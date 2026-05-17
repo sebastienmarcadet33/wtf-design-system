@@ -1,0 +1,2300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Way To Freedom — Système de design v2.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Fondation neutres communs */
+    --paper:        #F6F1E8;
+    --paper-soft:   #EFE8DB;
+    --paper-deep:   #E6DCC9;
+    --ink:          #1F1A14;
+    --ink-2:        #3B342A;
+    --ink-3:        #6B6256;
+    --line:         #C9BFA9;
+
+    /* Way To Freedom — maison-mère, palette nuit suspendue à validation */
+    --w2f-night:    #1B1814;     /* nuit profonde maison-mère */
+    --w2f-night-2:  #2E2A22;
+    --w2f-gold:     #B8884A;     /* doré bas, accent moments éditoriaux */
+    --w2f-gold-soft:#D9B884;
+
+    /* SÉSÂMES — palette extraite du logo canalisé */
+    --ses-paper:    #FAF7F2;     /* lumière, fond dominant */
+    --ses-cream:    #F2EDE4;
+    --ses-sand:     #E8E0D2;
+    --ses-black:    #1A1410;     /* triangle, écriture, ancrage */
+    --ses-gold:     #C9A24E;     /* graine, flamme, or canalisé (≠ or EES) */
+    --ses-blue:     #A8C4D9;     /* bleu lunaire, lumière froide d'aube */
+    --ses-amethyst: #5B3F7A;     /* accent ponctuel, ciel violet */
+    --ses-amethyst-2: #7B5F9A;
+    --ses-night:    #1B2A3A;     /* nocturne, très rare */
+
+    /* EssenCel'en Soi — rose poudré + or signature, sauge en ancrage */
+    --ees-cream:    #F2EDE4;     /* dominante neutre */
+    --ees-rose:     #E8D2C6;     /* rose poudré, dominante chaude (signature) */
+    --ees-rose-2:   #D9B8A6;
+    --ees-gold:     #B8884A;     /* or signature wordmark (signature) */
+    --ees-gold-2:   #D9B884;
+    --ees-sage:     #6B7B5E;     /* sauge, ancrage / texte / structure */
+    --ees-sage-2:   #8C9C7E;
+    --ees-deep:     #2E3F2C;     /* vert sombre — accent rare */
+
+    /* Voie d'autonomie économique — terre cuite, lever de soleil */
+    --voie-cream:   #F4EFE5;
+    --voie-terre:   #A6533A;     /* terre cuite, accent principal */
+    --voie-terre-2: #C57556;
+    --voie-ocre:    #C28846;     /* nuance compagne */
+    --voie-ancrage: #5B3D2C;     /* terre profonde, texte affirmé */
+
+    /* Aloe Vera Excellence — sauge + crème + or très discret */
+    --ave-cream:    #F2EDE4;
+    --ave-sage:     #5E7A4E;
+    --ave-sage-2:   #93A984;
+    --ave-gold:     #B8884A;     /* très ponctuel */
+
+    --ff-display: 'Fraunces', Georgia, serif;
+    --ff-italic:  'Instrument Serif', Georgia, serif;
+    --ff-body:    'Inter Tight', system-ui, sans-serif;
+    --ff-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{background:var(--paper); color:var(--ink); font-family:var(--ff-body); font-weight:400; -webkit-font-smoothing:antialiased; line-height:1.55}
+  body{font-size:15px}
+
+  /* ===== Layout shell ===== */
+  .page{max-width:1280px; margin:0 auto; padding:96px 80px 120px}
+  section{padding:88px 0; border-top:1px solid var(--paper-deep)}
+  section:first-of-type{border-top:0; padding-top:0}
+
+  /* ===== Type primitives ===== */
+  .eyebrow{
+    font-family:var(--ff-body); font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ink-3); font-weight:500; display:inline-flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:24px; height:1px; background:currentColor; display:inline-block}
+  h1.display{
+    font-family:var(--ff-display); font-weight:300; font-size:88px; line-height:.98;
+    letter-spacing:-.025em; color:var(--ink); font-variation-settings:"opsz" 144;
+  }
+  h1.display em{font-style:italic; font-family:var(--ff-italic); font-weight:400; color:var(--ink-2)}
+  h2.section{
+    font-family:var(--ff-display); font-weight:400; font-size:46px; line-height:1.05;
+    letter-spacing:-.02em; color:var(--ink); font-variation-settings:"opsz" 144;
+  }
+  h2.section em{font-style:italic; font-family:var(--ff-italic); color:var(--ink-2); font-weight:400}
+  h3.block{font-family:var(--ff-display); font-weight:400; font-size:24px; line-height:1.2; letter-spacing:-.01em}
+  h3.block em{font-style:italic; font-family:var(--ff-italic); color:var(--ink-2); font-weight:400}
+  .lede{font-size:18px; line-height:1.65; color:var(--ink-2); max-width:62ch; font-weight:300}
+  .body{font-size:15px; color:var(--ink-2); line-height:1.65}
+  .caption{font-size:12px; color:var(--ink-3); letter-spacing:.04em; line-height:1.5}
+  .mono{font-family:var(--ff-mono); font-size:11px; letter-spacing:.02em; color:var(--ink-3)}
+
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:48px}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+  .mt-12{margin-top:12px} .mt-24{margin-top:24px} .mt-48{margin-top:48px}
+  .mb-12{margin-bottom:12px} .mb-24{margin-bottom:24px} .mb-48{margin-bottom:48px}
+
+  /* ===== Cover ===== */
+  .cover{display:grid; grid-template-columns: 1.4fr 1fr; gap:80px; align-items:end; min-height:560px}
+  .cover-left .meta{display:flex; gap:32px; margin-bottom:48px; align-items:center}
+  .cover-left .meta .stamp{
+    width:58px; height:58px; border:1px solid var(--ink); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--ff-italic); font-style:italic; font-size:22px; color:var(--ink);
+  }
+  .cover-left .meta .meta-text{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); line-height:1.6}
+  .cover-left .meta .meta-text strong{color:var(--ink); font-weight:500; letter-spacing:.18em}
+  .cover-left h1{margin-bottom:36px}
+  .cover-left .signature{
+    display:flex; gap:20px; align-items:baseline; padding-top:32px; border-top:1px solid var(--paper-deep);
+    font-family:var(--ff-italic); font-style:italic; font-size:20px; color:var(--ink-2);
+  }
+  .cover-left .signature .names{color:var(--ink); font-size:22px}
+  .cover-right{position:relative}
+  .cover-card{
+    background:var(--paper-soft); border:1px solid var(--paper-deep); padding:36px 32px 32px;
+    position:relative;
+  }
+  .cover-card .corner{position:absolute; top:14px; right:16px; font-family:var(--ff-italic); font-style:italic; font-size:16px; color:var(--ink-3)}
+  .principles{list-style:none; display:flex; flex-direction:column; gap:14px; margin-top:18px}
+  .principles li{display:flex; gap:14px; font-size:14px; color:var(--ink-2); line-height:1.5}
+  .principles li::before{content:""; flex:0 0 6px; width:6px; height:6px; border-radius:50%; background:var(--w2f-gold); margin-top:9px}
+  .principles li b{color:var(--ink); font-weight:500}
+
+  /* ===== Changelog ===== */
+  .changelog{margin-top:72px; padding:40px 48px; background:var(--ink); color:var(--paper); display:grid; grid-template-columns: 1fr 2.2fr; gap:48px}
+  .changelog h3{font-family:var(--ff-display); font-weight:300; font-size:34px; line-height:1.05; color:var(--paper); font-variation-settings:"opsz" 144}
+  .changelog h3 em{font-style:italic; font-family:var(--ff-italic); color:var(--w2f-gold-soft)}
+  .changelog .meta{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--w2f-gold-soft); margin-top:14px; font-weight:500}
+  .changelog ol{list-style:none; counter-reset:c; display:grid; grid-template-columns:1fr 1fr; gap:16px 32px}
+  .changelog li{counter-increment:c; padding-left:32px; position:relative; font-size:13px; color:#D9CFB8; line-height:1.55}
+  .changelog li::before{content:counter(c, decimal-leading-zero); position:absolute; left:0; top:1px; font-family:var(--ff-mono); font-size:10px; color:var(--w2f-gold); letter-spacing:.06em}
+  .changelog li b{color:var(--paper); font-weight:500}
+
+  /* ===== Architecture diagram ===== */
+  .arch{margin-top:48px; background:var(--paper-soft); border:1px solid var(--paper-deep); padding:48px 56px; display:grid; grid-template-columns:1fr; gap:36px}
+  .arch-house{text-align:center; padding-bottom:28px; border-bottom:1px solid var(--paper-deep)}
+  .arch-house .title{font-family:var(--ff-display); font-weight:300; font-size:38px; color:var(--ink); font-variation-settings:"opsz" 144}
+  .arch-house .title em{font-style:italic; font-family:var(--ff-italic); color:var(--w2f-gold)}
+  .arch-house .role{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); margin-top:8px}
+  .arch-house .domain{font-family:var(--ff-mono); font-size:12px; color:var(--ink-2); margin-top:6px}
+  .arch-3{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--paper-deep); border-left:1px solid var(--paper-deep)}
+  .arch-3 .ent{padding:24px 24px 28px; border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); background:var(--paper)}
+  .arch-3 .ent .tag{font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); font-weight:500; display:flex; align-items:center; gap:8px; margin-bottom:10px}
+  .arch-3 .ent .tag .dot{width:8px; height:8px; border-radius:50%}
+  .arch-3 .ent .name{font-family:var(--ff-display); font-weight:400; font-size:24px; line-height:1.1; letter-spacing:-.005em}
+  .arch-3 .ent .name em{font-style:italic; font-family:var(--ff-italic); font-weight:400}
+  .arch-3 .ent .domain{font-family:var(--ff-mono); font-size:11px; color:var(--ink-3); margin-top:8px; word-break:break-all}
+  .arch-3 .ent .role{font-family:var(--ff-italic); font-style:italic; font-size:14px; color:var(--ink-2); line-height:1.4; margin-top:14px; padding-top:12px; border-top:1px dashed var(--paper-deep)}
+  .arch-hub{padding:24px 28px; background:var(--ave-cream); border:1px solid var(--paper-deep); display:flex; gap:24px; align-items:center}
+  .arch-hub .left{flex:0 0 auto; display:flex; align-items:center; gap:14px}
+  .arch-hub .left .dot{width:10px; height:10px; border-radius:50%; background:var(--ave-sage)}
+  .arch-hub .left .name{font-family:var(--ff-display); font-weight:400; font-size:22px}
+  .arch-hub .left .name em{font-style:italic; font-family:var(--ff-italic); color:var(--ink-2)}
+  .arch-hub .desc{flex:1; font-size:13px; color:var(--ink-2); line-height:1.5}
+  .arch-hub .desc b{color:var(--ink); font-weight:500}
+  .arch-hub .right{font-family:var(--ff-mono); font-size:11px; color:var(--ink-3); text-align:right}
+  .arch-foot{margin-top:8px; padding:18px 24px; background:var(--paper-deep); display:flex; gap:18px; align-items:center; font-size:13px; color:var(--ink-2); line-height:1.5}
+  .arch-foot b{color:var(--ink); font-weight:500}
+  .arch-foot .badge{font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink); font-weight:500; padding:4px 10px; border:1px solid var(--ink); flex:0 0 auto}
+
+  /* ===== Couche symbolique (5 entités) ===== */
+  .sym-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:40px; border-top:1px solid var(--paper-deep); border-left:1px solid var(--paper-deep)}
+  .sym-cell{padding:32px 36px; border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); background:var(--paper-soft)}
+  .sym-cell .head{display:flex; align-items:baseline; gap:14px; margin-bottom:14px; flex-wrap:wrap}
+  .sym-cell .head .name{font-family:var(--ff-display); font-weight:300; font-size:30px; font-variation-settings:'opsz' 144; line-height:1.05}
+  .sym-cell .head .name em{font-style:italic; font-family:var(--ff-italic); font-weight:400}
+  .sym-cell .head .role{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)}
+  .sym-cell .lecture{font-family:var(--ff-italic); font-style:italic; font-size:18px; color:var(--ink-2); line-height:1.4; margin-bottom:14px}
+  .sym-cell .body{font-size:14px; color:var(--ink-2); line-height:1.6}
+  .sym-cell .body b{color:var(--ink); font-weight:500}
+  .sym-cell .doctrine{font-size:13px; color:var(--ink-3); line-height:1.55; margin-top:12px; padding-top:12px; border-top:1px dashed var(--paper-deep)}
+  .sym-cell .doctrine b{color:var(--ink-2); font-weight:500}
+  .sym-cell .doctrine em{font-family:var(--ff-italic); font-style:italic}
+
+  /* ===== Audit poles map ===== */
+  .audit-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:48px; border-top:1px solid var(--paper-deep)}
+  .audit-cell{padding:28px 24px 32px; border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); position:relative}
+  .audit-cell:last-child{border-right:0}
+  .audit-cell .swatch-row{display:flex; gap:6px; margin:14px 0 18px}
+  .audit-cell .swatch-row .sw{width:28px; height:28px; border-radius:50%; border:1px solid rgba(0,0,0,.08)}
+  .audit-cell h4{font-family:var(--ff-display); font-weight:500; font-size:18px; margin-bottom:4px}
+  .audit-cell .url{font-family:var(--ff-mono); font-size:11px; color:var(--ink-3); letter-spacing:.02em; margin-bottom:12px; word-break:break-all}
+  .audit-cell .verdict{font-family:var(--ff-italic); font-style:italic; font-size:15px; color:var(--ink-2); line-height:1.45; margin-bottom:14px}
+  .audit-cell .pros, .audit-cell .cons{font-size:13px; color:var(--ink-2); line-height:1.55; padding-left:18px; position:relative; margin-bottom:6px}
+  .audit-cell .pros::before{content:"+"; position:absolute; left:0; color:var(--ave-sage); font-weight:500}
+  .audit-cell .cons::before{content:"–"; position:absolute; left:0; color:var(--voie-terre); font-weight:500}
+  .verdict-box{
+    margin-top:48px; background:var(--ink); color:var(--paper);
+    padding:44px 56px; display:grid; grid-template-columns: 1.1fr 2fr; gap:48px; align-items:start;
+  }
+  .verdict-box h3{font-family:var(--ff-display); font-weight:300; font-size:32px; line-height:1.1; color:var(--paper); font-variation-settings:"opsz" 144}
+  .verdict-box h3 em{font-style:italic; font-family:var(--ff-italic); color:var(--w2f-gold-soft)}
+  .verdict-box .vlist{display:grid; grid-template-columns:1fr 1fr; gap:24px 40px}
+  .verdict-box .vlist h5{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--w2f-gold-soft); margin-bottom:8px; font-weight:500}
+  .verdict-box .vlist p{font-size:14px; color:#E6DCC9; line-height:1.6}
+  .verdict-box .vlist em{font-style:italic; font-family:var(--ff-italic); color:var(--w2f-gold-soft)}
+
+  /* ===== Palettes ===== */
+  .pal-foundation{display:grid; grid-template-columns:repeat(6,1fr); gap:0; border:1px solid var(--paper-deep)}
+  .swatch{aspect-ratio: 4/5; padding:14px 14px 16px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; border-right:1px solid rgba(0,0,0,.06)}
+  .swatch:last-child{border-right:0}
+  .swatch .name{font-family:var(--ff-display); font-size:16px; line-height:1.1; margin-bottom:4px}
+  .swatch .hex{font-family:var(--ff-mono); font-size:10px; letter-spacing:.04em; opacity:.75}
+  .swatch.dark{color:var(--paper)}
+  .swatch.light{color:var(--ink)}
+
+  .pal-block{margin-bottom:32px; border:1px solid var(--paper-deep); background:var(--paper-soft)}
+  .pal-block .head{padding:24px 32px; border-bottom:1px solid var(--paper-deep); display:flex; align-items:flex-start; justify-content:space-between; gap:32px}
+  .pal-block .head .h-left .role{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; font-weight:500}
+  .pal-block .head .h-left .h-name{font-family:var(--ff-display); font-weight:300; font-size:30px; font-variation-settings:'opsz' 144; line-height:1}
+  .pal-block .head .h-left .h-name em{font-style:italic; font-family:var(--ff-italic); font-weight:400}
+  .pal-block .head .h-right{font-family:var(--ff-italic); font-style:italic; font-size:15px; color:var(--ink-3); max-width:42ch; text-align:right; line-height:1.45}
+  .pal-block .head .h-right .domain{display:block; font-family:var(--ff-mono); font-style:normal; font-size:11px; color:var(--ink-3); margin-top:6px; letter-spacing:.04em}
+  .pal-block .row{display:grid; gap:0}
+  .pal-block .row.r-5{grid-template-columns:repeat(5,1fr)}
+  .pal-block .row.r-4{grid-template-columns:repeat(4,1fr)}
+
+  /* ===== Type ===== */
+  .type-card{background:var(--paper-soft); border:1px solid var(--paper-deep); padding:48px 56px; position:relative; margin-top:40px}
+  .type-card .opt-tag{position:absolute; top:24px; right:28px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--w2f-gold); border:1px solid var(--w2f-gold); padding:6px 10px}
+  .type-card .label{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); margin-bottom:8px; font-weight:500}
+  .type-card .opt-name{font-family:var(--ff-display); font-weight:400; font-size:32px; margin-bottom:6px}
+  .type-card .opt-mood{font-family:var(--ff-italic); font-style:italic; font-size:15px; color:var(--ink-2); margin-bottom:32px}
+  .type-card .specimen{margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid var(--paper-deep)}
+  .type-card .specimen:last-child{border-bottom:0; padding-bottom:0; margin-bottom:0}
+  .type-card .meta-line{display:flex; justify-content:space-between; margin-bottom:8px; align-items:baseline}
+  .type-card .meta-line .role{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)}
+  .type-card .meta-line .spec{font-family:var(--ff-mono); font-size:10px; color:var(--ink-3)}
+  .o1-h1{font-family:'Fraunces',serif; font-weight:300; font-size:46px; line-height:1; letter-spacing:-.02em; color:var(--ink); font-variation-settings:"opsz" 144}
+  .o1-h1 em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2); font-weight:400}
+  .o1-h2{font-family:'Fraunces',serif; font-weight:400; font-size:24px; line-height:1.15; color:var(--ink)}
+  .o1-body{font-family:'Inter Tight',sans-serif; font-weight:400; font-size:15px; line-height:1.65; color:var(--ink-2)}
+  .o1-quote{font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; line-height:1.35; color:var(--ink); font-weight:400}
+  .recommend{margin-top:32px; padding:18px 22px; border:1px solid var(--w2f-gold); background:rgba(184,136,74,.06); display:flex; gap:14px; align-items:center}
+  .recommend .star{font-family:var(--ff-italic); font-style:italic; font-size:22px; color:var(--w2f-gold)}
+  .recommend .txt{font-size:13px; color:var(--ink-2); line-height:1.5}
+  .recommend .txt b{color:var(--ink); font-weight:500}
+
+  /* ===== Logos ===== */
+  .logos-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:32px; margin-top:40px}
+  .logo-master{background:var(--w2f-night); color:var(--paper); padding:60px; display:flex; flex-direction:column; justify-content:space-between; min-height:480px; position:relative}
+  .logo-master .corner{position:absolute; top:18px; right:22px; font-family:var(--ff-italic); font-style:italic; font-size:14px; opacity:.6}
+  .logo-master .lock{display:flex; flex-direction:column; align-items:center; gap:18px; flex:1; justify-content:center}
+  .logo-master .lock svg{width:64px; height:64px}
+  .logo-master .wordmark{font-family:'Fraunces',serif; font-weight:300; font-size:54px; line-height:1; letter-spacing:.02em; font-variation-settings:"opsz" 144; text-align:center}
+  .logo-master .wordmark em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--w2f-gold-soft); font-weight:400}
+  .logo-master .tagline{text-align:center; font-family:var(--ff-italic); font-style:italic; font-size:15px; color:var(--w2f-gold-soft); letter-spacing:.04em}
+  .logo-master .footer-line{display:flex; justify-content:space-between; align-items:flex-end; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(246,241,232,.55)}
+
+  .logo-poles{display:grid; grid-template-rows:repeat(4,1fr); gap:8px}
+  .logo-pole{background:var(--paper-soft); border:1px solid var(--paper-deep); padding:18px 22px; display:flex; align-items:center; gap:18px}
+  .logo-pole .mono-ico{width:48px; height:48px; flex:0 0 48px; display:flex; align-items:center; justify-content:center; border-radius:50%; color:var(--paper); overflow:hidden}
+  .logo-pole .mono-ico svg{width:32px; height:32px}
+  .logo-pole .text{flex:1}
+  .logo-pole .text .name{font-family:'Fraunces',serif; font-weight:400; font-size:18px; line-height:1.1; letter-spacing:-.005em}
+  .logo-pole .text .name em{font-family:'Instrument Serif',serif; font-style:italic; font-weight:400}
+  .logo-pole .text .sub{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-top:3px}
+  .logo-pole .accent-bar{width:3px; align-self:stretch; min-height:36px}
+
+  /* WTF illustratif placeholder */
+  .wtf-illustration{aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 50% 38%, #2C3E5C 0%, #1B1814 70%); position:relative; overflow:hidden; border:2px solid var(--w2f-gold)}
+  .wtf-illustration .ph-text{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:18px; text-align:center}
+  .wtf-illustration .ph-text .glyph{font-family:var(--ff-italic); font-style:italic; font-size:20px; color:var(--w2f-gold-soft)}
+  .wtf-illustration .ph-text .what{font-family:var(--ff-italic); font-style:italic; font-size:11px; color:var(--w2f-gold-soft); line-height:1.35; max-width:18ch}
+
+  /* ===== Boutons ===== */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:0;
+    font-family:var(--ff-body); font-size:13px; font-weight:500; letter-spacing:.04em;
+    text-decoration:none; cursor:pointer; border:1px solid transparent; transition:all .2s ease;
+  }
+  .btn .arrow{transition:transform .2s ease}
+  .btn:hover .arrow{transform:translateX(3px)}
+  .btn-tertiary{background:transparent; padding:14px 0; border:0; border-bottom:1px solid currentColor}
+  /* Per-entity primary buttons */
+  .btn-prim-ses{background:var(--ses-amethyst); color:var(--ses-paper)}
+  .btn-prim-ses:hover{background:var(--ses-amethyst-2)}
+  /* EES primary = or signature (signature wordmark — pas la sauge, pas le rose vif) */
+  .btn-prim-ees{background:var(--ees-gold); color:var(--ees-cream)}
+  .btn-prim-ees:hover{background:#9C7138}
+  .btn-prim-voie{background:var(--voie-terre); color:var(--voie-cream)}
+  .btn-prim-voie:hover{background:var(--voie-terre-2)}
+  .btn-prim-w2f{background:var(--w2f-night); color:var(--paper)}
+  .btn-prim-w2f:hover{background:var(--w2f-night-2)}
+  .btn-prim-ave{background:var(--ave-sage); color:var(--ave-cream)}
+  .btn-prim-ave:hover{background:var(--ave-sage-2)}
+  /* Per-entity secondary (transparent + bordure couleur de marque) */
+  .btn-sec-ses{background:transparent; color:var(--ses-amethyst); border:1px solid var(--ses-amethyst)}
+  .btn-sec-ses:hover{background:var(--ses-amethyst); color:var(--ses-paper)}
+  /* EES secondary = sauge en bordure (ancrage textuel, contre-poids) */
+  .btn-sec-ees{background:transparent; color:var(--ees-sage); border:1px solid var(--ees-sage)}
+  .btn-sec-ees:hover{background:var(--ees-sage); color:var(--ees-cream)}
+  .btn-sec-voie{background:transparent; color:var(--voie-terre); border:1px solid var(--voie-terre)}
+  .btn-sec-voie:hover{background:var(--voie-terre); color:var(--voie-cream)}
+  .btn-sec-w2f{background:transparent; color:var(--w2f-night); border:1px solid var(--w2f-night)}
+  .btn-sec-w2f:hover{background:var(--w2f-night); color:var(--paper)}
+  .btn-sec-ave{background:transparent; color:var(--ave-sage); border:1px solid var(--ave-sage)}
+  .btn-sec-ave:hover{background:var(--ave-sage); color:var(--ave-cream)}
+  /* Per-entity tertiary (souligné couleur de marque) */
+  .btn-ter-ses{color:var(--ses-amethyst)} .btn-ter-ees{color:var(--ees-sage)}
+  .btn-ter-voie{color:var(--voie-terre)} .btn-ter-w2f{color:var(--w2f-night)}
+  .btn-ter-ave{color:var(--ave-sage)}
+
+  .btn-table{margin-top:32px; border:1px solid var(--paper-deep); background:var(--paper-soft); display:grid; grid-template-columns:1.1fr repeat(3,1fr); gap:0}
+  .btn-table > div{padding:20px 22px; border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); min-height:88px; display:flex; align-items:center}
+  .btn-table > div:nth-child(4n){border-right:0}
+  .btn-table > div:nth-last-child(-n+4){border-bottom:0}
+  .btn-table .head-cell{background:var(--paper-deep); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink); font-weight:500; padding:14px 22px; min-height:auto}
+  .btn-table .row-label{display:flex; flex-direction:column; gap:4px; align-items:flex-start}
+  .btn-table .row-label .name{font-family:var(--ff-display); font-weight:400; font-size:18px; line-height:1.1}
+  .btn-table .row-label .name em{font-style:italic; font-family:var(--ff-italic); font-weight:400}
+  .btn-table .row-label .role{font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500}
+  .btn-table .row-label .accent-line{width:24px; height:2px; margin-top:6px}
+
+  /* ===== Cartes ===== */
+  .cards-doc{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:32px}
+  .card-doc{background:var(--paper-soft); border:1px solid var(--paper-deep); display:flex; flex-direction:column; min-height:380px; overflow:hidden}
+  .card-doc .img{height:180px; position:relative; display:flex; align-items:center; justify-content:center; color:rgba(246,241,232,.65); font-family:var(--ff-italic); font-style:italic; font-size:14px; padding:20px; text-align:center}
+  .card-doc .img.tint-ees{background:var(--ees-sage)}
+  .card-doc .img.tint-ses{background:var(--ses-amethyst)}
+  .card-doc .img.tint-voie{background:var(--voie-terre)}
+  .card-doc .img.tint-w2f{background:var(--w2f-night)}
+  .card-doc .img.tint-ave{background:var(--ave-sage)}
+  .card-doc .img.tint-ees-rose{background:var(--ees-rose); color:var(--ink-3)}
+  .card-doc .content{padding:24px 26px 26px; display:flex; flex-direction:column; gap:10px; flex:1}
+  .card-doc .pole-tag{font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); font-weight:500; display:flex; align-items:center; gap:8px}
+  .card-doc .pole-tag .dot{width:7px; height:7px; border-radius:50%; display:inline-block}
+  .card-doc .usage{font-family:var(--ff-mono); font-size:10px; letter-spacing:.04em; color:var(--ink-3); padding:4px 8px; background:var(--paper); border:1px solid var(--paper-deep); display:inline-block; align-self:flex-start; text-transform:uppercase; letter-spacing:.18em}
+  .card-doc h4{font-family:'Fraunces',serif; font-weight:400; font-size:22px; line-height:1.15; color:var(--ink); margin-top:4px}
+  .card-doc h4 em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2); font-weight:400}
+  .card-doc .desc{font-size:13px; color:var(--ink-2); line-height:1.55}
+  .card-doc .where{margin-top:auto; padding-top:14px; border-top:1px dashed var(--paper-deep); font-size:11px; color:var(--ink-3); line-height:1.5}
+  .card-doc .where b{color:var(--ink-2); font-weight:500}
+
+  /* ===== Hero ===== */
+  .hero-demo{margin-top:32px; border:1px solid var(--paper-deep); overflow:hidden}
+  .hero-frame{background:var(--paper-soft); padding:36px 48px 0; display:grid; grid-template-columns:1.1fr 1fr; gap:48px; min-height:540px; position:relative}
+  .hero-nav{grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:18px 0 28px; border-bottom:1px solid var(--paper-deep); margin-bottom:36px}
+  .hero-nav .brand{font-family:'Fraunces',serif; font-weight:400; font-size:18px; letter-spacing:.04em}
+  .hero-nav .brand em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)}
+  .hero-nav ul{display:flex; gap:32px; list-style:none}
+  .hero-nav ul li{font-size:13px; color:var(--ink-2); letter-spacing:.02em}
+  .hero-nav ul li.active{color:var(--ink); font-weight:500}
+  .hero-content{padding-bottom:48px; align-self:end}
+  .hero-content .eyebrow{margin-bottom:20px}
+  .hero-content h1{font-family:'Fraunces',serif; font-weight:300; font-size:54px; line-height:1.02; letter-spacing:-.02em; margin-bottom:20px; font-variation-settings:"opsz" 144}
+  .hero-content h1 em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2); font-weight:400}
+  .hero-content p{font-size:16px; line-height:1.65; color:var(--ink-2); max-width:46ch; margin-bottom:28px; font-weight:300}
+  .hero-content .ctas{display:flex; gap:16px; align-items:center; flex-wrap:wrap}
+  .hero-image{align-self:end; height:440px; background:var(--w2f-night); position:relative; overflow:hidden; margin-bottom:48px}
+  .hero-image .ph{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(246,241,232,.55); font-family:var(--ff-italic); font-style:italic; font-size:14px; flex-direction:column; gap:6px}
+  .hero-image::after{content:""; position:absolute; left:0; right:0; bottom:0; height:80px; background:linear-gradient(0deg, rgba(0,0,0,.4), transparent)}
+  .hero-image .quote-overlay{position:absolute; left:24px; bottom:22px; right:24px; color:var(--paper); font-family:'Instrument Serif',serif; font-style:italic; font-size:18px; line-height:1.35; z-index:1}
+
+  /* ===== Planches comparatives 4 traitements ===== */
+  .treat-section{margin-top:48px}
+  .treat-row{display:grid; grid-template-columns:180px repeat(4,1fr); gap:0; border-top:1px solid var(--paper-deep); border-left:1px solid var(--paper-deep)}
+  .treat-row > div{border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); padding:18px 18px; min-height:140px; display:flex; flex-direction:column; justify-content:center}
+  .treat-head{background:var(--paper-deep); font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:500; color:var(--ink); min-height:auto !important; padding:14px 18px !important}
+  .treat-head .role{display:block; font-family:'Fraunces',serif; font-weight:400; font-size:18px; line-height:1.1; letter-spacing:-.005em; text-transform:none; margin-top:6px; color:var(--ink)}
+  .treat-head .role em{font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--ink-2)}
+  .treat-head .accent-line{height:2px; width:32px; margin-top:8px}
+  .treat-axis{background:var(--paper-soft) !important; align-items:flex-start !important; justify-content:flex-start !important; padding-top:22px !important}
+  .treat-axis .num{font-family:var(--ff-mono); font-size:10px; color:var(--ink-3); letter-spacing:.06em; margin-bottom:6px}
+  .treat-axis .lbl{font-family:'Fraunces',serif; font-weight:500; font-size:16px; line-height:1.2; color:var(--ink)}
+  .treat-axis .desc{font-size:11px; color:var(--ink-3); margin-top:4px; line-height:1.4}
+
+  /* hero mini */
+  .mini-hero{background:var(--paper); padding:14px 14px 16px; min-height:100%; position:relative; display:flex; flex-direction:column; gap:8px; overflow:hidden}
+  .mini-hero.bg-w2f{background:var(--w2f-night); color:var(--paper)}
+  .mini-hero.bg-ses{background:var(--ses-paper)}
+  .mini-hero.bg-ees{background:var(--ees-cream)}
+  .mini-hero.bg-voie{background:var(--voie-cream)}
+  .mini-hero .nav{display:flex; justify-content:space-between; font-size:8px; letter-spacing:.18em; text-transform:uppercase; opacity:.6}
+  .mini-hero .h{font-family:'Fraunces',serif; font-weight:300; font-size:18px; line-height:1.05; letter-spacing:-.01em; font-variation-settings:'opsz' 144}
+  .mini-hero .h em{font-family:'Instrument Serif',serif; font-style:italic; font-weight:400}
+  .mini-hero .sub{font-size:9px; color:var(--ink-3); line-height:1.4; max-width:24ch}
+  .mini-hero.bg-w2f .sub{color:#D9CFB8}
+  .mini-hero .mini-cta{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; font-size:9px; letter-spacing:.06em; font-weight:500; align-self:flex-start; margin-top:auto}
+  .mini-hero.bg-w2f .h, .mini-hero.bg-w2f .nav{color:var(--paper)}
+  .mini-hero .ph-img{position:absolute; right:0; top:0; bottom:0; width:42%; opacity:.85}
+  .mini-hero .ph-img.dim-w2f{background:linear-gradient(135deg,#3A2E1F,#1B1814)}
+  /* Hero photo placeholders — accordés sur la signature corrigée v2.1 */
+  .mini-hero .ph-img.dim-ses{background:linear-gradient(135deg,#A8C4D9 0%,#1A1410 100%)}  /* bleu lunaire → noir profond */
+  .mini-hero .ph-img.dim-ees{background:linear-gradient(135deg,#E8D2C6 0%,#B8884A 100%)}  /* rose poudré → or signature */
+  .mini-hero .ph-img.dim-voie{background:linear-gradient(135deg,#C57556,#5B3D2C)}
+
+  /* mini card */
+  .mini-card{background:var(--paper); border:1px solid var(--paper-deep); display:flex; flex-direction:column; overflow:hidden; min-height:100%}
+  .mini-card .img{height:50px; display:flex; align-items:center; justify-content:center; font-family:'Instrument Serif',serif; font-style:italic; font-size:9px; color:rgba(246,241,232,.7)}
+  .mini-card .img.bg-w2f{background:var(--w2f-night)}
+  .mini-card .img.bg-ses{background:linear-gradient(135deg,#1A1410 0%,#5B3F7A 100%)}
+  .mini-card .img.bg-ees{background:var(--ees-rose); color:rgba(46,40,30,.55)}
+  .mini-card .img.bg-voie{background:var(--voie-terre)}
+  .mini-card .body-c{padding:10px 12px 12px}
+  .mini-card .tag{font-size:8px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); margin-bottom:4px}
+  .mini-card .ttl{font-family:'Fraunces',serif; font-weight:400; font-size:13px; line-height:1.2; color:var(--ink); margin-bottom:4px}
+  .mini-card .ttl em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)}
+  .mini-card .lk{font-size:9px; margin-top:6px; padding-top:6px; border-top:1px dashed var(--paper-deep); display:flex; justify-content:space-between}
+
+  /* mini button */
+  .mini-btn-wrap{padding:24px 0; display:flex; flex-direction:column; gap:10px; align-items:flex-start}
+  .mini-btn{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; font-size:11px; font-weight:500; letter-spacing:.06em; text-decoration:none}
+  .mini-btn-spec{font-family:var(--ff-mono); font-size:9px; color:var(--ink-3); letter-spacing:.04em; line-height:1.4}
+
+  /* mini quote */
+  .mini-quote{padding:14px 16px; min-height:100%; display:flex; flex-direction:column; justify-content:center}
+  .mini-quote.bg-w2f{background:var(--w2f-night); color:var(--paper)}
+  .mini-quote.bg-ses{background:var(--ses-paper); border-left:2px solid var(--ses-gold)}
+  .mini-quote.bg-ees{background:var(--ees-rose); border-left:2px solid var(--ees-gold)}
+  .mini-quote.bg-voie{background:var(--voie-cream)}
+  .mini-quote .qmark{font-family:'Instrument Serif',serif; font-style:italic; font-size:24px; line-height:1; margin-bottom:4px}
+  .mini-quote.bg-w2f .qmark{color:var(--w2f-gold-soft)}
+  .mini-quote.bg-ses .qmark{color:var(--ses-amethyst)}
+  .mini-quote.bg-ees .qmark{color:var(--ees-gold)}
+  .mini-quote.bg-voie .qmark{color:var(--voie-terre)}
+  .mini-quote .qtxt{font-family:'Instrument Serif',serif; font-style:italic; font-size:12px; line-height:1.35; margin-bottom:8px}
+  .mini-quote.bg-w2f .qtxt{color:var(--paper)}
+  .mini-quote .qsource{font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)}
+  .mini-quote.bg-w2f .qsource{color:#A6997B}
+
+  .treat-principle{margin-top:24px; padding:18px 22px; background:var(--paper-soft); border:1px solid var(--paper-deep); display:flex; gap:14px; align-items:flex-start; font-size:13px; color:var(--ink-2); line-height:1.55}
+  .treat-principle b{color:var(--ink); font-weight:500}
+  .treat-principle .star{font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; color:var(--w2f-gold); flex:0 0 auto; line-height:1}
+
+  /* ===== Voix ===== */
+  .voice-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:40px; border:1px solid var(--paper-deep)}
+  .voice-cell{padding:32px 36px; border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); background:var(--paper-soft)}
+  .voice-cell:nth-child(2n){border-right:0}
+  .voice-cell:nth-last-child(-n+2){border-bottom:0}
+  .voice-cell .vh{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; gap:18px}
+  .voice-cell .vh h4{font-family:'Fraunces',serif; font-weight:400; font-size:20px; color:var(--ink); letter-spacing:-.005em}
+  .voice-cell .vh h4 em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2); font-weight:400}
+  .voice-cell .vh .num{font-family:var(--ff-mono); font-size:11px; color:var(--ink-3); letter-spacing:.06em}
+  .voice-cell .pair{display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--paper-deep); margin-top:14px}
+  .voice-cell .pair > div{padding:14px 0 4px}
+  .voice-cell .pair > div + div{padding-left:18px; border-left:1px dashed var(--paper-deep)}
+  .voice-cell .pair .tag{font-size:10px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; margin-bottom:8px}
+  .voice-cell .pair .yes .tag{color:var(--ave-sage)}
+  .voice-cell .pair .no .tag{color:var(--voie-terre)}
+  .voice-cell .pair .ex{font-family:'Fraunces',serif; font-size:16px; line-height:1.35; color:var(--ink); font-weight:400}
+  .voice-cell .pair .no .ex{color:var(--ink-3); text-decoration:line-through; text-decoration-thickness:.5px; text-decoration-color:var(--voie-terre)}
+
+  .lex-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:40px; border:1px solid var(--paper-deep); background:var(--paper-soft)}
+  .lex-col{padding:28px 32px}
+  .lex-col + .lex-col{border-left:1px solid var(--paper-deep)}
+  .lex-col h5{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); margin-bottom:16px; font-weight:500; display:flex; align-items:center; gap:10px}
+  .lex-col h5::before{content:""; width:8px; height:8px; border-radius:50%}
+  .lex-col.use h5::before{background:var(--ave-sage)}
+  .lex-col.avoid h5::before{background:var(--voie-terre)}
+  .lex-col ul{list-style:none; display:flex; flex-direction:column; gap:8px}
+  .lex-col li{font-family:'Fraunces',serif; font-weight:400; font-size:16px; color:var(--ink); line-height:1.35}
+  .lex-col.avoid li{color:var(--ink-3); text-decoration:line-through; text-decoration-thickness:.5px; text-decoration-color:rgba(166,83,58,.55)}
+  .lex-col li em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)}
+
+  /* ===== Photographie ===== */
+  .photo-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:40px}
+  .photo-cell{display:flex; flex-direction:column; gap:14px}
+  .photo-frame{aspect-ratio:4/5; position:relative; overflow:hidden; border:1px solid var(--paper-deep)}
+  .photo-frame .ph-text{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(246,241,232,.7); text-align:center; padding:20px}
+  .photo-frame .ph-text .glyph{font-family:'Instrument Serif',serif; font-style:italic; font-size:28px}
+  .photo-frame .ph-text .what{font-family:'Instrument Serif',serif; font-style:italic; font-size:14px; line-height:1.35; max-width:18ch}
+  .photo-frame .ph-text .stop{font-family:var(--ff-mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; opacity:.7}
+  .photo-frame.dim-w2f{background:linear-gradient(135deg, #2C2419 0%, #1B1814 100%)}
+  /* SES photo : noir profond + bleu lunaire (extrait du logo canalisé, pas l'améthyste) */
+  .photo-frame.dim-ses{background:linear-gradient(135deg, #1A1410 0%, #2E3848 60%, #5A7A92 100%)}
+  .photo-frame.dim-voie{background:linear-gradient(135deg, #C57556 0%, #5B3D2C 100%)}
+  /* EES photo : rose poudré → or signature (la signature publique, pas la sauge) */
+  .photo-frame.dim-ees{background:linear-gradient(135deg, #E8D2C6 0%, #C9A079 50%, #8C6438 100%)}
+  .photo-frame.dim-w2f .ph-text, .photo-frame.dim-voie .ph-text, .photo-frame.dim-ses .ph-text{color:rgba(217,184,132,.85)}
+  .photo-frame.dim-ees .ph-text{color:rgba(46,30,20,.7)}
+  .photo-frame.dim-ees .ph-text .stop{color:rgba(46,30,20,.55)}
+  .photo-cell .meta .role{font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-bottom:6px}
+  .photo-cell .meta .role em{font-style:italic; font-family:var(--ff-italic); text-transform:none; letter-spacing:0}
+  .photo-cell .meta h5{font-family:'Fraunces',serif; font-weight:400; font-size:17px; line-height:1.2; margin-bottom:6px; color:var(--ink)}
+  .photo-cell .meta h5 em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)}
+  .photo-cell .meta p{font-size:12px; color:var(--ink-3); line-height:1.5}
+
+  .photo-rules{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:32px; border:1px solid var(--paper-deep); background:var(--paper-soft)}
+  .photo-rules .col{padding:28px 32px}
+  .photo-rules .col + .col{border-left:1px solid var(--paper-deep)}
+  .photo-rules .col h5{font-size:11px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:14px; font-weight:500; display:flex; align-items:center; gap:10px}
+  .photo-rules .col.do h5{color:var(--ink-2)}
+  .photo-rules .col.dont h5{color:var(--voie-terre)}
+  .photo-rules .col h5::before{content:""; width:8px; height:8px; border-radius:50%}
+  .photo-rules .col.do h5::before{background:var(--ave-sage)}
+  .photo-rules .col.dont h5::before{background:var(--voie-terre)}
+  .photo-rules .col ul{list-style:none; display:flex; flex-direction:column; gap:10px}
+  .photo-rules .col li{font-size:13px; color:var(--ink-2); line-height:1.55; padding-left:18px; position:relative}
+  .photo-rules .col.do li::before{content:"—"; position:absolute; left:0; color:var(--ave-sage)}
+  .photo-rules .col.dont li::before{content:"—"; position:absolute; left:0; color:var(--voie-terre)}
+  .photo-rules .col li b{color:var(--ink); font-weight:500}
+
+  /* ===== Widget Avis EES ===== */
+  .review-mockups{display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:40px}
+  .review-card{padding:32px 36px; min-height:340px; display:flex; flex-direction:column; gap:18px; position:relative}
+  .review-card.before{background:#fff; border:1px solid #DADCE0}
+  .review-card.before .header{display:flex; align-items:center; gap:12px}
+  .review-card.before .g-logo{width:36px; height:36px; border-radius:50%; background:#1A73E8; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Roboto', Arial, sans-serif; font-weight:500; font-size:18px}
+  .review-card.before .h-text{font-family:'Roboto', Arial, sans-serif}
+  .review-card.before .h-text .name{font-weight:500; font-size:14px; color:#202124}
+  .review-card.before .h-text .when{font-size:12px; color:#5F6368}
+  .review-card.before .stars{color:#FBBC04; font-size:18px; letter-spacing:.04em}
+  .review-card.before .body-r{font-family:'Roboto', Arial, sans-serif; font-size:14px; color:#3C4043; line-height:1.5}
+  .review-card.before .label{position:absolute; top:14px; right:18px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#5F6368; font-weight:500}
+
+  .review-card.after{background:var(--ees-cream); border:1px solid var(--paper-deep)}
+  .review-card.after .header{display:flex; align-items:center; gap:14px; padding-bottom:14px; border-bottom:1px solid rgba(184,136,74,.25)}
+  .review-card.after .g-logo{width:36px; height:36px; border-radius:50%; background:var(--ees-gold); color:var(--ees-cream); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:300; font-size:20px; font-style:italic}
+  .review-card.after .h-text .name{font-family:'Fraunces',serif; font-weight:500; font-size:16px; color:var(--ink); letter-spacing:-.005em}
+  .review-card.after .h-text .when{font-size:11px; color:var(--ink-3); letter-spacing:.04em; margin-top:2px}
+  .review-card.after .stars{color:var(--ees-gold); font-size:16px; letter-spacing:.08em; font-family:'Instrument Serif',serif; font-style:italic}
+  .review-card.after .body-r{font-family:'Fraunces',serif; font-weight:300; font-style:italic; font-size:18px; color:var(--ink-2); line-height:1.5}
+  .review-card.after .source{margin-top:auto; padding-top:14px; font-family:var(--ff-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); display:flex; justify-content:space-between}
+  .review-card.after .label{position:absolute; top:14px; right:18px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ees-gold); font-weight:500}
+
+  /* ===== Espacement ===== */
+  .grid-vis{display:grid; grid-template-columns:1.2fr 1fr; gap:48px; margin-top:40px; align-items:start}
+  .scale-stack{background:var(--paper-soft); border:1px solid var(--paper-deep); padding:32px}
+  .scale-row{display:grid; grid-template-columns: 64px 1fr 80px; align-items:center; padding:10px 0; border-bottom:1px dashed var(--paper-deep); gap:18px}
+  .scale-row:last-child{border-bottom:0}
+  .scale-row .token{font-family:var(--ff-mono); font-size:11px; color:var(--ink-3); letter-spacing:.04em}
+  .scale-row .bar{background:var(--ink); height:8px; opacity:.85}
+  .scale-row .px{font-family:var(--ff-mono); font-size:11px; color:var(--ink-3); text-align:right}
+  .principles-list{display:flex; flex-direction:column; gap:18px}
+  .principle{display:grid; grid-template-columns:36px 1fr; gap:16px; padding:18px 0; border-bottom:1px solid var(--paper-deep)}
+  .principle:last-child{border-bottom:0}
+  .principle .num{font-family:'Fraunces',serif; font-weight:400; font-size:24px; color:var(--w2f-gold); font-variation-settings:"opsz" 144}
+  .principle h5{font-family:'Fraunces',serif; font-weight:500; font-size:17px; line-height:1.2; margin-bottom:4px}
+  .principle p{font-size:13px; color:var(--ink-2); line-height:1.55}
+
+  /* ===== À retenir ===== */
+  .retain{margin-top:48px; padding:56px 64px; background:var(--w2f-night); color:var(--paper); display:grid; grid-template-columns: 1fr 1.6fr; gap:56px; align-items:start}
+  .retain h3{font-family:var(--ff-display); font-weight:300; font-size:42px; line-height:1.05; color:var(--paper); font-variation-settings:'opsz' 144}
+  .retain h3 em{font-style:italic; font-family:var(--ff-italic); color:var(--w2f-gold-soft)}
+  .retain .meta{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--w2f-gold-soft); margin-top:16px; font-weight:500}
+  .retain ol{list-style:none; counter-reset:r; display:flex; flex-direction:column; gap:24px}
+  .retain li{counter-increment:r; padding-left:48px; position:relative; padding-bottom:18px; border-bottom:1px solid rgba(217,184,132,.18)}
+  .retain li:last-child{border-bottom:0; padding-bottom:0}
+  .retain li::before{content:counter(r, decimal-leading-zero); position:absolute; left:0; top:2px; font-family:'Fraunces',serif; font-weight:300; font-size:22px; color:var(--w2f-gold); font-variation-settings:'opsz' 144}
+  .retain li h5{font-family:'Fraunces',serif; font-weight:400; font-size:20px; line-height:1.2; color:var(--paper); margin-bottom:6px}
+  .retain li h5 em{font-style:italic; font-family:var(--ff-italic); color:var(--w2f-gold-soft); font-weight:400}
+  .retain li p{font-size:14px; color:#D9CFB8; line-height:1.55}
+
+  /* ===== Convention nominale ===== */
+  .name-conv{margin-top:32px; padding:32px 40px; background:var(--paper-soft); border:1px solid var(--paper-deep); display:grid; grid-template-columns:1fr 1fr; gap:48px}
+  .name-conv .col h5{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-bottom:12px; display:flex; align-items:center; gap:10px}
+  .name-conv .col h5::before{content:""; width:8px; height:8px; border-radius:50%}
+  .name-conv .col.yes h5::before{background:var(--ave-sage)}
+  .name-conv .col.no h5::before{background:var(--voie-terre)}
+  .name-conv .col ul{list-style:none; display:flex; flex-direction:column; gap:8px}
+  .name-conv .col li{font-family:'Fraunces',serif; font-weight:400; font-size:18px; line-height:1.3; color:var(--ink)}
+  .name-conv .col.no li{color:var(--ink-3); text-decoration:line-through; text-decoration-color:rgba(166,83,58,.55)}
+  .name-conv .col li em{font-style:italic; font-family:'Instrument Serif',serif; color:var(--ink-2)}
+
+  /* ===== Colophon ===== */
+  .colophon{margin-top:64px; padding-top:32px; border-top:1px solid var(--paper-deep); display:flex; justify-content:space-between; align-items:flex-start; gap:48px}
+  .colophon .col-text{font-family:'Instrument Serif',serif; font-style:italic; font-size:18px; line-height:1.5; color:var(--ink-2); max-width:48ch}
+  .colophon .col-meta{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); text-align:right; line-height:1.8}
+  .colophon .col-meta strong{color:var(--ink); font-weight:500}
+
+  /* ===== Decorative ===== */
+  .ornament{display:flex; align-items:center; gap:14px; margin:40px 0 28px}
+  .ornament .line{flex:1; height:1px; background:var(--paper-deep)}
+  .ornament .glyph{font-family:'Instrument Serif',serif; font-style:italic; font-size:18px; color:var(--w2f-gold)}
+
+  /* ========================================================== */
+  /* PRINT STYLES — optimisés pour export PDF A4 portrait        */
+  /* ========================================================== */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 12mm 10mm;
+    }
+
+    html, body {
+      background: var(--paper) !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    /* Force colour preservation everywhere */
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    .page {
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    /* Each major section starts on a new page */
+    section {
+      break-before: page;
+      page-break-before: always;
+      break-inside: avoid-page;
+      padding: 8mm 0 !important;
+    }
+    section:first-of-type {
+      break-before: auto;
+      page-break-before: auto;
+    }
+
+    /* Cover/header doesn't need a forced break before */
+    header, .cover, .colophon-block {
+      break-before: auto;
+      page-break-before: auto;
+    }
+
+    /* Avoid awkward splits */
+    h1, h2, h3, h4, h5, .section, .block {
+      break-after: avoid;
+      page-break-after: avoid;
+      break-inside: avoid;
+    }
+    .pal-block, .photo-cell, .voice-cell, .card-doc, .mini-card,
+    .mini-hero, .mini-quote, .treat-section, .photo-grid > *,
+    .lex-col, .name-conv > .col, .swatch, .row, .arch-3 > *,
+    .sym-cell, .logo-pole, .review-card, .treat-row > * {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Trim heavy interactive only — keep layout intact */
+    a { text-decoration: none; color: inherit; }
+    a[href]::after { content: ""; }
+
+    /* Slightly tighten body type for paginated reading */
+    body {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    h1.cover { font-size: 64px !important; line-height: 1.02 !important; }
+    h2.section { font-size: 38px !important; line-height: 1.05 !important; }
+    h3.block { font-size: 22px !important; }
+
+    /* Disable any transitions/animations */
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    /* Hide nothing structural — the design is the deliverable */
+  }
+</style>
+<script>
+  // Auto-print once fonts are ready
+  (function() {
+    function triggerPrint() {
+      setTimeout(function() {
+        try { window.print(); } catch (e) { /* noop */ }
+      }, 600);
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() {
+        if (document.readyState === 'complete') {
+          triggerPrint();
+        } else {
+          window.addEventListener('load', triggerPrint, { once: true });
+        }
+      });
+    } else {
+      window.addEventListener('load', triggerPrint, { once: true });
+    }
+  })();
+</script>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============================================================ -->
+  <!-- 01 — COUVERTURE + CHANGELOG -->
+  <!-- ============================================================ -->
+  <section class="cover-section">
+    <div class="cover">
+      <div class="cover-left">
+        <div class="meta">
+          <div class="stamp">W</div>
+          <div class="meta-text">
+            <strong>Way To Freedom</strong><br>
+            Système de design — version&nbsp;2.1 · édition révisée<br>
+            30 avril 2026 · Document de référence DirCom
+          </div>
+        </div>
+        <h1 class="display">Une seule maison,<br>trois <em>chemins</em>,<br>un hub <em>discret</em>.</h1>
+        <p class="lede" style="margin-top:28px">
+          Édition révisée du système de design Way To Freedom, intégrant
+          douze corrections doctrinales validées par Céline &amp; Sébastien.
+          Une grammaire visuelle pour porter une vision sur dix ans, sans
+          jamais trahir la profondeur du projet.
+        </p>
+        <div class="signature">
+          <span>Cœur vivant —</span>
+          <span class="names">Céline &amp; Sébastien</span>
+        </div>
+      </div>
+      <div class="cover-right">
+        <div class="cover-card">
+          <div class="corner">¶</div>
+          <div class="eyebrow">Cinq tensions à tenir</div>
+          <ul class="principles">
+            <li><span><b>Profond</b> sans grandiloquence.</span></li>
+            <li><span><b>Simple</b> sans pauvreté.</span></li>
+            <li><span><b>Clair</b> sans froideur.</span></li>
+            <li><span><b>Chaleureux</b> sans mollesse.</span></li>
+            <li><span><b>Premium</b> sans arrogance.</span></li>
+          </ul>
+          <div style="margin-top:28px; padding-top:18px; border-top:1px solid var(--paper-deep); font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:var(--ink-3); line-height:1.5">
+            Aucune promesse médicale. Aucune énergie commerciale agressive.
+            Une identité qui se vit, qui ne se crie pas.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="changelog">
+      <div>
+        <h3>Ce qui change<br>en <em>v2.1</em>.</h3>
+        <div class="meta">Douze corrections · 30 avril 2026</div>
+      </div>
+      <ol>
+        <li><b>Palette SÉSÂMES dominante lumineuse.</b> Crème + sable. Bleu nuit secondaire. Accent améthyste tranché.</li>
+        <li><b>Convention nominale Céline &amp; Sébastien.</b> Ordre alphabétique partout, sauf signatures de chemin.</li>
+        <li><b>Phénix dominant pour AVE.</b> Pas d'aigle frontal. Plume stylisée, registre minimaliste.</li>
+        <li><b>Voie d'autonomie économique caractérisée.</b> Terre cuite, registre droit, lever de soleil.</li>
+        <li><b>Palette EES recalibrée.</b> Sauge ajoutée, violet et rose bonbon retirés.</li>
+        <li><b>Palette WTF en validation.</b> Nuit suspendue à premiers tests visuels mai-juin.</li>
+        <li><b>Polices conservées.</b> Fraunces + Inter Tight + Instrument Serif. Validées telles quelles.</li>
+        <li><b>Logos arbitrés.</b> WTF illustratif (montagne) conservé. AVE à redessiner phénix.</li>
+        <li><b>Boutons à 3 niveaux × 5 entités.</b> Jamais noir en principal. Couleur de marque obligatoire.</li>
+        <li><b>Cartes documentées par usage.</b> 6 types, dont une nouvelle carte chemin maison-mère.</li>
+        <li><b>Architecture corrigée.</b> 1 maison-mère + 3 chemins légitimes + 1 hub discret. Plus jamais « 4 pôles ». Forever jamais public.</li>
+        <li><b>Widget Google Avis stylisé.</b> Habillage palette EES, contenu Google strict (DGCCRF).</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 02 — ARCHITECTURE -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">02 — Architecture</span>
+        <h2 class="section" style="margin-top:18px">Une maison-mère.<br>Trois chemins. Un <em>hub</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Cinq entités à designer, articulées en <b style="color:var(--ink); font-weight:500">1 maison-mère + 3 chemins légitimes + 1 hub discret</b>. La maison-mère
+        narre l'écosystème. Trois chemins légitimes sont nommés
+        publiquement. Un hub pédagogique reste discret. Forever est un
+        outil, jamais nommé en façade.
+      </p>
+    </div>
+
+    <div class="arch">
+      <div class="arch-house">
+        <div class="title">Way To <em>Freedom</em></div>
+        <div class="role">Maison-mère narrative</div>
+        <div class="domain">waytofreedom.fr</div>
+      </div>
+
+      <div class="arch-3">
+        <div class="ent">
+          <div class="tag"><span class="dot" style="background:var(--ses-amethyst)"></span>Chemin · sous-page caractérisée</div>
+          <div class="name">SÉSÂMES</div>
+          <div class="role">Clarification intérieure — accompagnement Sébastien sur les périodes de vie qui appellent une question.</div>
+          <div class="domain">waytofreedom.fr/clarification-interieure-periode-de-vie</div>
+        </div>
+        <div class="ent">
+          <div class="tag"><span class="dot" style="background:var(--ees-sage)"></span>Chemin · site propre</div>
+          <div class="name">EssenCel'<em>en Soi</em></div>
+          <div class="role">Sanctuaire du corps — soins et accompagnement de Céline. Site dédié, entrée vers WTF.</div>
+          <div class="domain">essencelensoi.fr · entrée waytofreedom.fr/energie-equilibre-naturel</div>
+        </div>
+        <div class="ent">
+          <div class="tag"><span class="dot" style="background:var(--voie-terre)"></span>Chemin · sous-page caractérisée</div>
+          <div class="name">Voie d'autonomie <em>économique</em></div>
+          <div class="role">Construire une activité durable — pas un site séparé, une page caractérisée de WTF.</div>
+          <div class="domain">waytofreedom.fr/revenu-complementaire-independant</div>
+        </div>
+      </div>
+
+      <div class="arch-hub">
+        <div class="left">
+          <span class="dot"></span>
+          <span class="name">Aloe Vera <em>Excellence</em></span>
+        </div>
+        <div class="desc">
+          <b>Hub pédagogique support, jamais en façade.</b> Documente, éduque, accueille les questions concrètes sur le corps et la routine. Aucun rôle commercial direct, aucune pression d'inscription.
+        </div>
+        <div class="right">aloeveraexcellence.com<br>hub support discret</div>
+      </div>
+
+      <div class="arch-foot">
+        <span class="badge">Forever</span>
+        <span><b>Outil concret de la voie d'autonomie économique.</b> Jamais nommé publiquement, jamais affiché en façade. Mentionné uniquement en accompagnement humain, après confiance établie.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 03 — COUCHE SYMBOLIQUE -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">03 — Couche symbolique</span>
+        <h2 class="section" style="margin-top:18px">L'âme des marques,<br>avant <em>la forme</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Aucune décision visuelle ne précède la lecture symbolique. Voici
+        ce que chaque entité porte — et ce que toute interprétation
+        graphique doit honorer pour ne jamais trahir.
+      </p>
+    </div>
+
+    <div class="sym-grid">
+      <div class="sym-cell">
+        <div class="head">
+          <span class="name" style="color:var(--w2f-night)">Way To <em>Freedom</em></span>
+          <span class="role">maison-mère</span>
+        </div>
+        <p class="lecture">Le passage et la transformation accomplie.</p>
+        <p class="body"><b>Symboles porteurs :</b> le chemin, le sommet, le sac à dos déposé, le papillon-homme. Quelqu'un qui est passé, qui a traversé.</p>
+        <p class="doctrine"><b>Traduction graphique :</b> registre éditorial, dominante typographique, doré bas pour signer les moments éditoriaux. Le logo illustratif (montagne, sentier, papillon) porte la profondeur et reste l'emblème officiel — jamais simplifié en signe abstrait sur les pages-mères.</p>
+      </div>
+
+      <div class="sym-cell">
+        <div class="head">
+          <span class="name" style="color:var(--ses-amethyst)">SÉSÂMES</span>
+          <span class="role">chemin · Sébastien</span>
+        </div>
+        <p class="lecture">SÉ (Sébastien) + ÂMES + sésame, la porte qui s'ouvre.</p>
+        <p class="body"><b>Symboles porteurs :</b> le triangle ouvert à la base — la porte. La graine au centre — le jardin intérieur. La flamme — la transmutation.</p>
+        <p class="doctrine"><b>Logo canalisé, à conserver intégralement.</b> Jamais redessiné, jamais simplifié dans son rôle d'apparat. La sous-signature géométrique reste un complément utilitaire pour favicon et contextes contraints.</p>
+      </div>
+
+      <div class="sym-cell">
+        <div class="head">
+          <span class="name" style="color:var(--ees-gold)">EssenCel'<em style="color:var(--ees-sage)">en Soi</em></span>
+          <span class="role">chemin · Céline</span>
+        </div>
+        <p class="lecture">Cel (Céline) + L'Essentiel est en Soi.</p>
+        <p class="body"><b>Lecture :</b> ce qui est essentiel se trouve déjà à l'intérieur. La praticienne ne donne rien que la personne ne porte déjà.</p>
+        <p class="doctrine"><b>Conservation intégrale du wordmark gold script + ligature lune-C.</b> À isoler du visuel chakras / lotus actuel — qui n'est pas le logo, seulement un décor à retirer.</p>
+      </div>
+
+      <div class="sym-cell">
+        <div class="head">
+          <span class="name" style="color:var(--voie-terre)">Voie d'autonomie <em>économique</em></span>
+          <span class="role">chemin · sous-page</span>
+        </div>
+        <p class="lecture">Lever de soleil sur un chemin clair. Direct, solide, droit.</p>
+        <p class="body"><b>Lecture :</b> retrouver une autonomie matérielle qui libère l'attention pour ce qui compte. Mouvement vers l'avant, ancrage, terre travaillée.</p>
+        <p class="doctrine"><b>Caractère propre dans la maison.</b> Distinct de SÉSÂMES (introspection) — ici registre droit, taille typo affirmée, terre cuite chaleureuse, photographie de route et d'horizon. Forever reste l'outil, jamais nommé publiquement.</p>
+      </div>
+
+      <div class="sym-cell" style="grid-column:1 / -1">
+        <div class="head">
+          <span class="name" style="color:var(--ave-sage)">Aloe Vera <em>Excellence</em></span>
+          <span class="role">hub pédagogique discret</span>
+        </div>
+        <p class="lecture">Apprendre à lire son corps avant de choisir. Phénix discret — la transformation comme renaissance silencieuse.</p>
+        <p class="body"><b>Lecture :</b> le corps envoie des signaux simples. Encore faut-il avoir appris à les lire. Le phénix porte la traversée, jamais le triomphe — plume, légèreté, feu doux qui transforme.</p>
+        <p class="doctrine"><b>Logo à redessiner — registre désamorçant.</b> Plume stylisée évoquant le phénix, qui peut subtilement rappeler l'aile pour les initiés Forever, mais lecture première = douceur, pas spectacle. Aucun phénix flamboyant rouge / vert. Aucune symbolique MLM frontale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 04 — AUDIT TROIS SITES -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">04 — Diagnostic</span>
+        <h2 class="section" style="margin-top:18px">Trois sites,<br>trois <em>voix différentes</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Avant d'unifier, regarder honnêtement. Voici l'état actuel des
+        trois portails de l'écosystème — y compris la sous-page
+        SÉSÂMES sur waytofreedom.fr — ce qu'ils réussissent, et ce
+        qu'ils laissent fuir.
+      </p>
+    </div>
+
+    <div class="audit-grid">
+      <div class="audit-cell">
+        <h4>Way To Freedom · maison-mère</h4>
+        <div class="url">waytofreedom.fr</div>
+        <div class="swatch-row">
+          <span class="sw" style="background:#1A1410"></span>
+          <span class="sw" style="background:#3A2E22"></span>
+          <span class="sw" style="background:#A6824A"></span>
+          <span class="sw" style="background:#F4ECDD"></span>
+        </div>
+        <p class="verdict">Un héros ritualisé, puis le souffle retombe.</p>
+        <p class="pros">Photographie chaude, profonde — bois, bougie, soir. Bon registre émotionnel.</p>
+        <p class="pros">Voix éditoriale claire (« passer, comprendre, avancer »).</p>
+        <p class="cons">Le reste de la page redevient plate, sans rythme typographique fort.</p>
+        <p class="cons">Aucun système chromatique partagé avec les chemins.</p>
+      </div>
+
+      <div class="audit-cell">
+        <h4>SÉSÂMES · clarification intérieure</h4>
+        <div class="url">/clarification-interieure-periode-de-vie</div>
+        <div class="swatch-row">
+          <span class="sw" style="background:#FAF7F2"></span>
+          <span class="sw" style="background:#E8E0D2"></span>
+          <span class="sw" style="background:#5B3F7A"></span>
+          <span class="sw" style="background:#1B2A3A"></span>
+        </div>
+        <p class="verdict">La page a déjà la palette lumineuse — il faut affirmer l'améthyste.</p>
+        <p class="pros">Fond crème dominant, respect du registre quiet.</p>
+        <p class="pros">Logo canalisé bien posé, pas d'effets parasites.</p>
+        <p class="cons">Manque d'un accent identitaire fort — l'améthyste n'est pas encore présent.</p>
+        <p class="cons">Boutons et CTA encore neutres, sans porter la couleur du chemin.</p>
+      </div>
+
+      <div class="audit-cell">
+        <h4>EssenCel'en Soi · sanctuaire</h4>
+        <div class="url">essencelensoi.fr</div>
+        <div class="swatch-row">
+          <span class="sw" style="background:#2E3F2C"></span>
+          <span class="sw" style="background:#B8884A"></span>
+          <span class="sw" style="background:#6B7B5E"></span>
+          <span class="sw" style="background:#E8D2C6"></span>
+        </div>
+        <p class="verdict">Identité dorée + sauge cachée sous un décor rose-violet à retirer.</p>
+        <p class="pros">Wordmark gold script avec ligature lune-C, juste, précieux.</p>
+        <p class="pros">Le pied de page (vert sombre + or) montre la vraie palette latente.</p>
+        <p class="cons">CTA roses, particules brillantes, illustrations chakras stock — à retirer.</p>
+        <p class="cons">Violet et rose bonbon non doctrinaux — palette à recalibrer sauge + or.</p>
+      </div>
+
+      <div class="audit-cell">
+        <h4>Voie d'autonomie économique</h4>
+        <div class="url">/revenu-complementaire-independant</div>
+        <div class="swatch-row">
+          <span class="sw" style="background:#F4EFE5"></span>
+          <span class="sw" style="background:#A6533A"></span>
+          <span class="sw" style="background:#C28846"></span>
+          <span class="sw" style="background:#5B3D2C"></span>
+        </div>
+        <p class="verdict">Sous-page sans caractère propre — à différencier de SÉSÂMES.</p>
+        <p class="pros">URL et structure prêtes, ton non-vendeur déjà tenu.</p>
+        <p class="pros">Distance saine vis-à-vis de Forever, jamais nommé.</p>
+        <p class="cons">Palette indistincte de la maison-mère — manque la terre cuite.</p>
+        <p class="cons">Photographie absente ou générique — manque l'horizon, la route.</p>
+      </div>
+
+      <div class="audit-cell">
+        <h4>Aloe Vera Excellence · hub</h4>
+        <div class="url">aloeveraexcellence.com</div>
+        <div class="swatch-row">
+          <span class="sw" style="background:#F5EFE2"></span>
+          <span class="sw" style="background:#E8E0CE"></span>
+          <span class="sw" style="background:#3F6B4A"></span>
+          <span class="sw" style="background:#234032"></span>
+        </div>
+        <p class="verdict">Propre et structuré — mais sans âme, déjà presque générique.</p>
+        <p class="pros">Crème + sauge : la base la plus proche du « premium humble ».</p>
+        <p class="pros">Pédagogie tenue, ton non-vendeur respecté.</p>
+        <p class="cons">Boutons pilule vert vif type SaaS — manque de gravité.</p>
+        <p class="cons">Logo phénix-aigle flamboyant à retirer (pas de MLM frontale).</p>
+      </div>
+
+      <div class="audit-cell" style="background:var(--paper-soft)">
+        <h4 style="color:var(--w2f-gold)">Lecture transversale</h4>
+        <div class="url" style="color:var(--w2f-gold)">le système, pas chaque site</div>
+        <p class="verdict" style="color:var(--ink)">Cinq entités, cinq chambres d'une même maison.</p>
+        <p class="body" style="font-size:13px; line-height:1.55; margin-top:12px">
+          Aucune entité n'est un échec — chacune porte déjà une partie de
+          ce qu'il faut. Le travail v2.1 est de <b style="color:var(--ink); font-weight:500">retirer ce qui crie</b>,
+          <b style="color:var(--ink); font-weight:500">unifier la fondation</b>, et
+          <b style="color:var(--ink); font-weight:500">affirmer chaque accent identitaire</b>.
+        </p>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <h3>Le verdict :<br>une <em>famille</em>,<br>cinq <em>tempéraments</em>.</h3>
+      <div class="vlist">
+        <div>
+          <h5>À unifier sans hésiter</h5>
+          <p>La typographie, les neutres (crème + encre), la grille, le ton de la photographie, le langage iconographique. Le <em>chassis</em> commun.</p>
+        </div>
+        <div>
+          <h5>À garder distinct</h5>
+          <p>Une couleur signature par entité, une intention de photographie spécifique, un mot-clé d'ouverture. Cinq voix accordées sur la même note fondamentale.</p>
+        </div>
+        <div>
+          <h5>À retirer franchement</h5>
+          <p>Particules brillantes, dégradés roses-violets, chakras illustratifs, pilules vert SaaS, scripts décoratifs multiples. Tout ce qui décore sans porter.</p>
+        </div>
+        <div>
+          <h5>À introduire</h5>
+          <p>Améthyste pour SÉSÂMES, terre cuite pour la Voie, sauge confirmé pour EES. Photographies d'incarnation — mains, gestes, lumière vraie. Italique éditorial unique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 05 — COULEUR -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">05 — Couleur</span>
+        <h2 class="section" style="margin-top:18px">Une fondation <em>commune</em>,<br>cinq palettes accordées.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Les neutres portent l'écosystème. Le doré bas signe les moments
+        de chaleur. Cinq palettes — une par entité — chacune avec une
+        signature dominante et des compagnes pour les fonds doux et les
+        moments éditoriaux.
+      </p>
+    </div>
+
+    <h3 class="block mt-48 mb-12">Fondation — neutres partagés</h3>
+    <p class="body mb-24" style="max-width:60ch">Utilisés sur l'ensemble de l'écosystème, sans exception. C'est la peau commune.</p>
+    <div class="pal-foundation">
+      <div class="swatch light" style="background:#FAF7F2"><div class="name">Lin clair</div><div class="hex">#FAF7F2</div></div>
+      <div class="swatch light" style="background:#F6F1E8"><div class="name">Lin</div><div class="hex">#F6F1E8 — paper</div></div>
+      <div class="swatch light" style="background:#EFE8DB"><div class="name">Crème</div><div class="hex">#EFE8DB</div></div>
+      <div class="swatch light" style="background:#E6DCC9"><div class="name">Sable</div><div class="hex">#E6DCC9</div></div>
+      <div class="swatch dark" style="background:#3B342A"><div class="name">Terre</div><div class="hex">#3B342A</div></div>
+      <div class="swatch dark" style="background:#1F1A14"><div class="name">Nuit</div><div class="hex">#1F1A14 — ink</div></div>
+    </div>
+
+    <div class="ornament"><span class="line"></span><span class="glyph">✦</span><span class="line"></span></div>
+
+    <h3 class="block mt-24 mb-12">Signatures chromatiques de l'écosystème</h3>
+    <p class="body mb-24" style="max-width:64ch">
+      Une signature n'est pas une couleur — c'est un <em>accord</em>.
+      Chaque entité se reconnaît par deux ou trois teintes tenues
+      ensemble. Réduire à un carré plein trahit : SÉSÂMES n'est pas
+      « la marque violette », EES n'est pas « la marque verte ». Voici
+      les vrais accords signature, chacun extrait du logo ou de la
+      doctrine v2.1.
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:48px">
+
+      <!-- WTF : nuit + or bas -->
+      <div style="border:1px solid var(--paper-deep); background:var(--paper-soft); display:flex; flex-direction:column">
+        <div style="display:flex; height:120px">
+          <div style="flex:2; background:#1B1814"></div>
+          <div style="flex:1; background:#B8884A"></div>
+        </div>
+        <div style="padding:14px 16px 16px">
+          <div style="font-family:'Fraunces',serif; font-weight:400; font-size:15px; line-height:1.15">Way To <em style="font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)">Freedom</em></div>
+          <div style="font-family:var(--ff-mono); font-size:9px; color:var(--ink-3); margin-top:6px; line-height:1.6">#1B1814 · nuit<br>#B8884A · doré bas</div>
+          <div style="font-family:'Instrument Serif',serif; font-style:italic; font-size:11px; color:var(--ink-3); margin-top:6px; line-height:1.4">nuit-vision · accent or</div>
+        </div>
+      </div>
+
+      <!-- SÉSÂMES : noir + or canalisé + bleu lunaire + lumière -->
+      <div style="border:1px solid var(--paper-deep); background:var(--paper-soft); display:flex; flex-direction:column">
+        <div style="display:grid; grid-template-columns:1fr 1fr; height:120px">
+          <div style="background:#1A1410"></div>
+          <div style="background:#C9A24E"></div>
+          <div style="background:#A8C4D9"></div>
+          <div style="background:#FAF7F2; border-top:1px solid var(--paper-deep); border-left:1px solid var(--paper-deep)"></div>
+        </div>
+        <div style="padding:14px 16px 16px">
+          <div style="font-family:'Fraunces',serif; font-weight:400; font-size:15px; line-height:1.15">SÉSÂMES</div>
+          <div style="font-family:var(--ff-mono); font-size:9px; color:var(--ink-3); margin-top:6px; line-height:1.6">#1A1410 · noir<br>#C9A24E · or canalisé<br>#A8C4D9 · bleu lunaire<br>#FAF7F2 · lumière</div>
+          <div style="font-family:'Instrument Serif',serif; font-style:italic; font-size:11px; color:var(--ink-3); margin-top:6px; line-height:1.4">extrait du logo canalisé</div>
+        </div>
+      </div>
+
+      <!-- EES : rose poudré + or + crème -->
+      <div style="border:1px solid var(--paper-deep); background:var(--paper-soft); display:flex; flex-direction:column">
+        <div style="display:flex; height:120px">
+          <div style="flex:2; background:#E8D2C6"></div>
+          <div style="flex:1; background:#B8884A"></div>
+        </div>
+        <div style="padding:14px 16px 16px">
+          <div style="font-family:'Fraunces',serif; font-weight:400; font-size:15px; line-height:1.15">EssenCel'<em style="font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)">en Soi</em></div>
+          <div style="font-family:var(--ff-mono); font-size:9px; color:var(--ink-3); margin-top:6px; line-height:1.6">#E8D2C6 · rose poudré<br>#B8884A · or signature<br>· sauge en ancrage</div>
+          <div style="font-family:'Instrument Serif',serif; font-style:italic; font-size:11px; color:var(--ink-3); margin-top:6px; line-height:1.4">corps-vivant · douceur tenue</div>
+        </div>
+      </div>
+
+      <!-- Voie autonomie : terre cuite + ocre -->
+      <div style="border:1px solid var(--paper-deep); background:var(--paper-soft); display:flex; flex-direction:column">
+        <div style="display:flex; height:120px">
+          <div style="flex:2; background:#A6533A"></div>
+          <div style="flex:1; background:#C28846"></div>
+        </div>
+        <div style="padding:14px 16px 16px">
+          <div style="font-family:'Fraunces',serif; font-weight:400; font-size:15px; line-height:1.15">Voie d'autonomie <em style="font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)">économique</em></div>
+          <div style="font-family:var(--ff-mono); font-size:9px; color:var(--ink-3); margin-top:6px; line-height:1.6">#A6533A · terre cuite<br>#C28846 · ocre compagne</div>
+          <div style="font-family:'Instrument Serif',serif; font-style:italic; font-size:11px; color:var(--ink-3); margin-top:6px; line-height:1.4">chaud-actif · lever de soleil</div>
+        </div>
+      </div>
+
+      <!-- AVE : sauge sur crème dominant -->
+      <div style="border:1px solid var(--paper-deep); background:var(--paper-soft); display:flex; flex-direction:column">
+        <div style="display:flex; height:120px; background:#F2EDE4; padding:18px; align-items:center; justify-content:center">
+          <div style="width:60%; height:60%; background:#5E7A4E"></div>
+        </div>
+        <div style="padding:14px 16px 16px">
+          <div style="font-family:'Fraunces',serif; font-weight:400; font-size:15px; line-height:1.15">Aloe Vera <em style="font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2)">Excellence</em></div>
+          <div style="font-family:var(--ff-mono); font-size:9px; color:var(--ink-3); margin-top:6px; line-height:1.6">#F2EDE4 · crème dominant<br>#5E7A4E · sauge accent</div>
+          <div style="font-family:'Instrument Serif',serif; font-style:italic; font-size:11px; color:var(--ink-3); margin-top:6px; line-height:1.4">pédagogique-discret · sauge nue</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:18px 24px; background:var(--paper-soft); border:1px solid var(--paper-deep); margin-bottom:48px; display:flex; gap:14px; align-items:flex-start; font-size:13px; color:var(--ink-2); line-height:1.55">
+      <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; color:var(--w2f-gold); flex:0 0 auto; line-height:1">✦</span>
+      <span><b style="color:var(--ink); font-weight:500">Note importante.</b> EES et AVE partagent une parenté sauge — c'est doctrinal (le corps, la plante, la chlorophylle). Mais leurs <em>signatures</em> ne se confondent pas : EES se reconnaît à <b style="color:var(--ink); font-weight:500">l'or signature + le rose poudré</b> (la sauge est ancrage interne, pas façade) ; AVE se reconnaît à <b style="color:var(--ink); font-weight:500">la sauge nue sur crème dominant</b>, sans or, sans éclat. Les deux entités ne se croisent jamais visuellement parce qu'elles ne se présentent pas par leur sauge.</span>
+    </div>
+
+    <!-- WTF -->
+    <div class="pal-block">
+      <div class="head">
+        <div class="h-left">
+          <div class="role">Maison-mère · vision (palette en validation)</div>
+          <div class="h-name">Way To <em>Freedom</em></div>
+        </div>
+        <div class="h-right">
+          Nuit profonde + doré bas. Encadre les trois accents des chemins sans les cannibaliser.
+          <span class="domain">⏷ suspendu à premiers tests visuels mai-juin 2026</span>
+        </div>
+      </div>
+      <div class="row r-4">
+        <div class="swatch dark" style="background:#1B1814; aspect-ratio:5/3"><div class="name">Nuit</div><div class="hex">#1B1814 · dominante</div></div>
+        <div class="swatch dark" style="background:#2E2A22; aspect-ratio:5/3"><div class="name">Nuit chaude</div><div class="hex">#2E2A22</div></div>
+        <div class="swatch dark" style="background:#B8884A; aspect-ratio:5/3"><div class="name">Doré bas</div><div class="hex">#B8884A · accent</div></div>
+        <div class="swatch light" style="background:#F6F1E8; aspect-ratio:5/3"><div class="name">Lin</div><div class="hex">#F6F1E8 · fond</div></div>
+      </div>
+    </div>
+
+    <!-- SÉSÂMES — palette extraite du logo canalisé -->
+    <div class="pal-block">
+      <div class="head">
+        <div class="h-left">
+          <div class="role">Chemin · clarification intérieure (Sébastien)</div>
+          <div class="h-name">SÉSÂMES</div>
+        </div>
+        <div class="h-right">
+          Palette <b style="color:var(--ink)">extraite du logo canalisé</b>. Noir profond + lumière en structure. Or canalisé et bleu lunaire en signatures émotionnelles. Améthyste en accent ponctuel.
+        </div>
+      </div>
+      <div class="row r-5">
+        <div class="swatch dark" style="background:#1A1410; aspect-ratio:5/3"><div class="name">Noir profond</div><div class="hex">#1A1410 · triangle</div></div>
+        <div class="swatch light" style="background:#FAF7F2; aspect-ratio:5/3"><div class="name">Lumière</div><div class="hex">#FAF7F2 · fond</div></div>
+        <div class="swatch dark" style="background:#C9A24E; aspect-ratio:5/3"><div class="name">Or canalisé</div><div class="hex">#C9A24E · graine, flamme</div></div>
+        <div class="swatch dark" style="background:#A8C4D9; color:var(--ink); aspect-ratio:5/3"><div class="name" style="color:var(--ink)">Bleu lunaire</div><div class="hex" style="color:var(--ink-2)">#A8C4D9 · clarté froide</div></div>
+        <div class="swatch dark" style="background:#5B3F7A; aspect-ratio:5/3"><div class="name">Améthyste</div><div class="hex">#5B3F7A · accent ponctuel</div></div>
+      </div>
+      <div style="padding:16px 24px; background:var(--paper); border-top:1px solid var(--paper-deep); font-size:12px; color:var(--ink-3); line-height:1.55"><b style="color:var(--ink-2); font-weight:500">Distinction or canalisé / or EES.</b> L'or SÉSÂMES <span class="mono" style="font-size:11px">#C9A24E</span> est plus jaune, plus mystique, légèrement paillette — il vit sur noir et bleu lunaire. L'or EES <span class="mono" style="font-size:11px">#B8884A</span> est plus bronze, plus chaud, plus terre — il vit sur crème et rose poudré. Jamais interchangeables.</div>
+    </div>
+
+    <!-- EES — rose poudré + or en signatures, sauge en ancrage -->
+    <div class="pal-block">
+      <div class="head">
+        <div class="h-left">
+          <div class="role">Sanctuaire du corps · Céline</div>
+          <div class="h-name">EssenCel'<em>en Soi</em></div>
+        </div>
+        <div class="h-right">
+          <b style="color:var(--ink)">Rose poudré + or signature en dominantes.</b> La sauge n'est pas la signature — c'est l'ancrage structurel (texte, contre-poids, pied de page). Pas de violet, pas de rose bonbon.
+        </div>
+      </div>
+      <div class="row r-5">
+        <div class="swatch light" style="background:#E8D2C6; aspect-ratio:5/3"><div class="name">Rose poudré</div><div class="hex">#E8D2C6 · signature</div></div>
+        <div class="swatch dark" style="background:#B8884A; aspect-ratio:5/3"><div class="name">Or signature</div><div class="hex">#B8884A · wordmark</div></div>
+        <div class="swatch light" style="background:#F2EDE4; aspect-ratio:5/3"><div class="name">Crème</div><div class="hex">#F2EDE4 · dominante neutre</div></div>
+        <div class="swatch dark" style="background:#6B7B5E; aspect-ratio:5/3"><div class="name">Sauge</div><div class="hex">#6B7B5E · ancrage texte</div></div>
+        <div class="swatch dark" style="background:#2E3F2C; aspect-ratio:5/3"><div class="name">Vert sombre</div><div class="hex">#2E3F2C · rare</div></div>
+      </div>
+      <div style="padding:16px 24px; background:var(--paper); border-top:1px solid var(--paper-deep); font-size:12px; color:var(--ink-3); line-height:1.55"><b style="color:var(--ink-2); font-weight:500">Hiérarchie d'usage.</b> Hero, cartes soin, widget Avis, packaging : <b style="color:var(--ink-2); font-weight:500">rose poudré + or signature</b>. Texte courant, navigation, pied de page, légendes : <b style="color:var(--ink-2); font-weight:500">sauge sur crème</b>. Le vert sombre n'apparaît qu'en signature de pied. Cette hiérarchie évite toute confusion avec AVE qui, lui, mène par la sauge.</div>
+    </div>
+
+    <!-- VOIE AUTONOMIE -->
+    <div class="pal-block">
+      <div class="head">
+        <div class="h-left">
+          <div class="role">Chemin · sous-page caractérisée</div>
+          <div class="h-name">Voie d'autonomie <em>économique</em></div>
+        </div>
+        <div class="h-right">
+          Lever de soleil sur un chemin clair. Terre cuite chaleureuse, jamais d'or paillette (réservé EES), jamais d'améthyste (réservé SÉSÂMES).
+        </div>
+      </div>
+      <div class="row r-4">
+        <div class="swatch light" style="background:#F4EFE5; aspect-ratio:5/3"><div class="name">Crème terre</div><div class="hex">#F4EFE5 · dominante</div></div>
+        <div class="swatch dark" style="background:#A6533A; aspect-ratio:5/3"><div class="name">Terre cuite</div><div class="hex">#A6533A · accent</div></div>
+        <div class="swatch dark" style="background:#C28846; aspect-ratio:5/3"><div class="name">Ocre compagne</div><div class="hex">#C28846 · secondaire</div></div>
+        <div class="swatch dark" style="background:#5B3D2C; aspect-ratio:5/3"><div class="name">Terre profonde</div><div class="hex">#5B3D2C · ancrage</div></div>
+      </div>
+    </div>
+
+    <!-- AVE -->
+    <div class="pal-block" style="margin-bottom:0">
+      <div class="head">
+        <div class="h-left">
+          <div class="role">Hub pédagogique · discret</div>
+          <div class="h-name">Aloe Vera <em>Excellence</em></div>
+        </div>
+        <div class="h-right">
+          Sauge + crème + or très ponctuel. Palette la plus sobre — porte d'entrée accessible sans éclat. Jamais flamboyant, jamais MLM.
+        </div>
+      </div>
+      <div class="row r-4">
+        <div class="swatch light" style="background:#F2EDE4; aspect-ratio:5/3"><div class="name">Crème</div><div class="hex">#F2EDE4 · dominante</div></div>
+        <div class="swatch dark" style="background:#5E7A4E; aspect-ratio:5/3"><div class="name">Sauge</div><div class="hex">#5E7A4E · accent</div></div>
+        <div class="swatch dark" style="background:#93A984; aspect-ratio:5/3"><div class="name">Sauge clair</div><div class="hex">#93A984</div></div>
+        <div class="swatch dark" style="background:#B8884A; aspect-ratio:5/3"><div class="name">Or ponctuel</div><div class="hex">#B8884A · très rare</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 06 — TYPOGRAPHIE -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">06 — Typographie</span>
+        <h2 class="section" style="margin-top:18px">Une direction <em>validée</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Fraunces pour le serif éditorial, Inter Tight pour le corps
+        humaniste, Instrument Serif italique pour signer les moments
+        sensibles. Trois familles libres de droits, multi-supports,
+        suffisantes pour dix ans. Aucune modification depuis la v2.
+      </p>
+    </div>
+
+    <div class="type-card">
+      <div class="opt-tag">✦ Validée</div>
+      <div class="label">Système typographique</div>
+      <div class="opt-name">Fraunces · Inter Tight · Instrument Serif</div>
+      <div class="opt-mood">Serif éditorial vivant + sans humaniste calme + italique signature pour les moments tenus.</div>
+
+      <div class="specimen">
+        <div class="meta-line"><span class="role">Display</span><span class="spec">Fraunces · 300 · 46/46</span></div>
+        <p class="o1-h1">Reconnecter le corps,<br>la <em>clarté</em>, la liberté.</p>
+      </div>
+      <div class="specimen">
+        <div class="meta-line"><span class="role">Heading</span><span class="spec">Fraunces · 400 · 24/28</span></div>
+        <p class="o1-h2">Une approche simple,<br>respectueuse de votre rythme.</p>
+      </div>
+      <div class="specimen">
+        <div class="meta-line"><span class="role">Body</span><span class="spec">Inter Tight · 400 · 15/24</span></div>
+        <p class="o1-body">Chaque accompagnement est unique. Le vôtre commence là où vous en êtes — sans jugement, sans recette, sans promesse. Juste une présence, et le temps qu'il faut.</p>
+      </div>
+      <div class="specimen">
+        <div class="meta-line"><span class="role">Italique signature</span><span class="spec">Instrument Serif · italic · 22/30</span></div>
+        <p class="o1-quote">« Nous n'apportons pas de réponse — nous tenons l'espace où la vôtre peut paraître. »</p>
+      </div>
+
+      <div class="recommend">
+        <span class="star">✦</span>
+        <span class="txt"><b>Pourquoi celle-ci.</b> Fraunces porte la chaleur sans tomber dans le précieux ; Inter Tight tient la clarté sans froideur. L'italique Instrument signe les moments sensibles. Un système suffisant pour porter dix ans.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 07 — MARQUES / LOGOS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">07 — Marques</span>
+        <h2 class="section" style="margin-top:18px">Une maison,<br>quatre <em>signatures vivantes</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        <b style="color:var(--ink); font-weight:500">SÉSÂMES</b> et
+        <b style="color:var(--ink); font-weight:500">EssenCel'en Soi</b> :
+        logos sacrés, conservés intégralement.
+        <b style="color:var(--ink); font-weight:500">Way To Freedom</b> :
+        logo illustratif (montagne, sentier, papillon) conservé comme
+        emblème officiel — une version minimaliste l'accompagne pour les
+        contextes contraints.
+        <b style="color:var(--ink); font-weight:500">Aloe Vera Excellence</b> :
+        à redessiner autour du phénix, registre minimaliste.
+      </p>
+    </div>
+
+    <div class="logos-grid">
+      <div class="logo-master">
+        <div class="corner">¶ marque-mère · version minimaliste</div>
+        <div class="lock">
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" stroke="#D9B884" stroke-width="1"/>
+            <path d="M16 36 L24 24 L32 32 L40 22 L48 36" stroke="#F6F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="32" r="2" fill="#D9B884"/>
+          </svg>
+          <div class="wordmark">Way To <em>Freedom</em></div>
+          <div class="tagline">— l'écosystème —</div>
+        </div>
+        <div class="footer-line">
+          <span>Céline · Sébastien</span>
+          <span>fondé · 2024</span>
+        </div>
+      </div>
+
+      <div class="logo-poles">
+        <!-- WTF officiel illustratif (placeholder) -->
+        <div class="logo-pole">
+          <div class="accent-bar" style="background:var(--w2f-night)"></div>
+          <div class="mono-ico" style="background:transparent; border:1px dashed var(--w2f-night-2)">
+            <!-- Placeholder écusson illustratif WTF — montagne, chemin, papillon -->
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="14" stroke="#1B1814" stroke-width="1" fill="none"/>
+              <path d="M6 22 L11 14 L14 17 L20 9 L26 22" stroke="#1B1814" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+              <path d="M14 22 Q16 19 18 22" stroke="#B8884A" stroke-width="1" fill="none"/>
+              <circle cx="16" cy="9" r="1.4" fill="#1B1814"/>
+              <path d="M14.4 9 Q12.8 7.5 13.5 6 M17.6 9 Q19.2 7.5 18.5 6" stroke="#1B1814" stroke-width=".9" fill="none"/>
+            </svg>
+          </div>
+          <div class="text">
+            <div class="name">Way To <em>Freedom</em></div>
+            <div class="sub">Officiel illustratif · conservé</div>
+          </div>
+        </div>
+        <!-- EES gold script -->
+        <div class="logo-pole">
+          <div class="accent-bar" style="background:var(--ees-gold)"></div>
+          <div class="mono-ico" style="background:var(--ees-gold)">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M17 6 A8 8 0 1 0 17 18" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="text">
+            <div class="name">EssenCel'<em>en Soi</em></div>
+            <div class="sub">Wordmark gold script · conservé</div>
+          </div>
+        </div>
+        <!-- SÉSÂMES -->
+        <div class="logo-pole">
+          <div class="accent-bar" style="background:var(--ses-amethyst)"></div>
+          <div class="mono-ico" style="background:var(--ses-amethyst)">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 20 L12 5 L19 20" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>
+              <ellipse cx="12" cy="15" rx="1.4" ry="2" fill="#D9B884"/>
+              <path d="M12 11 Q11 9 12 7 Q13 9 12 11 Z" fill="#D9B884" opacity=".85"/>
+            </svg>
+          </div>
+          <div class="text">
+            <div class="name">SÉSÂMES</div>
+            <div class="sub">Logo canalisé · conservé intégralement</div>
+          </div>
+        </div>
+        <!-- AVE phénix minimaliste -->
+        <div class="logo-pole">
+          <div class="accent-bar" style="background:var(--ave-sage)"></div>
+          <div class="mono-ico" style="background:var(--ave-sage)">
+            <!-- Phénix minimaliste : plume centrale + ailes esquissées + feuille suggérée -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 19 L12 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M12 8 Q9 5 5 7" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none" opacity=".75"/>
+              <path d="M12 8 Q15 5 19 7" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none" opacity=".75"/>
+              <path d="M12 12 Q10 11 9.2 13" stroke="currentColor" stroke-width=".9" fill="none" opacity=".6"/>
+              <path d="M12 12 Q14 11 14.8 13" stroke="currentColor" stroke-width=".9" fill="none" opacity=".6"/>
+              <circle cx="12" cy="6.6" r=".9" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="text">
+            <div class="name">Aloe Vera <em>Excellence</em></div>
+            <div class="sub">À redessiner · phénix minimaliste</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Doctrine logos -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:32px; border:1px solid var(--paper-deep)">
+      <div style="padding:24px 28px; border-right:1px solid var(--paper-deep); border-bottom:1px solid var(--paper-deep); background:var(--paper-soft)">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px"><span style="width:8px; height:8px; border-radius:50%; background:var(--ses-amethyst)"></span><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500">Sacré · conservé</span></div>
+        <div style="font-family:'Fraunces',serif; font-weight:400; font-size:20px; margin-bottom:6px">SÉSÂMES</div>
+        <p style="font-size:13px; color:var(--ink-2); line-height:1.55">Logo canalisé. Triangle ouvert (porte), graine (jardin intérieur), flamme (transmutation). À conserver intégralement, jamais redessiné.</p>
+      </div>
+      <div style="padding:24px 28px; border-bottom:1px solid var(--paper-deep); background:var(--paper-soft)">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px"><span style="width:8px; height:8px; border-radius:50%; background:var(--ees-gold)"></span><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500">Sacré · conservé</span></div>
+        <div style="font-family:'Fraunces',serif; font-weight:400; font-size:20px; margin-bottom:6px">EssenCel'en Soi</div>
+        <p style="font-size:13px; color:var(--ink-2); line-height:1.55">Wordmark gold script avec ligature lune-C. À préserver intégralement, à isoler du décor chakras / lotus actuel — qui n'est pas le logo.</p>
+      </div>
+      <div style="padding:24px 28px; border-right:1px solid var(--paper-deep); background:var(--paper-soft)">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px"><span style="width:8px; height:8px; border-radius:50%; background:var(--w2f-night)"></span><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500">Conservé · officiel illustratif</span></div>
+        <div style="font-family:'Fraunces',serif; font-weight:400; font-size:20px; margin-bottom:6px">Way To Freedom</div>
+        <p style="font-size:13px; color:var(--ink-2); line-height:1.55">L'écusson illustratif (montagne, sentier sinueux, sac à dos déposé, papillon) porte la profondeur du parcours et reste l'emblème officiel. La version minimaliste (M dans cercle) sert pour favicons et contextes contraints — jamais sur les pages principales.</p>
+      </div>
+      <div style="padding:24px 28px; background:var(--paper-soft)">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px"><span style="width:8px; height:8px; border-radius:50%; background:var(--ave-sage)"></span><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500">À redessiner · phénix minimaliste</span></div>
+        <div style="font-family:'Fraunces',serif; font-weight:400; font-size:20px; margin-bottom:6px">Aloe Vera Excellence</div>
+        <p style="font-size:13px; color:var(--ink-2); line-height:1.55">Logo actuel (phénix-aigle flamboyant rouge / vert) à retirer — lecture MLM Forever frontale bannie. À redessiner autour d'un phénix minimaliste : plume stylisée, légèreté, feu transformateur doux. Une plume peut subtilement évoquer l'aile pour les initiés Forever, mais la lecture première reste douceur.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 08 — BOUTONS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">08 — Boutons &amp; CTA</span>
+        <h2 class="section" style="margin-top:18px">Trois niveaux,<br>cinq <em>tempéraments</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        <b style="color:var(--ink); font-weight:500">Jamais de bouton noir en principal.</b>
+        Le noir crée une rupture émotionnelle au moment de l'action,
+        contraire à la posture des marques d'écoute. Le bouton principal
+        porte toujours la couleur de la marque. Trois niveaux : action
+        primaire, action secondaire (transparente bordée), lien tertiaire
+        souligné.
+      </p>
+    </div>
+
+    <div class="btn-table">
+      <div class="head-cell">Entité</div>
+      <div class="head-cell">Principal — couleur de marque</div>
+      <div class="head-cell">Secondaire — bordure</div>
+      <div class="head-cell">Tertiaire — souligné</div>
+
+      <!-- WTF -->
+      <div class="row-label">
+        <div class="role">Maison-mère · suspendu</div>
+        <div class="name">Way To <em>Freedom</em></div>
+        <div class="accent-line" style="background:var(--w2f-night)"></div>
+      </div>
+      <div><a class="btn btn-prim-w2f" href="#">Découvrir l'écosystème <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-sec-w2f" href="#">Lire le manifeste <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-tertiary btn-ter-w2f" href="#">En savoir plus <span class="arrow">→</span></a></div>
+
+      <!-- SÉSÂMES -->
+      <div class="row-label">
+        <div class="role">Chemin · améthyste (accent)</div>
+        <div class="name">SÉSÂMES</div>
+        <div class="accent-line" style="background:linear-gradient(90deg, #1A1410 0%, #C9A24E 50%, #A8C4D9 100%)"></div>
+      </div>
+      <div><a class="btn btn-prim-ses" href="#">Demander la 1ère clé <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-sec-ses" href="#">Lire un parcours <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-tertiary btn-ter-ses" href="#">Voir les trois clés <span class="arrow">→</span></a></div>
+
+      <!-- EES -->
+      <div class="row-label">
+        <div class="role">Chemin · or signature + rose poudré</div>
+        <div class="name">EssenCel'<em>en Soi</em></div>
+        <div class="accent-line" style="background:linear-gradient(90deg, var(--ees-rose) 0%, var(--ees-gold) 100%)"></div>
+      </div>
+      <div><a class="btn btn-prim-ees" href="#">Réserver un soin <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-sec-ees" href="#">Découvrir les soins <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-tertiary btn-ter-ees" href="#">Lire le blog <span class="arrow">→</span></a></div>
+
+      <!-- VOIE AUTONOMIE -->
+      <div class="row-label">
+        <div class="role">Chemin · terre cuite</div>
+        <div class="name">Voie d'autonomie<br><em>économique</em></div>
+        <div class="accent-line" style="background:var(--voie-terre)"></div>
+      </div>
+      <div><a class="btn btn-prim-voie" href="#">Avancer simplement <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-sec-voie" href="#">Comprendre la voie <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-tertiary btn-ter-voie" href="#">Échanger avec nous <span class="arrow">→</span></a></div>
+
+      <!-- AVE -->
+      <div class="row-label">
+        <div class="role">Hub · sauge discret</div>
+        <div class="name">Aloe Vera <em>Excellence</em></div>
+        <div class="accent-line" style="background:var(--ave-sage)"></div>
+      </div>
+      <div><a class="btn btn-prim-ave" href="#">Recevoir le guide <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-sec-ave" href="#">Lire un article <span class="arrow">→</span></a></div>
+      <div><a class="btn btn-tertiary btn-ter-ave" href="#">Faire le point <span class="arrow">→</span></a></div>
+    </div>
+
+    <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:14px">
+      <div style="padding:20px 24px; background:var(--paper-soft); border:1px solid var(--paper-deep); display:flex; gap:14px; align-items:flex-start; font-size:13px; color:var(--ink-2); line-height:1.55">
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; color:var(--w2f-gold); flex:0 0 auto; line-height:1">✦</span>
+        <span><b style="color:var(--ink); font-weight:500">Règle absolue.</b> Une seule action principale par écran. Le bouton secondaire est toujours visuellement plus léger. Aucun coin arrondi SaaS, aucun ombrage, aucune urgence (« offre limitée », compteur, « rejoignez les 10 000 »).</span>
+      </div>
+      <div style="padding:20px 24px; background:var(--ees-rose); border:1px solid var(--paper-deep); display:flex; gap:14px; align-items:flex-start; font-size:13px; color:var(--ink-2); line-height:1.55">
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; color:var(--ees-gold); flex:0 0 auto; line-height:1">✦</span>
+        <span><b style="color:var(--ink); font-weight:500">Bascule EES — décision v2.1.1.</b> Le CTA primary EES passe du <span style="text-decoration:line-through; color:var(--ink-3)">rose vif <span class="mono" style="font-size:11px">#C8407A</span></span> du site actuel à <b style="color:var(--ink); font-weight:500">l'or signature <span class="mono" style="font-size:11px">#B8884A</span></b>. Cohérence avec le wordmark gold script, sortie définitive du registre « rose bonbon marketing ». La sauge devient le bouton secondaire (bordure transparente).</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 09 — CARTES -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">09 — Cartes</span>
+        <h2 class="section" style="margin-top:18px">Six types de cartes,<br>chacune <em>à sa juste place</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Image au-dessus, étiquette d'entité, titre serif, corps court, lien
+        de fin. Aucun gradient. Aucun ombrage. L'entité se reconnaît à la
+        couleur d'image, pas à un cadre coloré. Chaque type a un usage
+        précis documenté ci-dessous.
+      </p>
+    </div>
+
+    <div class="cards-doc">
+      <!-- Carte chemin WTF (NOUVEAU) -->
+      <div class="card-doc">
+        <div class="img tint-w2f">↳ photographie · sentier de montagne, soir</div>
+        <div class="content">
+          <div class="pole-tag"><span class="dot" style="background:var(--w2f-night)"></span>Way To Freedom · maison-mère</div>
+          <span class="usage">Carte chemin · trio en accueil WTF</span>
+          <h4>Clarifier une <em>période de vie</em></h4>
+          <p class="desc">Pour traverser un seuil, nommer ce qui appelle, retrouver une direction. Avec Sébastien.</p>
+          <div class="where"><b>Usage :</b> waytofreedom.fr accueil. Trio de cartes signature pour orienter vers les 3 chemins légitimes.</div>
+        </div>
+      </div>
+
+      <!-- Carte soin EES -->
+      <div class="card-doc">
+        <div class="img tint-ees">↳ photographie · mains de praticienne, lin clair</div>
+        <div class="content">
+          <div class="pole-tag"><span class="dot" style="background:var(--ees-sage)"></span>EssenCel'en Soi</div>
+          <span class="usage">Carte soin · page tarifs + accueil</span>
+          <h4>Cocoon de <em>détente</em></h4>
+          <p class="desc">Un temps court, enveloppant. Reposer le système nerveux, retrouver la fluidité du souffle.</p>
+          <div class="where"><b>Usage :</b> 4 soins signatures (Cocoon · Reconnexion Profonde · Harmonisation énergétique intuitive · Libération émotionnelle du ventre Chi Nei Tsang) + 2 complémentaires (dos, visage).</div>
+        </div>
+      </div>
+
+      <!-- Carte article SEO blog EES -->
+      <div class="card-doc">
+        <div class="img tint-ees-rose">↳ vignette article · plante, peau, matière</div>
+        <div class="content">
+          <div class="pole-tag"><span class="dot" style="background:var(--ees-sage)"></span>EssenCel'en Soi</div>
+          <span class="usage">Carte article SEO · page blog</span>
+          <h4>Comprendre le ventre,<br><em>seconde chambre</em> du corps</h4>
+          <p class="desc">Le ventre porte ce que la tête ne sait pas encore nommer. Repères simples, lectures progressives.</p>
+          <div class="where"><b>Usage :</b> page blog EES. Vignette + titre + extrait court + bouton « lire ». Pas de sensationnalisme, pas de promesse.</div>
+        </div>
+      </div>
+
+      <!-- Carte offre SÉSÂMES -->
+      <div class="card-doc">
+        <div class="img tint-ses">↳ photographie · objet de seuil, vue plongeante</div>
+        <div class="content">
+          <div class="pole-tag"><span class="dot" style="background:var(--ses-amethyst)"></span>SÉSÂMES</div>
+          <span class="usage">Carte parcours · page SÉSÂMES</span>
+          <h4>Trois clés,<br>un <em>seuil traversé</em></h4>
+          <p class="desc">RENAÎTRE, RÉVÉLER, RAYONNER. Trois temps d'accompagnement pour traverser une transition de vie.</p>
+          <div class="where"><b>Usage :</b> 1ère Clé d'accueil + parcours triple. Sobre, sans CTA agressif. Couleur de signature : améthyste.</div>
+        </div>
+      </div>
+
+      <!-- Carte témoignage EES (widget Google) -->
+      <div class="card-doc">
+        <div class="img tint-ees" style="background:var(--ees-cream); color:var(--ees-gold); border-bottom:1px solid var(--paper-deep)">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--ees-gold)">
+            <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:32px">★ ★ ★ ★ ★</span>
+            <span style="font-family:var(--ff-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)">widget google avis · stylisé EES</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="pole-tag"><span class="dot" style="background:var(--ees-sage)"></span>EssenCel'en Soi</div>
+          <span class="usage">Carte témoignage · widget stylisé</span>
+          <h4>La voix des autres,<br>tenue avec <em>retenue</em></h4>
+          <p class="desc">Widget Google Avis stylisé en charte EES — fond crème, étoiles or signature, typo Fraunces. Contenu Google strict.</p>
+          <div class="where"><b>Usage :</b> source Google Avis (DGCCRF). Habillage CSS uniquement, contenu intouchable. Détail en section 12.</div>
+        </div>
+      </div>
+
+      <!-- Carte ressource AVE -->
+      <div class="card-doc">
+        <div class="img tint-ave">↳ photographie · plante en jardin, contre-jour</div>
+        <div class="content">
+          <div class="pole-tag"><span class="dot" style="background:var(--ave-sage)"></span>Aloe Vera Excellence</div>
+          <span class="usage">Carte ressource · hub pédagogique</span>
+          <h4>Lire les signaux<br>du <em>corps fatigué</em></h4>
+          <p class="desc">Article + ressource téléchargeable + témoignage utilisateur. Aucun bouton « acheter », aucune boutique.</p>
+          <div class="where"><b>Usage :</b> aloeveraexcellence.com. Pédagogie progressive, sans recette. Le hub n'est jamais en façade commerciale.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 10 — HERO MAISON-MÈRE -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">10 — En-tête &amp; hero</span>
+        <h2 class="section" style="margin-top:18px">La page d'accueil<br>de la <em>maison</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Navigation discrète sur fond crème, titre éditorial à gauche,
+        image chaude à droite avec une signature italique en bas. Aucune
+        barre sticky agressive. La page commence calme — et nomme
+        explicitement les trois chemins légitimes plus le hub.
+      </p>
+    </div>
+
+    <div class="hero-demo">
+      <div class="hero-frame">
+        <div class="hero-nav">
+          <div class="brand">Way To <em>Freedom</em></div>
+          <ul>
+            <li class="active">Accueil</li>
+            <li>Notre vision</li>
+            <li>Les chemins</li>
+            <li>Céline &amp; Sébastien</li>
+            <li>Lettres</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+        <div class="hero-content">
+          <div class="eyebrow">L'écosystème</div>
+          <h1>Reconnecter le corps,<br>la clarté, l'<em>autonomie</em>,<br>la liberté.</h1>
+          <p>Way To Freedom n'est pas une marque. C'est un écosystème de
+            transformation humaine, fondé par Céline &amp; Sébastien.
+            Trois chemins légitimes, une seule respiration.</p>
+          <div class="ctas">
+            <a class="btn btn-prim-w2f" href="#">Découvrir l'écosystème <span class="arrow">→</span></a>
+            <a class="btn btn-tertiary btn-ter-w2f" href="#">Lire le manifeste</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="ph">
+            <span style="font-size:24px">¶</span>
+            <span>↳ photographie de couverture</span>
+            <span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; opacity:.7">mains tenant une bougie · lumière basse</span>
+          </div>
+          <div class="quote-overlay">« Tenir l'espace où la vôtre peut paraître. »</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 10b — PLANCHES COMPARATIVES — 4 TRAITEMENTS VISUELS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">10b — Quatre traitements visuels</span>
+        <h2 class="section" style="margin-top:18px">Une maison,<br>quatre <em>tempéraments</em><br>côte à côte.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Deux sous-pages caractérisées (SÉSÂMES + Voie d'autonomie économique),
+        un site propre (EssenCel'en Soi), un hub discret tenu à l'écart (AVE).
+        Quatre traitements distincts, accordés sur la même fondation.
+        Quatre axes de comparaison : hero de page, carte de présentation,
+        bouton principal, citation typographique.
+      </p>
+    </div>
+
+    <div class="treat-principle">
+      <span class="star">✦</span>
+      <span><b>Principe titre / slug.</b> Le titre éditorial public porte la doctrine
+        (« Voie d'autonomie économique » — cohérence des trois chemins légitimes).
+        Le slug URL conserve le SEO terrain
+        (<span class="mono" style="color:var(--ink)">/revenu-complementaire-independant</span>).
+        Cette dissociation est applicable à toute autre page sensible de l'écosystème.</span>
+    </div>
+
+    <div class="treat-section">
+      <div class="treat-row">
+        <div class="treat-axis treat-head" style="background:var(--ink); color:var(--paper)">
+          <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--w2f-gold-soft)">Axe ↓ · entité →</div>
+        </div>
+        <div class="treat-head">
+          <div style="font-size:10px; letter-spacing:.22em; color:var(--ink-3)">Sous-page caractérisée</div>
+          <div class="role">SÉSÂMES</div>
+          <div class="accent-line" style="background:linear-gradient(90deg, #1A1410 0%, #C9A24E 50%, #A8C4D9 100%)"></div>
+        </div>
+        <div class="treat-head">
+          <div style="font-size:10px; letter-spacing:.22em; color:var(--ink-3)">Site propre</div>
+          <div class="role">EssenCel'<em>en Soi</em></div>
+          <div class="accent-line" style="background:linear-gradient(90deg, var(--ees-rose) 0%, var(--ees-gold) 100%)"></div>
+        </div>
+        <div class="treat-head">
+          <div style="font-size:10px; letter-spacing:.22em; color:var(--ink-3)">Sous-page caractérisée</div>
+          <div class="role">Voie d'autonomie<br><em>économique</em></div>
+          <div class="accent-line" style="background:var(--voie-terre)"></div>
+        </div>
+        <div class="treat-head">
+          <div style="font-size:10px; letter-spacing:.22em; color:var(--ink-3)">Hub discret</div>
+          <div class="role">Aloe Vera <em>Excellence</em></div>
+          <div class="accent-line" style="background:var(--ave-sage)"></div>
+        </div>
+
+        <!-- Axe 1 — Hero -->
+        <div class="treat-axis">
+          <div class="num">i</div>
+          <div class="lbl">Hero de page</div>
+          <div class="desc">Premier souffle. Ton, palette, photographie.</div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-hero bg-ses">
+            <div class="nav"><span>SÉSÂMES</span><span>· · ·</span></div>
+            <div class="ph-img dim-ses"></div>
+            <div class="h" style="position:relative; z-index:1; max-width:60%">Clarifier<br>une <em>période</em><br>de vie.</div>
+            <div class="sub" style="position:relative; z-index:1; max-width:55%">Lumière + noir profond. Or canalisé et bleu lunaire en signatures.</div>
+            <span class="mini-cta" style="background:var(--ses-amethyst); color:var(--ses-paper); position:relative; z-index:1">Demander la 1ère clé →</span>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-hero" style="background:var(--ees-rose)">
+            <div class="nav" style="color:var(--ink-2)"><span>EssenCel'en Soi</span><span>· · ·</span></div>
+            <div class="ph-img dim-ees"></div>
+            <div class="h" style="position:relative; z-index:1; max-width:60%; color:var(--ink)">Le corps,<br>seconde <em style="color:var(--ees-gold)">chambre</em>.</div>
+            <div class="sub" style="position:relative; z-index:1; max-width:55%; color:var(--ink-2)">Rose poudré + or signature. Sauge en ancrage textuel.</div>
+            <span class="mini-cta" style="background:var(--ees-gold); color:var(--ees-cream); position:relative; z-index:1">Réserver un soin →</span>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-hero bg-voie">
+            <div class="nav"><span>Voie autonomie</span><span>· · ·</span></div>
+            <div class="ph-img dim-voie"></div>
+            <div class="h" style="position:relative; z-index:1; max-width:60%; font-style:normal">Construire<br>une activité<br><em>durable</em>.</div>
+            <div class="sub" style="position:relative; z-index:1; max-width:55%">Registre droit. Terre cuite. Lever de soleil.</div>
+            <span class="mini-cta" style="background:var(--voie-terre); color:var(--voie-cream); position:relative; z-index:1">Avancer simplement →</span>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-hero" style="background:#F4F0E5">
+            <div class="nav"><span>Aloe Vera Excellence</span><span>· · ·</span></div>
+            <div class="h" style="max-width:75%">Lire les<br>signaux du<br><em>corps</em>.</div>
+            <div class="sub" style="max-width:80%">Pédagogique, sobre. Sauge + crème, or très rare.</div>
+            <span class="mini-cta" style="background:var(--ave-sage); color:var(--ave-cream)">Recevoir le guide →</span>
+          </div>
+        </div>
+
+        <!-- Axe 2 — Carte -->
+        <div class="treat-axis">
+          <div class="num">ii</div>
+          <div class="lbl">Carte de présentation</div>
+          <div class="desc">Image teintée à la couleur signature, étiquette d'entité, titre serif.</div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-card">
+            <div class="img bg-ses" style="color:rgba(250,247,242,.85)">↳ objet de seuil</div>
+            <div class="body-c">
+              <div class="tag" style="color:var(--ses-amethyst)">● SÉSÂMES</div>
+              <div class="ttl">Trois clés,<br>un <em>seuil</em></div>
+              <div class="lk" style="color:var(--ses-amethyst)"><span>Lire le parcours</span><span>→</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-card">
+            <div class="img bg-ees">↳ mains, lin clair</div>
+            <div class="body-c">
+              <div class="tag" style="color:var(--ees-gold)">● EssenCel'en Soi</div>
+              <div class="ttl">Cocoon de<br><em>détente</em></div>
+              <div class="lk" style="color:var(--ees-gold)"><span>Découvrir</span><span>→</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-card">
+            <div class="img bg-voie">↳ route, horizon</div>
+            <div class="body-c">
+              <div class="tag" style="color:var(--voie-terre)">● Voie autonomie</div>
+              <div class="ttl">Construire<br><em>simplement</em></div>
+              <div class="lk" style="color:var(--voie-terre)"><span>Comprendre</span><span>→</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-card">
+            <div class="img" style="background:var(--ave-sage); color:rgba(246,241,232,.7); height:50px; display:flex; align-items:center; justify-content:center; font-family:'Instrument Serif',serif; font-style:italic; font-size:9px">↳ plante, contre-jour</div>
+            <div class="body-c">
+              <div class="tag" style="color:var(--ave-sage)">● Aloe Vera</div>
+              <div class="ttl">Lire les<br><em>signaux</em></div>
+              <div class="lk" style="color:var(--ave-sage)"><span>Article + ressource</span><span>→</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Axe 3 — Bouton principal -->
+        <div class="treat-axis">
+          <div class="num">iii</div>
+          <div class="lbl">Bouton principal</div>
+          <div class="desc">Action primaire de page. Couleur de marque, jamais noir.</div>
+        </div>
+        <div>
+          <div class="mini-btn-wrap">
+            <a class="mini-btn" style="background:var(--ses-amethyst); color:var(--ses-paper)" href="#">Demander la 1ère clé →</a>
+            <span class="mini-btn-spec">#5B3F7A · améthyste profond<br>texte #FAF7F2 · lumière</span>
+          </div>
+        </div>
+        <div>
+          <div class="mini-btn-wrap">
+            <a class="mini-btn" style="background:var(--ees-gold); color:var(--ees-cream)" href="#">Réserver un soin →</a>
+            <span class="mini-btn-spec">#B8884A · or signature<br>texte #F2EDE4 · crème<br><em style="color:var(--ink-3)">remplace le rose vif du site actuel</em></span>
+          </div>
+        </div>
+        <div>
+          <div class="mini-btn-wrap">
+            <a class="mini-btn" style="background:var(--voie-terre); color:var(--voie-cream)" href="#">Avancer simplement →</a>
+            <span class="mini-btn-spec">#A6533A · terre cuite<br>texte #F4EFE5</span>
+          </div>
+        </div>
+        <div>
+          <div class="mini-btn-wrap">
+            <a class="mini-btn" style="background:var(--ave-sage); color:var(--ave-cream)" href="#">Recevoir le guide →</a>
+            <span class="mini-btn-spec">#5E7A4E · sauge sobre<br>texte #F2EDE4</span>
+          </div>
+        </div>
+
+        <!-- Axe 4 — Citation typographique -->
+        <div class="treat-axis">
+          <div class="num">iv</div>
+          <div class="lbl">Citation typographique</div>
+          <div class="desc">Instrument Serif italique. La voix d'auteur de chaque chemin.</div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-quote bg-ses">
+            <div class="qmark">«</div>
+            <div class="qtxt">Tenir l'espace où votre clarté peut paraître.</div>
+            <div class="qsource">— Sébastien</div>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-quote bg-ees">
+            <div class="qmark">«</div>
+            <div class="qtxt">Le corps sait. Encore faut-il l'écouter.</div>
+            <div class="qsource">— Céline</div>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-quote bg-voie">
+            <div class="qmark">«</div>
+            <div class="qtxt">Une autonomie matérielle qui libère l'attention pour ce qui compte.</div>
+            <div class="qsource">— Céline &amp; Sébastien</div>
+          </div>
+        </div>
+        <div style="padding:0 !important">
+          <div class="mini-quote" style="background:#F4F0E5">
+            <div class="qmark" style="color:var(--ave-sage)">«</div>
+            <div class="qtxt">Apprendre à lire son corps avant de choisir.</div>
+            <div class="qsource">— hub pédagogique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; padding:24px 32px; background:var(--ink); color:var(--paper); display:grid; grid-template-columns:repeat(4,1fr); gap:24px">
+      <div>
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--w2f-gold-soft); font-weight:500; margin-bottom:8px">SÉSÂMES</div>
+        <div style="font-size:13px; color:#D9CFB8; line-height:1.55">Lumière + noir profond, or canalisé et bleu lunaire. Sous-page caractérisée WTF.</div>
+      </div>
+      <div>
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--w2f-gold-soft); font-weight:500; margin-bottom:8px">EssenCel'en Soi</div>
+        <div style="font-size:13px; color:#D9CFB8; line-height:1.55">Rose poudré + or signature, sauge en ancrage. Site propre — entrée vers l'écosystème WTF.</div>
+      </div>
+      <div>
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--w2f-gold-soft); font-weight:500; margin-bottom:8px">Voie autonomie</div>
+        <div style="font-size:13px; color:#D9CFB8; line-height:1.55">Droit, chaud, ancré. Sous-page caractérisée WTF. Forever jamais nommé.</div>
+      </div>
+      <div>
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--w2f-gold-soft); font-weight:500; margin-bottom:8px">Aloe Vera Excellence</div>
+        <div style="font-size:13px; color:#D9CFB8; line-height:1.55">Sobre, pédagogique, à l'écart. Hub support — jamais en façade commerciale.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 11 — VOIX ÉDITORIALE -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">11 — Voix éditoriale</span>
+        <h2 class="section" style="margin-top:18px">Écrire <em>comme on parle</em><br>à quelqu'un qu'on respecte.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Le ton d'une lettre, jamais d'une vitrine. On nomme, on
+        n'argumente pas. On invite, on ne convertit pas. La voix est
+        tenue : posée, précise, sans jamais flatter ni effrayer.
+      </p>
+    </div>
+
+    <div class="voice-grid">
+      <div class="voice-cell">
+        <div class="vh">
+          <h4>Promesse — <em>nommer sans vendre</em></h4>
+          <span class="num">i</span>
+        </div>
+        <p class="body" style="font-size:13px">On décrit ce qui se passe vraiment dans la rencontre. Aucun bénéfice promis, aucun résultat garanti.</p>
+        <div class="pair">
+          <div class="yes"><div class="tag">Dire</div><div class="ex">Un temps pour reposer le système nerveux.</div></div>
+          <div class="no"><div class="tag">Éviter</div><div class="ex">Retrouvez votre énergie en 7 jours.</div></div>
+        </div>
+      </div>
+      <div class="voice-cell">
+        <div class="vh">
+          <h4>Adresse — <em>vouvoyer avec chaleur</em></h4>
+          <span class="num">ii</span>
+        </div>
+        <p class="body" style="font-size:13px">Le « vous » est de respect, pas de distance. On évite le « tu » marketing forcé et le « nous » corporate.</p>
+        <div class="pair">
+          <div class="yes"><div class="tag">Dire</div><div class="ex">Là où vous en êtes, c'est déjà juste.</div></div>
+          <div class="no"><div class="tag">Éviter</div><div class="ex">Toi aussi, deviens la meilleure version.</div></div>
+        </div>
+      </div>
+      <div class="voice-cell">
+        <div class="vh">
+          <h4>Rythme — <em>phrases courtes, silences nets</em></h4>
+          <span class="num">iii</span>
+        </div>
+        <p class="body" style="font-size:13px">Le point compte autant que la virgule. Une phrase porte une idée. Le paragraphe respire entre deux temps.</p>
+        <div class="pair">
+          <div class="yes"><div class="tag">Dire</div><div class="ex">Le corps sait. Encore faut-il l'écouter.</div></div>
+          <div class="no"><div class="tag">Éviter</div><div class="ex">Avec notre méthode unique, vous découvrirez…</div></div>
+        </div>
+      </div>
+      <div class="voice-cell">
+        <div class="vh">
+          <h4>Posture — <em>tenir, pas convaincre</em></h4>
+          <span class="num">iv</span>
+        </div>
+        <p class="body" style="font-size:13px">On n'a rien à prouver. On pose ce qui est. Si la personne reconnaît, elle s'avance ; sinon, c'est juste aussi.</p>
+        <div class="pair">
+          <div class="yes"><div class="tag">Dire</div><div class="ex">Ceci n'est peut-être pas pour vous aujourd'hui.</div></div>
+          <div class="no"><div class="tag">Éviter</div><div class="ex">Ne ratez pas cette opportunité unique.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="block" style="margin-top:48px; margin-bottom:8px">Lexique partagé</h3>
+    <p class="body mb-24" style="max-width:60ch">Les mots qui portent l'écosystème — et ceux qui le trahissent.</p>
+    <div class="lex-grid">
+      <div class="lex-col use">
+        <h5>Mots qui portent</h5>
+        <ul>
+          <li>Tenir <em>l'espace</em></li>
+          <li>Reconnaître, nommer, accueillir</li>
+          <li>Un <em>seuil</em>, une porte, un passage</li>
+          <li>Reposer le système nerveux</li>
+          <li>Retrouver la fluidité du souffle</li>
+          <li>Une <em>présence</em>, un témoin</li>
+          <li>Là où vous en êtes</li>
+          <li>Le <em>chemin</em>, le rythme propre</li>
+          <li>Honorer, déposer, traverser</li>
+        </ul>
+      </div>
+      <div class="lex-col avoid">
+        <h5>Mots qui trahissent</h5>
+        <ul>
+          <li>Solution, méthode, programme</li>
+          <li>Transformation garantie</li>
+          <li>Bien-être, mieux-être, healing</li>
+          <li>Découvrez, profitez, libérez</li>
+          <li>Énergies, vibrations, fréquence</li>
+          <li>Communauté, tribu, famille</li>
+          <li>Coaching, mentor, expert</li>
+          <li>Boost, débloque, libère</li>
+          <li>Soigner, guérir (réservé médical)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="block" style="margin-top:48px; margin-bottom:8px">Convention nominale</h3>
+    <p class="body mb-12" style="max-width:60ch">Ordre alphabétique partout — sites, profils, bios, citations duo. Exception : signature de chemin conservée (Sébastien seul pour SÉSÂMES, Céline pour EES).</p>
+    <div class="name-conv">
+      <div class="col yes">
+        <h5>À écrire</h5>
+        <ul>
+          <li>Céline &amp; Sébastien</li>
+          <li>Fondé par <em>Céline &amp; Sébastien</em></li>
+          <li>« Sébastien » — signature SÉSÂMES seule</li>
+          <li>« Céline » — signature EES seule</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h5>À éviter</h5>
+        <ul>
+          <li>Sébastien &amp; Céline</li>
+          <li>L'équipe Way To Freedom</li>
+          <li>Notre about us</li>
+          <li>S. &amp; C., abréviations diverses</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 12 — DIRECTION PHOTOGRAPHIQUE -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">12 — Direction photographique</span>
+        <h2 class="section" style="margin-top:18px">Cinq intentions,<br>une seule <em>lumière</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        La photographie incarne ce que les mots ne peuvent dire. Lumière
+        basse, naturelle, jamais studio. Mains, gestes, objets de seuil.
+        Aucun stock, aucune mise en scène commerciale.
+      </p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-cell">
+        <div class="photo-frame dim-w2f">
+          <div class="ph-text">
+            <span class="glyph">¶</span>
+            <span class="what">mains tenant une bougie<br>à hauteur de poitrine</span>
+            <span class="stop">— soir, tungstène —</span>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="role">Way To <em>Freedom</em> · vision</div>
+          <h5>L'incarnation du <em>passage</em></h5>
+          <p>Mains, lumière de bougie, objets de seuil. Aucun visage frontal. Le geste suggère.</p>
+        </div>
+      </div>
+
+      <div class="photo-cell">
+        <div class="photo-frame dim-ses">
+          <div class="ph-text">
+            <span class="glyph">¶</span>
+            <span class="what">objet posé sur table sombre,<br>rayé par un trait de lumière froide</span>
+            <span class="stop">— aube, fenêtre nord-est, contraste tenu —</span>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="role">SÉSÂMES · clarté</div>
+          <h5>Le silence d'un <em>objet</em></h5>
+          <p>Clé, pierre, carnet ouvert. Fond noir profond, faisceau de lumière bleutée (heure bleue), ombres nettes. Si or présent : reflet, dorure de couverture — jamais filtre saturé.</p>
+        </div>
+      </div>
+
+      <div class="photo-cell">
+        <div class="photo-frame dim-ees">
+          <div class="ph-text">
+            <span class="glyph">¶</span>
+            <span class="what">peau, geste de soin,<br>tissu de lin sur rose poudré</span>
+            <span class="stop">— matin, fenêtre est, ton cuivré —</span>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="role">EssenCel'<em>en Soi</em> · sanctuaire</div>
+          <h5>Le grain du <em>vivant</em></h5>
+          <p>Peau, mains de praticienne, lin clair, accents cuivre / or doux. Fonds rose poudré ou crème — jamais sauge en dominante. Lumière tamisée matinale, texture toujours visible.</p>
+        </div>
+      </div>
+
+      <div class="photo-cell">
+        <div class="photo-frame dim-voie">
+          <div class="ph-text">
+            <span class="glyph">¶</span>
+            <span class="what">route ouverte,<br>horizon, lever de soleil</span>
+            <span class="stop">— aube, direction est —</span>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="role">Voie d'autonomie <em>économique</em></div>
+          <h5>L'horizon <em>habité</em></h5>
+          <p>Chemin, route, lever de soleil. Mouvement vers l'avant. Aucune symbolique mystique, aucune métaphore intérieure.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-rules">
+      <div class="col do">
+        <h5>Faire</h5>
+        <ul>
+          <li><b>Lumière naturelle.</b> Fenêtre, soir, bougie. Tungstène domestique acceptable.</li>
+          <li><b>Cadrer serré.</b> Le geste, la main, la matière. Le hors-champ travaille.</li>
+          <li><b>Garder le grain.</b> Légère texture argentique, ombres tenues, blancs jamais brûlés.</li>
+          <li><b>Photographier des objets vrais.</b> Bougie utilisée, lin froissé, carnet écrit.</li>
+          <li><b>Préférer l'absence d'image</b> à une image stock. Une page de typographie sur crème vaut mieux.</li>
+        </ul>
+      </div>
+      <div class="col dont">
+        <h5>Éviter</h5>
+        <ul>
+          <li><b>Banques d'images.</b> Aloès sur fond blanc, mains parfaites, lotus, chakras stock.</li>
+          <li><b>Saturation.</b> Couchers de soleil orange vif, néons, filtres Instagram.</li>
+          <li><b>Visages frontaux souriants.</b> On suggère la présence, on ne pose pas pour la caméra.</li>
+          <li><b>Mise en scène commerciale.</b> Praticienne en uniforme, packshot produit Forever, pose sponsorisée.</li>
+          <li><b>Symboles ésotériques littéraux.</b> Mandalas, géométrie sacrée, runes, cristaux disposés.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 13 — WIDGET GOOGLE AVIS EES -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">13 — Témoignages EES</span>
+        <h2 class="section" style="margin-top:18px">Le widget Google,<br>habillé en <em>charte</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        La source Google Avis est <b style="color:var(--ink); font-weight:500">réglementairement irréprochable</b>
+        — avis publics indépendants, conformes DGCCRF. Le sujet n'est pas
+        le contenu, mais l'habillage : le widget standard sort de la
+        charte (typo Roboto, étoiles dorées Google, carrés gris).
+        Solution : stylisation CSS sans modification de contenu.
+      </p>
+    </div>
+
+    <div class="review-mockups">
+      <div class="review-card before">
+        <span class="label">Avant · standard Google</span>
+        <div class="header">
+          <div class="g-logo">M</div>
+          <div class="h-text">
+            <div class="name">Marie-Lou D.</div>
+            <div class="when">il y a 2 mois</div>
+          </div>
+        </div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <div class="body-r">Je suis arrivée chez Céline avec un corps que je n'habitais plus. Je suis repartie avec une lumière dont je ne savais pas qu'elle m'attendait.</div>
+        <div style="margin-top:auto; padding-top:14px; font-family:'Roboto',Arial,sans-serif; font-size:11px; color:#5F6368">Source : Google Avis · EssenCel'en Soi</div>
+      </div>
+
+      <div class="review-card after">
+        <span class="label">Après · stylisé EES</span>
+        <div class="header">
+          <div class="g-logo">M</div>
+          <div class="h-text">
+            <div class="name">Marie-Lou D.</div>
+            <div class="when">Il y a 2 mois</div>
+          </div>
+          <div class="stars" style="margin-left:auto">★ ★ ★ ★ ★</div>
+        </div>
+        <div class="body-r">« Je suis arrivée chez Céline avec un corps que je n'habitais plus. Je suis repartie avec une lumière dont je ne savais pas qu'elle m'attendait. »</div>
+        <div class="source"><span>Source · Google Avis EssenCel'en Soi</span><span>★ 4.9 / 5 · 47 avis</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; padding:24px 32px; background:var(--paper-soft); border:1px solid var(--paper-deep); display:grid; grid-template-columns:1fr 1fr; gap:32px">
+      <div>
+        <h5 style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-bottom:10px">Habillage CSS — règles</h5>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-size:13px; color:var(--ink-2); line-height:1.55">
+          <li>— Fond crème EES <span class="mono">#F2EDE4</span></li>
+          <li>— Typo Fraunces 300 italique pour le contenu</li>
+          <li>— Étoiles or signature <span class="mono">#B8884A</span></li>
+          <li>— Bordure 1 px sable <span class="mono">#E6DCC9</span></li>
+          <li>— Source Google nommée explicitement en pied</li>
+        </ul>
+      </div>
+      <div>
+        <h5 style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-bottom:10px">Cadre réglementaire</h5>
+        <p style="font-size:13px; color:var(--ink-2); line-height:1.55">
+          <b style="color:var(--ink); font-weight:500">Aucune modification du contenu d'avis.</b>
+          La DGCCRF distingue source et apparence : seul le contenu compte.
+          Mix possible à terme : widget Google + 2-3 témoignages narratifs longs avec accord client écrit. CSS handoff fourni à Claude Code en phase 2.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 14 — ESPACEMENT & PRINCIPES -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="grid-2" style="align-items:end; margin-bottom:8px">
+      <div>
+        <span class="eyebrow">14 — Espacement &amp; principes</span>
+        <h2 class="section" style="margin-top:18px">L'espace est <em>matière première</em>.</h2>
+      </div>
+      <p class="body" style="max-width:52ch; padding-bottom:12px">
+        Une grille à 12 colonnes, un rythme vertical à base 8&nbsp;px,
+        des marges généreuses. Le vide n'est pas du gaspillage — c'est
+        ce qui permet à chaque mot d'arriver.
+      </p>
+    </div>
+
+    <div class="grid-vis">
+      <div class="scale-stack">
+        <div class="caption mb-12" style="margin-bottom:18px">Échelle d'espacement (base&nbsp;8)</div>
+        <div class="scale-row"><span class="token">space-1</span><span class="bar" style="width:8px"></span><span class="px">8 px</span></div>
+        <div class="scale-row"><span class="token">space-2</span><span class="bar" style="width:16px"></span><span class="px">16 px</span></div>
+        <div class="scale-row"><span class="token">space-3</span><span class="bar" style="width:24px"></span><span class="px">24 px</span></div>
+        <div class="scale-row"><span class="token">space-4</span><span class="bar" style="width:32px"></span><span class="px">32 px</span></div>
+        <div class="scale-row"><span class="token">space-6</span><span class="bar" style="width:48px"></span><span class="px">48 px</span></div>
+        <div class="scale-row"><span class="token">space-8</span><span class="bar" style="width:64px"></span><span class="px">64 px</span></div>
+        <div class="scale-row"><span class="token">space-12</span><span class="bar" style="width:96px"></span><span class="px">96 px</span></div>
+        <div class="scale-row"><span class="token">space-16</span><span class="bar" style="width:128px"></span><span class="px">128 px</span></div>
+      </div>
+
+      <div class="principles-list">
+        <div class="principle">
+          <span class="num">i</span>
+          <div>
+            <h5>Une seule action par écran.</h5>
+            <p>Le visiteur ne doit jamais avoir à choisir entre deux portes principales en même temps. Une primaire, une secondaire — pas plus.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <span class="num">ii</span>
+          <div>
+            <h5>Le vide a un rôle.</h5>
+            <p>Marges hautes : 96 à 128&nbsp;px entre les sections. Mesure de ligne : 60 à 72 caractères, jamais plus large.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <span class="num">iii</span>
+          <div>
+            <h5>L'image est sacrée — ou absente.</h5>
+            <p>Plutôt aucune image qu'une image stock. Préférer une typographie posée et un fond crème qu'une photographie générique.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <span class="num">iv</span>
+          <div>
+            <h5>Pas d'angles arrondis SaaS.</h5>
+            <p>Cartes, boutons, conteneurs : coins droits ou très subtilement adoucis (2&nbsp;px max). Le rond est réservé aux portraits et aux micro-pictogrammes.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <span class="num">v</span>
+          <div>
+            <h5>Pas de promesse, pas d'urgence.</h5>
+            <p>Aucune mention médicale. Aucun « offre limitée », aucun compteur, aucun « rejoignez les 10 000 ». Le ton est celui d'une lettre.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <span class="num">vi</span>
+          <div>
+            <h5>Les fondateurs sont au centre.</h5>
+            <p>Céline &amp; Sébastien apparaissent par leur prénom, leur écriture, leur visage. Jamais comme « équipe » ni « about us ». L'écosystème est porté par deux personnes vivantes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 15 — À RETENIR -->
+  <!-- ============================================================ -->
+  <section style="border-top:0; padding-top:0">
+    <div class="retain">
+      <div>
+        <h3>À <em>retenir</em>.</h3>
+        <div class="meta">Cinq principes non négociables</div>
+      </div>
+      <ol>
+        <li>
+          <h5>Une maison, <em>trois chemins, un hub</em>.</h5>
+          <p>Une maison-mère narrative (WTF), trois chemins légitimes (SÉSÂMES, EES, Voie d'autonomie économique), un hub pédagogique discret (AVE). Plus jamais l'expression « 4 pôles ». Forever est un outil, jamais nommé publiquement.</p>
+        </li>
+        <li>
+          <h5>Une couleur signature <em>par entité</em>, jamais empruntée.</h5>
+          <p>Améthyste pour SÉSÂMES, sauge + or pour EES, terre cuite pour la Voie, nuit pour WTF, sauge discret pour AVE. Aucune dilution, aucun croisement.</p>
+        </li>
+        <li>
+          <h5>Jamais de <em>bouton noir en principal</em>.</h5>
+          <p>Le bouton principal porte la couleur de la marque. Le noir crée une rupture émotionnelle au moment de l'action — contraire à la posture des marques d'écoute.</p>
+        </li>
+        <li>
+          <h5>La voix est <em>tenue</em>, jamais vendeuse.</h5>
+          <p>Aucune promesse médicale, aucune urgence, aucun compteur. On nomme ce qui se passe vraiment. On vouvoie avec chaleur. On invite, on ne convertit pas.</p>
+        </li>
+        <li>
+          <h5>L'image est <em>sacrée</em> — ou absente.</h5>
+          <p>Lumière naturelle, mains, gestes, objets vrais. Aucun stock, aucune mise en scène commerciale, aucun symbole ésotérique littéral. Plutôt rien qu'une image générique.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- COLOPHON -->
+  <!-- ============================================================ -->
+  <div class="colophon">
+    <div class="col-text">
+      « Une identité ne se décrète pas. Elle se vit pendant des années,
+      jusqu'à ce qu'on la reconnaisse de loin sans avoir besoin d'un logo.
+      Ce document est la pierre suivante. »
+    </div>
+    <div class="col-meta">
+      <strong>Way To Freedom</strong><br>
+      Système de design v2.1<br>
+      Édition révisée · 30 avril 2026<br>
+      <span style="color:var(--w2f-gold)">✦</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

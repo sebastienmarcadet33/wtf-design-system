@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<script>
+  (function() {
+    const origConsoleError = window.console && window.console.error;
+    if (origConsoleError) {
+      window.console.error = function(...args) {
+        const msg = args[0] && args[0].toString ? args[0].toString() : '';
+        if (/ResizeObserver loop/.test(msg)) return;
+        return origConsoleError.apply(window.console, args);
+      };
+    }
+    window.addEventListener('error', function(e) {
+      if (e.message && /ResizeObserver loop/.test(e.message)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return false;
+      }
+    }, true);
+    window.addEventListener('unhandledrejection', function(e) {
+      if (e.reason && /ResizeObserver loop/.test(String(e.reason))) {
+        e.preventDefault();
+      }
+    });
+  })();
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Way To Freedom · v3 · Lot 5 carrousels + Lot 6 documentation + Lot 7 scellement</title>
+
+<!-- ============================================================
+     Bundler thumbnail · pré-requis super_inline_html
+     ============================================================
+     Splash montrée pendant la décompression du HTML inliné en
+     base64. Voir COVERAGE.md §3 pour la recette d'export PNG
+     serveur (Playwright/wkhtmltoimage). NE PAS supprimer.
+============================================================ -->
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#F6F1E8"/>
+    <circle cx="50" cy="50" r="32" fill="none" stroke="#C9A24E" stroke-width="2"/>
+    <text x="50" y="62" text-anchor="middle"
+          font-family="Fraunces, Georgia, serif" font-style="italic"
+          font-size="32" fill="#C9A24E">W</text>
+  </svg>
+</template>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0 }
+  html, body{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    font-kerning:normal;
+    background:#f0eee9;
+    color:#1F1A14;
+    font-family:'Inter Tight', system-ui, sans-serif;
+  }
+
+  .topbar{
+    position:sticky; top:0; z-index:10;
+    background:rgba(250,247,242,.92); backdrop-filter:saturate(140%) blur(8px);
+    -webkit-backdrop-filter:saturate(140%) blur(8px);
+    border-bottom:1px solid rgba(15,18,24,.08);
+    padding:14px 28px; display:flex; gap:24px; justify-content:space-between; align-items:baseline;
+    font-family:'Inter Tight', sans-serif; font-size:12px; color:#3B342A;
+    letter-spacing:.04em;
+  }
+  .topbar strong{
+    font-family:'Fraunces', Georgia, serif; font-weight:400;
+    font-variation-settings:'"opsz" 144, "wght" 400'; font-size:14px;
+    color:#1F1A14; letter-spacing:.02em;
+  }
+  .topbar .gold{ color:#C9A24E }
+  .topbar .meta{
+    font-family:ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size:11px; letter-spacing:.04em; color:rgba(15,18,24,.5);
+  }
+  .booting{
+    padding: 56px 64px; font-family: 'Inter Tight', sans-serif; color:#3B342A;
+    font-size: 14px; letter-spacing:.04em;
+  }
+  .booting em{ font-family:'Instrument Serif', Georgia, serif; font-style: italic; color:#C9A24E; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="topbar">
+    <span><strong>Way To Freedom</strong>&nbsp;&nbsp;·&nbsp;&nbsp;v3 — <strong>Lot 5 carrousels</strong> &nbsp;<span class="gold">·</span>&nbsp; <strong>Lot 6 documentation</strong> &nbsp;<span class="gold">·</span>&nbsp; <strong>Lot 7 scellement</strong> &nbsp;<span class="gold">·</span>&nbsp; 6 sceaux écosystème live · 21 cards narratives · 5 notes doc</span>
+    <span class="meta">v3 lot 5+6+7 du 15 mai 2026</span>
+  </div>
+
+  <div id="root">
+    <div class="booting">
+      Initialisation du catalogue… <em>une seconde de tenue</em>.
+    </div>
+  </div>
+
+  <!-- Primitives partagées Lot 4 (réutilisées) -->
+  <script type="text/babel" data-presets="react" src="design-canvas.jsx"></script>
+  <script type="text/babel" data-presets="react" src="lot4-primitives.jsx"></script>
+
+  <!-- Hook de swap logos WTF + AVE -->
+  <script type="text/babel" data-presets="react" src="lot5-logo-swap.jsx"></script>
+
+  <!-- Lot 5 · 4 carrousels narratifs · 21 cards -->
+  <script type="text/babel" data-presets="react" src="lot5-carrousels.jsx"></script>
+
+  <!-- Lot 6 · documentation transversale · 5 notes -->
+  <script type="text/babel" data-presets="react" src="lot6-documentation.jsx"></script>
+
+  <!-- Assemblage canvas -->
+  <script type="text/babel" data-presets="react">
+    /* ============================================================
+       lot56-app.jsx — assemblage final
+       ============================================================ */
+
+    // Wrapper d'artboard autonome — outer flex column, slot contenu et
+    // MetaL4 en siblings directs. Ne passe PAS par ArtbgL4 (dont l'inner
+    // slot est en row-flex et écrasait deux enfants côte-à-côte). Bug
+    // hérité du Lot 4 contourné ici sans toucher au lot validé.
+    function Card({ bg = T.wtfLight, ink = T.ink, label, sub, light = false, children }) {
+      return (
+        <div style={{
+          width:'100%', height:'100%', background: bg, color: ink,
+          display:'flex', flexDirection:'column', overflow:'hidden',
+        }}>
+          <div style={{
+            flex: 1, minHeight: 0, padding: 18, overflow:'hidden',
+            display:'block', position:'relative',
+          }}>
+            {children}
+          </div>
+          <MetaL4 label={label} sub={sub} light={light}/>
+        </div>
+      );
+    }
+
+    // Carte spécifique documentation : pas de pied méta (la note PORTE
+    // déjà son kicker), juste l'enveloppe propre. Variante "open card"
+    // qui scroll si nécessaire (les notes peuvent être longues).
+    function DocCard({ children }) {
+      return (
+        <div style={{
+          width:'100%', height:'100%', background: T.wtfLight,
+          display:'flex', flexDirection:'column',
+        }}>
+          <div style={{flex: 1, overflow:'auto'}}>{children}</div>
+        </div>
+      );
+    }
+
+    function Lot56App() {
+      return (
+        <DesignCanvas>
+
+          {/* ── INTRO ─────────────────────────────────────────────── */}
+          <DCSection id="intro-lot56"
+                     title="Lot 5 + Lot 6 · carrousels narratifs & documentation"
+                     subtitle="21 cards narrative production · 5 notes doctrine · hook swap logos LIVE (6 sceaux DALL-E intégrés)">
+
+            <DCArtboard id="intro" label="Périmètre Lot 5 + Lot 6 + Lot 7" width={620} height={640}>
+              <NoteCard
+                eyebrow="Lot 5 + 6 + 7 · scellement 15 mai 2026"
+                title="Vingt-et-une cards narratives. Cinq notes doctrine. Six sceaux écosystème scellés."
+                accent={T.wtfGold}
+                body={
+                  <>
+                    <p><strong>Lot 5 · 4 carrousels narratifs</strong> en 1080×1350 (4:5 IG/LI portrait).
+                    Card 1 = cover citation pure ; cards intermédiaires = titre éditorial + body court ;
+                    card finale = invitation ouverte sans CTA. Pagination en points discrets bas-droite,
+                    pas de « 1 / 5 » magazine.</p>
+                    <p><strong>Lot 6 · 5 notes documentation</strong> : inventaire (61 objets visuels),
+                    brief illustrateur résolu, protocole swap actualisé doctrine 14 mai, checklist
+                    12 points, critère final Hermès / Aesop / The Row.</p>
+                    <p><strong>Lot 7 · scellement écosystème.</strong> Cinq sceaux DALL-E v2
+                    (sceau papillon-corps, manifeste montagne, favicon WTF, sceau AVE, favicon AVE)
+                    intégrés dans <code>v3/assets/logos/</code>. Favicon EES C+lune extrait par
+                    soustraction chromatique depuis le source original (méthode validée).
+                    Tous les composants <code>LogoXxx</code> rendent l'image photoréaliste, plus le
+                    fallback typographique.</p>
+                    <p><strong>Doctrine 14 mai actualisée.</strong> Le sceau papillon-corps est le logo
+                    signature unique. Le manifeste montagne est une composition narrative éditoriale,
+                    jamais signature. Voir note <strong>H3</strong> pour le protocole de re-swap si
+                    nouvelle itération.</p>
+                  </>
+                }
+              />
+            </DCArtboard>
+
+            <DCArtboard id="swap-state" label="État du swap · 6 sceaux écosystème LIVE" width={520} height={640}>
+              <div style={{
+                width:'100%', height:'100%', background: T.wtfLight,
+                padding: 32, display:'flex', flexDirection:'column', gap: 22, overflow:'auto',
+              }}>
+                <div style={{fontSize: 11, letterSpacing:'.22em', textTransform:'uppercase',
+                             color: T.eesSage, fontWeight: 500}}>
+                  Swap state · 15 mai 2026 · scellement écosystème
+                </div>
+                <h2 style={{
+                  fontFamily: T.ffDisplay, fontWeight: 400, fontSize: 22,
+                  lineHeight: 1.2, color: T.ink, maxWidth:'24ch',
+                }}>Six sceaux DALL-E intégrés. Fallback typo retiré.</h2>
+
+                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap: 14}}>
+                  {[
+                    { name: 'WTF sceau v2',     comp: <LogoWTF size={56}/>,        entity: 'WTF' },
+                    { name: 'WTF manifeste',    comp: <LogoManifesteWTF height={64}/>, entity: 'WTF manifeste' },
+                    { name: 'WTF favicon',      comp: <LogoFaviconWTF size={56}/>, entity: 'WTF favicon' },
+                    { name: 'AVE sceau v2',     comp: <LogoAVE size={56}/>,        entity: 'AVE' },
+                    { name: 'AVE favicon',      comp: <LogoFaviconAVE size={56}/>, entity: 'AVE favicon' },
+                    { name: 'EES C+lune',       comp: <LogoEESFavicon size={56}/>, entity: 'EES favicon' },
+                  ].map((row, i) => (
+                    <div key={i} style={{
+                      display:'flex', alignItems:'center', gap: 12,
+                      padding: 10, border:`1px solid ${T.inkLine}`,
+                    }}>
+                      <div style={{
+                        width: 70, height: 70, display:'flex', alignItems:'center', justifyContent:'center',
+                        background: T.wtfLight, flexShrink: 0, overflow:'hidden',
+                      }}>{row.comp}</div>
+                      <div style={{display:'flex', flexDirection:'column', gap: 4, minWidth: 0}}>
+                        <span style={{fontSize: 11, fontWeight: 500, color: T.ink}}>{row.name}</span>
+                        <SwapStatus entity={row.entity}/>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{
+                  fontFamily: T.ffBody, fontSize: 11.5, color: T.ink2, lineHeight: 1.55,
+                  paddingTop: 14, borderTop: `1px solid ${T.inkLine}`,
+                }}>
+                  Doctrine 14 mai · le sceau papillon-corps est le logo signature unique.
+                  Le manifeste montagne est une composition éditoriale narrative
+                  — jamais signature. Voir note <strong>H3</strong> pour le protocole de re-swap.
+                </div>
+              </div>
+            </DCArtboard>
+          </DCSection>
+
+          {/* ── LOT 5 · CARROUSEL A · EES ────────────────────────── */}
+          <DCSection id="lot5-a"
+                     title="A · Carrousel EES — « Reposer le système nerveux »"
+                     subtitle="5 cards · crème lin + or signature + rose poudré en touches">
+
+            <DCArtboard id="CarrA1" label="A1 · cover citation" width={400} height={520}>
+              <Card label="EES carrousel 1·5" sub="1080×1350"><CarrA1 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrA2" label="A2 · quand le système est en alerte" width={400} height={520}>
+              <Card label="EES carrousel 2·5" sub="1080×1350"><CarrA2 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrA3" label="A3 · la pratique" width={400} height={520}>
+              <Card label="EES carrousel 3·5" sub="1080×1350"><CarrA3 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrA4" label="A4 · ce qui revient" width={400} height={520}>
+              <Card label="EES carrousel 4·5" sub="1080×1350"><CarrA4 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrA5" label="A5 · invitation finale" width={400} height={520}>
+              <Card label="EES carrousel 5·5" sub="1080×1350"><CarrA5 scale={0.32}/></Card>
+            </DCArtboard>
+          </DCSection>
+
+          {/* ── LOT 5 · CARROUSEL B · SÉSÂMES ────────────────────── */}
+          <DCSection id="lot5-b"
+                     title="B · Carrousel SÉSÂMES — « Pas par manque de sérieux »"
+                     subtitle="6 cards · crème lumière + or canalisé + bleu lunaire">
+
+            <DCArtboard id="CarrB1" label="B1 · cover citation pivot" width={400} height={520}>
+              <Card label="SÉSÂMES carrousel 1·6" sub="1080×1350"><CarrB1 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrB2" label="B2 · reconnaître le seuil" width={400} height={520}>
+              <Card label="SÉSÂMES carrousel 2·6" sub="1080×1350"><CarrB2 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrB3" label="B3 · cartographier ce qui se répète" width={400} height={520}>
+              <Card label="SÉSÂMES carrousel 3·6" sub="1080×1350"><CarrB3 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrB4" label="B4 · tenir l'espace" width={400} height={520}>
+              <Card label="SÉSÂMES carrousel 4·6" sub="1080×1350"><CarrB4 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrB5" label="B5 · l'attention précède l'action" width={400} height={520}>
+              <Card label="SÉSÂMES carrousel 5·6" sub="1080×1350"><CarrB5 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrB6" label="B6 · signature ouverte" width={400} height={520}>
+              <Card label="SÉSÂMES carrousel 6·6" sub="1080×1350"><CarrB6 scale={0.32}/></Card>
+            </DCArtboard>
+          </DCSection>
+
+          {/* ── LOT 5 · CARROUSEL C · WTF ───────────────────────── */}
+          <DCSection id="lot5-c"
+                     title="C · Carrousel WTF — « Une maison. Trois chemins. »"
+                     subtitle="5 cards · présentation transversale écosystème · signature duo Céline & Sébastien">
+
+            <DCArtboard id="CarrC1" label="C1 · cover bleu nuit manifeste" width={400} height={520}>
+              <Card bg="#1F2438" ink={T.wtfLight} light label="WTF carrousel 1·5" sub="1080×1350"><CarrC1 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrC2" label="C2 · chemin SÉSÂMES" width={400} height={520}>
+              <Card label="WTF carrousel 2·5" sub="1080×1350"><CarrC2 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrC3" label="C3 · chemin EES" width={400} height={520}>
+              <Card label="WTF carrousel 3·5" sub="1080×1350"><CarrC3 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrC4" label="C4 · chemin Voie d'autonomie" width={400} height={520}>
+              <Card label="WTF carrousel 4·5" sub="1080×1350"><CarrC4 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrC5" label="C5 · signature duo Céline & Sébastien" width={400} height={520}>
+              <Card label="WTF carrousel 5·5" sub="1080×1350"><CarrC5 scale={0.32}/></Card>
+            </DCArtboard>
+          </DCSection>
+
+          {/* ── LOT 5 · CARROUSEL D · VOIE ──────────────────────── */}
+          <DCSection id="lot5-d"
+                     title="D · Carrousel Voie — « Le mouvement avant la méthode »"
+                     subtitle="5 cards · cuivre + bleu nuit + crème lin · autonomie patiente">
+
+            <DCArtboard id="CarrD1" label="D1 · cover citation" width={400} height={520}>
+              <Card label="Voie carrousel 1·5" sub="1080×1350"><CarrD1 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrD2" label="D2 · la promesse pressée" width={400} height={520}>
+              <Card label="Voie carrousel 2·5" sub="1080×1350"><CarrD2 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrD3" label="D3 · au rythme propre" width={400} height={520}>
+              <Card label="Voie carrousel 3·5" sub="1080×1350"><CarrD3 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrD4" label="D4 · construire ce qui tient" width={400} height={520}>
+              <Card label="Voie carrousel 4·5" sub="1080×1350"><CarrD4 scale={0.32}/></Card>
+            </DCArtboard>
+            <DCArtboard id="CarrD5" label="D5 · signature ouverte" width={400} height={520}>
+              <Card label="Voie carrousel 5·5" sub="1080×1350"><CarrD5 scale={0.32}/></Card>
+            </DCArtboard>
+          </DCSection>
+
+          {/* ── LOT 6 · DOCUMENTATION TRANSVERSALE ──────────────── */}
+          <DCSection id="lot6-doc"
+                     title="Lot 6 · Documentation transversale"
+                     subtitle="Inventaire · brief illustrateur · protocole swap · checklist 12 points · critère final">
+
+            <DCArtboard id="DocH1" label="H1 · Inventaire des 55 composants" width={680} height={640}>
+              <DocCard><DocH1/></DocCard>
+            </DCArtboard>
+            <DCArtboard id="DocH2" label="H2 · Brief illustrateur transmissible" width={680} height={640}>
+              <DocCard><DocH2/></DocCard>
+            </DCArtboard>
+            <DCArtboard id="DocH3" label="H3 · Protocole de swap logos" width={680} height={640}>
+              <DocCard><DocH3/></DocCard>
+            </DCArtboard>
+            <DCArtboard id="DocH4" label="H4 · Checklist 12 points" width={680} height={640}>
+              <DocCard><DocH4/></DocCard>
+            </DCArtboard>
+            <DCArtboard id="DocH5" label="H5 · Critère final Hermès / Aesop" width={680} height={640}>
+              <DocCard><DocH5/></DocCard>
+            </DCArtboard>
+          </DCSection>
+
+        </DesignCanvas>
+      );
+    }
+
+    window.Lot56App = Lot56App;
+  </script>
+
+  <script type="text/babel" data-presets="react">
+    // Boot — attend que tous les scripts babel inline+src soient transpilés et
+    // que les composants soient assignés à window. Babel-standalone charge les
+    // scripts src en async ; on poll avec un timeout généreux.
+    (function boot(tries = 0) {
+      const needed = [
+        'DesignCanvas','DCSection','DCArtboard',
+        'T','Frame','ArtbgL4','MetaL4','NoteCard',
+        'WordmarkEES','WordmarkSES','WordmarkWTF','WordmarkVoie',
+        'TriangleSes','PapillonGold','MonogrammePhoenix',
+        'PhotoSlot','TitreL4','SignatureL4','TaglineL4','Filet',
+        'LogoWTF','LogoAVE','SwapStatus',
+        'LogoManifesteWTF','LogoFaviconWTF','LogoFaviconAVE','LogoEESFavicon',
+        'CarrA1','CarrA5','CarrB1','CarrB6','CarrC1','CarrC5','CarrD1','CarrD5',
+        'DocH1','DocH2','DocH3','DocH4','DocH5',
+        'Lot56App',
+      ];
+      const missing = needed.filter((k) => !window[k]);
+      if (missing.length === 0) {
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<window.Lot56App />);
+        return;
+      }
+      if (tries > 60) {
+        document.getElementById('root').innerHTML =
+          '<div class="booting">Composants manquants après 12s : <code>' +
+          missing.join(', ') + '</code>. Vérifier les fichiers JSX référencés.</div>';
+        return;
+      }
+      setTimeout(() => boot(tries + 1), 200);
+    })();
+  </script>
+</body>
+</html>
