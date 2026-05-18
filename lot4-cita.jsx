@@ -228,10 +228,11 @@ function CitaA5({ scale = 0.4 }) {
 // « Marcher porte ce qui doit l'être. »
 // ─────────────────────────────────────────────────────────────
 function CitaA6({ scale = 0.35 }) {
-  const bg = '#1F2438'; // bleu nuit profond Folon-esprit
+  // V3.0b · rebase automatique sur --wtf-nuit #1B1814 (palette chaude validée)
+  const bg = T.wtfNuit;
   return (
-    <Frame w={1080} h={1350} bg={bg} ink={T.wtfLight} scale={scale}>
-      <div style={{position:'absolute', inset:'140px 128px', display:'flex', flexDirection:'column', color: T.wtfLight}}>
+    <Frame w={1080} h={1350} bg={bg} ink={T.wtfLin} scale={scale}>
+      <div style={{position:'absolute', inset:'140px 128px', display:'flex', flexDirection:'column', color: T.wtfLin}}>
 
         <WordmarkWTF size={26} color="rgba(250,247,242,.85)" weight={300}/>
 
@@ -365,6 +366,157 @@ function CitaA8({ scale = 0.35 }) {
   );
 }
 
+// ────────────────────────────────────────────────────────────
+// SECTION A → V3.0b · débord événement (dette mercredi)
+// ────────────────────────────────────────────────────────────
+
+// A9 — EES annonce conférence Céline IG portrait 1080×1350
+//
+// Fond rose poudré deep #D9B8A6 (registre signature pivot, cohérent
+// CitaA8). Or terre V3.0b accents. Slot date + lieu + titre paramétriques.
+// Usage canonique · Mystika 6-7 juin Angoulême, Brantôme 19-20 septembre.
+// Signature Céline seule (sa conférence — pas duo).
+function CitaA9({ scale = 0.35, date = '6–7 juin 2026', lieu = 'Salon Mystika · Angoulême',
+                  titre = 'Le corps sait. Encore faut-il l’écouter.' }) {
+  return (
+    <Frame w={1080} h={1350} bg={T.eesRoseDeep} ink={T.eesCream} scale={scale}>
+      <div style={{position:'absolute', inset:'140px 128px', display:'flex', flexDirection:'column', color: T.eesCream}}>
+
+        <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between'}}>
+          <WordmarkEES size={36} color={T.eesCream}/>
+          <TaglineL4 color="rgba(246,241,232,.75)" size={11}>
+            Conférence · entrée libre
+          </TaglineL4>
+        </div>
+
+        <div style={{flex: 1, display:'flex', alignItems:'center'}}>
+          <div style={{display:'flex', flexDirection:'column', gap: 56}}>
+            <div style={{display:'flex', flexDirection:'column', gap: 14}}>
+              <TaglineL4 color={T.eesGoldSoft} size={13}>
+                {date}
+              </TaglineL4>
+              <TaglineL4 color="rgba(246,241,232,.80)" size={12}>
+                {lieu}
+              </TaglineL4>
+            </div>
+
+            <TitreL4
+              before={<>{titre.split(' ').slice(0, -3).join(' ')} </>}
+              accent={titre.split(' ').slice(-2, -1)[0]}
+              after={` ${titre.split(' ').slice(-1)[0]}`}
+              accentColor={T.eesGold}
+              ink={T.eesCream}
+              size={86}
+              maxw="13ch"
+            />
+
+            <Filet w={64} color={T.eesGold} opacity={0.95}/>
+
+            <div style={{
+              fontFamily: T.ffBody, fontSize: 18, lineHeight: 1.55,
+              color: 'rgba(246,241,232,.88)', maxWidth:'34ch', fontWeight: 300,
+            }}>
+              Une heure pour reposer le système nerveux,
+              honorer ce qui demande à se déposer,
+              reconnaître la fluidité du souffle.
+            </div>
+          </div>
+        </div>
+
+        <div style={{display:'flex', alignItems:'flex-end', justifyContent:'space-between',
+                     paddingTop: 32, borderTop:`1px solid rgba(246,241,232,.28)`}}>
+          <div style={{display:'flex', flexDirection:'column', gap: 6}}>
+            <SignatureL4 name="Céline" color={T.eesCream} size={30}/>
+            <TaglineL4 color="rgba(246,241,232,.72)" size={11}>
+              Sanctuaire du corps
+            </TaglineL4>
+          </div>
+          <TaglineL4 color="rgba(246,241,232,.70)" size={11}>
+            essencelensoi.fr
+          </TaglineL4>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+// A10 — WTF annonce événement écosystème IG portrait 1080×1350
+//
+// Fond nuit V3.0b #1B1814 (registre manifeste structurant). Or terre
+// doré bas accents. Sceau WTF papillon-corps live en signature.
+// Slot date + lieu + titre paramétriques. Usage canonique · salon où le
+// duo expose ensemble, conférence duo, journée portes ouvertes.
+function CitaA10({ scale = 0.35,
+                   date = '6–7 juin 2026',
+                   lieu = 'Salon Mystika · Angoulême',
+                   titre = 'Une maison.', accent = 'Trois chemins.', after = 'Un horizon.' }) {
+  return (
+    <Frame w={1080} h={1350} bg={T.wtfNuit} ink={T.wtfLin} scale={scale}>
+      <div style={{position:'absolute', inset:'140px 128px', display:'flex', flexDirection:'column', color: T.wtfLin}}>
+
+        <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between'}}>
+          <WordmarkWTF size={26} color="rgba(246,241,232,.88)" weight={300}/>
+          <TaglineL4 color="rgba(246,241,232,.72)" size={11}>
+            Événement écosystème
+          </TaglineL4>
+        </div>
+
+        <div style={{flex: 1, display:'flex', alignItems:'center'}}>
+          <div style={{display:'flex', flexDirection:'column', gap: 48}}>
+            <div style={{display:'flex', flexDirection:'column', gap: 14}}>
+              <TaglineL4 color={T.wtfDoreBas} size={13}>
+                {date}
+              </TaglineL4>
+              <TaglineL4 color="rgba(246,241,232,.78)" size={12}>
+                {lieu}
+              </TaglineL4>
+            </div>
+
+            <h1 style={{
+              fontFamily: T.ffDisplay, fontWeight: 400,
+              fontVariationSettings:'"opsz" 144, "wght" 300, "SOFT" 0',
+              fontSize: 92, lineHeight: 1.12,
+              color: T.wtfLin, maxWidth:'14ch', textWrap:'balance',
+              margin: 0,
+            }}>
+              {titre}<br/>
+              <em style={{
+                fontFamily: T.ffItalic, fontStyle:'italic',
+                color: T.wtfDoreBas, fontWeight: 400, letterSpacing:'.005em',
+              }}>{accent}</em><br/>
+              {after}
+            </h1>
+
+            <Filet w={80} color={T.wtfDoreBas} opacity={0.92}/>
+
+            <div style={{
+              fontFamily: T.ffBody, fontSize: 17, lineHeight: 1.55,
+              color: 'rgba(246,241,232,.82)', maxWidth:'34ch', fontWeight: 300,
+            }}>
+              Céline & Sébastien Marcadet exposent ensemble.
+              Conférences, rencontres, accompagnements.
+            </div>
+          </div>
+        </div>
+
+        <div style={{display:'flex', alignItems:'flex-end', justifyContent:'space-between',
+                     paddingTop: 32, borderTop:`1px solid rgba(246,241,232,.18)`}}>
+          <div style={{display:'flex', flexDirection:'column', gap: 6}}>
+            <TaglineL4 color="rgba(246,241,232,.78)" size={12}>
+              waytofreedom.fr / evenements
+            </TaglineL4>
+            <TaglineL4 color="rgba(246,241,232,.68)" size={11}>
+              Céline & Sébastien Marcadet
+            </TaglineL4>
+          </div>
+          <LogoWTF size={72}/>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
 Object.assign(window, {
   CitaA1, CitaA2, CitaA3, CitaA4, CitaA5, CitaA6, CitaA7, CitaA8,
+  CitaA9, CitaA10,
 });
