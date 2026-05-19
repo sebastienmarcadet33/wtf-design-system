@@ -413,6 +413,14 @@ function StoryD4({ scale = 0.28 }) {
 //   · ProfilC6, C8 (FB)          · slot photo OPTIONNEL (prop withPhoto, default true)
 //     Instruction libre rédacteur · "Photo libre · ratio 4:5 · cadrage rédacteur"
 //   · ProfilC7, C10 (IG carré)   · pas de slot photo (typo pur grammaire CitaA)
+//
+// V3.0c · 19 mai 2026 — durcissements doctrinaux :
+//   · Signature pied droit IG carré · TOUJOURS <LogoWTF/> sceau papillon-corps.
+//     Jamais TriangleSes, jamais WordmarkSES/WordmarkEES (cf. brief §5).
+//     Les fondateurs portent la maison-mère en signature, pas leur pôle.
+//   · Liseré photo · uniformisé sur --liz-base 0.16em (cf. brief §6).
+//     Le registre --liz-strong 0.22em est réservé aux composants pivot
+//     signature rare (entities-v3-FULL.css §IV `.photo-frame.pivot`).
 
 
 // C5 — Sébastien LI Paysage 1584×396 · banner profil personnel
@@ -429,7 +437,7 @@ function ProfilC5({ scale = 0.36, withPhoto = false }) {
                      display:'grid', gridTemplateColumns:'auto 1fr', gap: 56, alignItems:'center'}}>
           <div style={{
             padding: '0.40em',
-            border: `0.14em solid ${T.sebPetrol}`,
+            border: `0.16em solid ${T.sebPetrol}`,
             fontSize: 24, display:'inline-block',
           }}>
             <PhotoSlot
@@ -499,8 +507,9 @@ function ProfilC6({ scale = 0.42, withPhoto = true }) {
                      display:'grid', gridTemplateColumns:'4fr 6fr', gap: 64, alignItems:'center'}}>
           <div style={{
             padding: '0.45em',
-            border: `0.14em solid ${T.sebPetrol}`,
-            fontSize: 28, display:'inline-block', alignSelf:'center',
+            border: `0.16em solid ${T.sebPetrol}`,
+            fontSize: 28, display:'inline-block',
+            alignSelf:'center', justifySelf:'flex-start',
           }}>
             <PhotoSlot
               w={300} h={380}
@@ -639,7 +648,7 @@ function ProfilC8({ scale = 0.42, withPhoto = true }) {
           </div>
           <div style={{
             padding: '0.45em',
-            border: `0.14em solid ${T.celCoral}`,
+            border: `0.16em solid ${T.celCoral}`,
             fontSize: 28, display:'inline-block', alignSelf:'center', justifySelf:'flex-end',
           }}>
             <PhotoSlot
@@ -697,7 +706,7 @@ function ProfilC9({ scale = 0.36, withPhoto = false }) {
                      display:'grid', gridTemplateColumns:'auto 1fr', gap: 56, alignItems:'center'}}>
           <div style={{
             padding: '0.40em',
-            border: `0.14em solid ${T.celCoral}`,
+            border: `0.16em solid ${T.celCoral}`,
             fontSize: 24, display:'inline-block',
           }}>
             <PhotoSlot
@@ -802,10 +811,15 @@ function ProfilC10({ scale = 0.42 }) {
 
 // D5 — EES Story Conférence 1080×1920 (9:16 IG + FB)
 //
-// Cohérent avec CitaA9 · fond rose poudré deep, or terre accents.
+// Cohérent avec CitaA9 · fond rose poudré deep, or terre signature.
 // Annonce conférence Céline (Mystika juin, Brantôme septembre).
 // Slot date + lieu + titre paramétriques. Zone bas réservée swipe-up sticker.
 // Pas de slot photo (le manifeste rose deep porte seul · doctrine TIP).
+//
+// V3.0c · 19 mai 2026 · patch contraste (brief §3) :
+//   Sur fond rose deep (#D9B8A6, clair WCAG), textes SOMBRES uniquement.
+//   Encre --ink #1F1A14, plancher --ink-2 #3B342A. Italique mot-cœur
+//   en --ees-gold #B8884A. Cohérence avec CitaA9.
 function StoryD5({ scale = 0.28,
                    date = '6–7 juin 2026',
                    lieu = 'Salon Mystika · Angoulême',
@@ -815,13 +829,13 @@ function StoryD5({ scale = 0.28,
   const lastWord = words.slice(-1)[0];
   const before = words.slice(0, -1).join(' ') + ' ';
   return (
-    <Frame w={1080} h={1920} bg={T.eesRoseDeep} ink={T.eesCream} scale={scale}>
+    <Frame w={1080} h={1920} bg={T.eesRoseDeep} ink={T.ink} scale={scale}>
       <div style={{position:'absolute', inset:'200px 112px 220px 112px',
-                   display:'flex', flexDirection:'column', color: T.eesCream}}>
+                   display:'flex', flexDirection:'column', color: T.ink}}>
 
         <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between'}}>
-          <WordmarkEES size={36} color={T.eesCream}/>
-          <TaglineL4 color="rgba(246,241,232,.70)" size={11}>
+          <WordmarkEES size={56} color={T.eesGold}/>
+          <TaglineL4 color={T.ink2} size={11}>
             Conférence
           </TaglineL4>
         </div>
@@ -829,10 +843,10 @@ function StoryD5({ scale = 0.28,
         <div style={{flex: 1, display:'flex', alignItems:'center'}}>
           <div style={{display:'flex', flexDirection:'column', gap: 56}}>
             <div style={{display:'flex', flexDirection:'column', gap: 18}}>
-              <TaglineL4 color={T.eesGoldSoft} size={16}>
+              <TaglineL4 color={T.ink2} size={16}>
                 {date}
               </TaglineL4>
-              <TaglineL4 color="rgba(246,241,232,.82)" size={13}>
+              <TaglineL4 color={T.ink2} size={13}>
                 {lieu}
               </TaglineL4>
             </div>
@@ -841,7 +855,7 @@ function StoryD5({ scale = 0.28,
               fontFamily: T.ffDisplay, fontWeight: 400,
               fontVariationSettings:'"opsz" 96, "wght" 400, "SOFT" 0',
               fontSize: 112, lineHeight: 1.08,
-              color: T.eesCream, maxWidth:'10ch', textWrap:'balance',
+              color: T.ink, maxWidth:'10ch', textWrap:'balance',
               margin: 0,
             }}>
               {before}
@@ -857,9 +871,9 @@ function StoryD5({ scale = 0.28,
         </div>
 
         <div style={{display:'flex', alignItems:'flex-end', justifyContent:'space-between',
-                     paddingTop: 36, borderTop:`1px solid rgba(246,241,232,.28)`}}>
-          <SignatureL4 name="Céline" color={T.eesCream} size={30}/>
-          <TaglineL4 color="rgba(246,241,232,.70)" size={12}>
+                     paddingTop: 36, borderTop:`1px solid ${T.inkLine}`}}>
+          <SignatureL4 name="Céline" color={T.ink} size={30}/>
+          <TaglineL4 color={T.ink2} size={12}>
             essencelensoi.fr
           </TaglineL4>
         </div>
@@ -868,10 +882,10 @@ function StoryD5({ scale = 0.28,
       {/* Zone bas réservée swipe-up / sticker app · indication visuelle */}
       <div style={{
         position:'absolute', bottom: 80, left: 112, right: 112, height: 64,
-        border: `1px dashed rgba(246,241,232,.40)`,
+        border: `1px dashed ${T.inkLine}`,
         display:'flex', alignItems:'center', justifyContent:'center',
         fontFamily: T.ffItalic, fontStyle:'italic', fontSize: 18,
-        color:'rgba(246,241,232,.72)', letterSpacing:'.02em',
+        color: T.ink2, letterSpacing:'.02em',
       }}>
         zone sticker lien · à poser dans l'app IG
       </div>

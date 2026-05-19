@@ -1,8 +1,18 @@
-// lot4-gbp.jsx — Famille 1 · GBP + AveHeader · V3.0b
+// lot4-gbp.jsx — Famille 1 · GBP + AveHeader · V3.0c (19 mai 2026)
 //
-// Transition V2.2 → V3.0b complète. Trois composants (+ deux variantes
-// AveHeader) qui clôturent la dette mercredi famille 1 (cf. brief DirCom
-// 17 mai 2026 + arbitrages doctrinaux post-questions).
+// V3.0c · refonte AveHeader complète (brief §2 du 19 mai) :
+//   · 3 formats redimensionnés · 3600×1203 desktop · 1800×603 email · 3240×963 mobile
+//   · Acronyme "AVE" retiré · wordmark "Aloe Vera Excellence" dominant Fraunces
+//   · Phénix sceau signe à côté du wordmark (15-20% largeur) · pas à sa place
+//   · Bande sauge clair affinée 8px en pied · pas de mention territoriale
+//
+// V3.0c · garde-fou wordmark SÉSÂMES sur SesGbp (brief §4) :
+//   · Le composant WordmarkSES (cf. lot5-logo-swap.jsx) impose désormais
+//     aspectRatio: '4.67/1' au PNG sesames-wordmark + display:inline-block
+//     + alignSelf:flex-start → l'étirement horizontal flex-column observé
+//     sur les Lot 8 PNG ne peut plus se produire.
+//   · Doctrine cardinale entities-v3-FULL.css §I respectée · aucune refonte
+//     vectorielle du PNG, juste contrainte d'aspect-ratio à l'affichage.
 //
 // Doctrine GBP écosystème · seuls deux profils GBP existent dans la
 // stratégie WTF :
@@ -19,10 +29,6 @@
 //     → JAMAIS portrait frontal, JAMAIS bureau personnel.
 //   Le gabarit définit la zone + ratio. Le rédacteur dicte le sujet.
 //   Instructions de cadrage génériques, ≤ 14 mots, sans préempter le sujet.
-//
-// AveHeader · trois formats livrés (1200×400 web + 600×200 email
-// + 1080×320 mobile bonus). Tagline en placeholder `[Tagline AVE · à définir]`,
-// DirCom arbitre en parallèle avec Sébastien & Céline.
 //
 // Exports window : EesGbp, SesGbp, AveHeader, AveHeaderEmail, AveHeaderMobile
 
@@ -164,7 +170,7 @@ function SesGbp({ scale = 0.45, variant = 'typo' }) {
                      display:'grid', gridTemplateColumns:'6fr 5fr', gap: 80, alignItems:'center'}}>
 
           <div style={{display:'flex', flexDirection:'column', gap: 36}}>
-            <WordmarkSES size={24} color={T.sesInk}/>
+            <WordmarkSES size={56} color={T.sesInk}/>
             <TitreL4
               before={<>Pas par manque<br/>de sérieux.<br/>Par manque<br/>de </>}
               accent="système"
@@ -211,7 +217,7 @@ function SesGbp({ scale = 0.45, variant = 'typo' }) {
         <div style={{position:'absolute', inset:'160px 144px 96px 144px',
                      display:'flex', flexDirection:'column'}}>
 
-          <WordmarkSES size={28} color={T.sesInk}/>
+          <WordmarkSES size={64} color={T.sesInk}/>
 
           <div style={{flex: 1, display:'flex', alignItems:'center'}}>
             <div style={{display:'flex', flexDirection:'column', gap: 44, maxWidth:'82%'}}>
@@ -256,59 +262,129 @@ function SesGbp({ scale = 0.45, variant = 'typo' }) {
 
 
 // ─────────────────────────────────────────────────────────────
-// AveHeader — En-tête site web AVE · 1200×400
-//
-// Composition typographique, aucune photo. Bandeau aloès V3.0b en filet
-// bas (touche pigmentaire signature, JAMAIS aplat dominant). Sceau phénix
-// bas droite. Tagline en placeholder `[Tagline AVE · à définir]`.
-// DirCom arbitre avec Sébastien & Céline en parallèle (doctrine DGCCRF
-// aloe vera = moins on affiche, mieux c'est · Forever jamais nommé).
+// AveHeader — En-tête éditorial Aloe Vera Excellence · V3.0c
 // ─────────────────────────────────────────────────────────────
-function AveHeader({ scale = 0.55, tagline = '[Tagline AVE · à définir]' }) {
+//
+// Doctrine V3.0c (brief 19 mai · arbitrage Patrimoine §VI scellé 17 mai) :
+//   · Le sceau phénix est un symbole iconographique pur, SANS wordmark
+//     associé. L'acronyme "AVE" n'a jamais été doctrine façade.
+//   · Composition unique : wordmark "Aloe Vera Excellence" en Fraunces
+//     régulier (60-65% largeur dominante), tagline italique sous filet,
+//     sceau phénix (15-20%) en signature côté droit — il signe à côté
+//     du wordmark, pas à sa place.
+//   · Bande sauge clair affinée en pied (8px).
+//   · Pas de mention territoriale (Médoc, Gironde, Sainte-Hélène) ·
+//     doctrine fondatrice nomade Patrimoine §II.
+//   · Pas de mention "Forever" · tri-distinction 3 mai 2026.
+//
+// Trois formats livrés :
+//   · AveHeader        3600×1203  desktop hero web
+//   · AveHeaderEmail   1800×603   signature email institutionnelle
+//   · AveHeaderMobile  3240×963   mobile-first responsive
+//
+// Mood d'école : The Beauty Chef "Edit", Pukka Herbs "Wellness",
+// Aesop Quarterly. Couche éditoriale-magazine de marques santé
+// naturelle non-territorialisées.
+// ─────────────────────────────────────────────────────────────
+
+
+// AveHeader desktop — 3600×1203 hero web
+function AveHeader({ scale = 0.22, tagline = '[Tagline AVE · à définir]' }) {
   return (
-    <Frame w={1200} h={400} bg={T.aveCream} scale={scale}>
-      {/* Bandeau aloès en filet bas · touche pigmentaire signature V3.0b */}
+    <Frame w={3600} h={1203} bg={T.aveCream} scale={scale}>
+      {/* Bande sauge clair affinée en pied · 8px doctrine V3.0c */}
+      <div style={{
+        position:'absolute', left: 0, right: 0, bottom: 0, height: 8,
+        background: T.aveAloesClair, opacity: 0.95,
+      }}/>
+
+      <div style={{position:'absolute', inset:'240px 280px 200px 280px',
+                   display:'grid', gridTemplateColumns:'minmax(0, 65fr) minmax(0, 20fr)',
+                   gap: 160, alignItems:'center'}}>
+
+        {/* Zone gauche dominante · wordmark + filet + tagline */}
+        <div style={{display:'flex', flexDirection:'column', gap: 56, minWidth: 0}}>
+          <h1 style={{
+            fontFamily: T.ffDisplay, fontWeight: 400,
+            fontVariationSettings:'"opsz" 144, "wght" 400, "SOFT" 0',
+            fontSize: 240, lineHeight: 1.02,
+            color: T.aveInk, letterSpacing:'.02em',
+            maxWidth: '14ch', margin: 0,
+            textWrap: 'balance',
+          }}>
+            Aloe Vera<br/>Excellence
+          </h1>
+
+          <div style={{display:'flex', flexDirection:'column', gap: 28}}>
+            <div style={{
+              width: 128, height: 1,
+              background: T.aveAloesClair, opacity: 0.95,
+            }}/>
+            <div style={{
+              fontFamily: T.ffItalic, fontStyle:'italic',
+              fontSize: 44, lineHeight: 1.35,
+              color: T.ink2, maxWidth:'34ch',
+              fontStyle: tagline.startsWith('[') ? 'italic' : 'italic',
+              opacity: tagline.startsWith('[') ? 0.6 : 1,
+            }}>
+              {tagline}
+            </div>
+          </div>
+        </div>
+
+        {/* Signature droite · phénix sceau à côté, pas à la place */}
+        <div style={{display:'flex', justifyContent:'flex-end', alignItems:'center'}}>
+          <LogoAVE size={320}/>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+
+// AveHeader email — 1800×603 signature email institutionnelle
+function AveHeaderEmail({ scale = 0.44, tagline = '[Tagline AVE · à définir]' }) {
+  return (
+    <Frame w={1800} h={603} bg={T.aveCream} scale={scale}>
       <div style={{
         position:'absolute', left: 0, right: 0, bottom: 0, height: 6,
-        background: T.aveAloes, opacity: 0.90,
-      }}/>
-      <div style={{
-        position:'absolute', left: 0, right: 0, bottom: 6, height: 22,
-        background: T.aveAloesClair, opacity: 0.35,
+        background: T.aveAloesClair, opacity: 0.95,
       }}/>
 
-      <div style={{position:'absolute', inset:'64px 96px 80px 96px',
-                   display:'grid', gridTemplateColumns:'7fr 3fr', gap: 64, alignItems:'center'}}>
+      <div style={{position:'absolute', inset:'108px 140px 96px 140px',
+                   display:'grid', gridTemplateColumns:'minmax(0, 65fr) minmax(0, 20fr)',
+                   gap: 80, alignItems:'center'}}>
 
-        <div style={{display:'flex', flexDirection:'column', gap: 22}}>
-          <div style={{display:'flex', alignItems:'center', gap: 20}}>
-            <WordmarkAVE size={38} color={T.aveInk}/>
-            <Filet w={48} color={T.aveAloes} opacity={0.85}/>
-            <span style={{
-              fontFamily: T.ffDisplay, fontStyle:'italic',
-              fontVariationSettings:'"opsz" 96, "wght" 400',
-              fontSize: 22, color: T.aveAloes, letterSpacing:'.005em',
-            }}>
-              Aloe Vera Excellence
-            </span>
-          </div>
-
-          <div style={{
-            fontFamily: T.ffBody, fontSize: 15, lineHeight: 1.6,
-            color: T.ink2, maxWidth:'60ch', fontWeight: 300,
-            fontStyle: tagline.startsWith('[') ? 'italic' : 'normal',
+        <div style={{display:'flex', flexDirection:'column', gap: 28, minWidth: 0}}>
+          <h1 style={{
+            fontFamily: T.ffDisplay, fontWeight: 400,
+            fontVariationSettings:'"opsz" 144, "wght" 400, "SOFT" 0',
+            fontSize: 128, lineHeight: 1.02,
+            color: T.aveInk, letterSpacing:'.02em',
+            margin: 0, whiteSpace: 'nowrap',
           }}>
-            {tagline}
-          </div>
+            Aloe Vera Excellence
+          </h1>
 
-          <TaglineL4 color={T.ink2} size={11}>
-            aloeveraexcellence.com
-          </TaglineL4>
+          <div style={{display:'flex', flexDirection:'column', gap: 14}}>
+            <div style={{
+              width: 72, height: 1,
+              background: T.aveAloesClair, opacity: 0.95,
+            }}/>
+            <div style={{
+              fontFamily: T.ffItalic, fontStyle:'italic',
+              fontSize: 24, lineHeight: 1.4,
+              color: T.ink2,
+              opacity: tagline.startsWith('[') ? 0.6 : 1,
+              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            }}>
+              {tagline}
+            </div>
+          </div>
         </div>
 
-        {/* Sceau phénix or canalisé bas droite */}
         <div style={{display:'flex', justifyContent:'flex-end', alignItems:'center'}}>
-          <LogoAVE size={150}/>
+          <LogoAVE size={200}/>
         </div>
       </div>
     </Frame>
@@ -316,100 +392,49 @@ function AveHeader({ scale = 0.55, tagline = '[Tagline AVE · à définir]' }) {
 }
 
 
-// ─────────────────────────────────────────────────────────────
-// AveHeaderEmail — Variante email · 600×200
-// ─────────────────────────────────────────────────────────────
-function AveHeaderEmail({ scale = 0.85, tagline = '[Tagline AVE · à définir]' }) {
+// AveHeader mobile — 3240×963 mobile-first
+function AveHeaderMobile({ scale = 0.24, tagline = '[Tagline AVE · à définir]' }) {
   return (
-    <Frame w={600} h={200} bg={T.aveCream} scale={scale}>
+    <Frame w={3240} h={963} bg={T.aveCream} scale={scale}>
       <div style={{
-        position:'absolute', left: 0, right: 0, bottom: 0, height: 4,
-        background: T.aveAloes, opacity: 0.92,
+        position:'absolute', left: 0, right: 0, bottom: 0, height: 8,
+        background: T.aveAloesClair, opacity: 0.95,
       }}/>
 
-      <div style={{position:'absolute', inset:'36px 48px 24px 48px',
-                   display:'grid', gridTemplateColumns:'5fr 2fr', gap: 32, alignItems:'center'}}>
+      <div style={{position:'absolute', inset:'180px 200px 160px 200px',
+                   display:'grid', gridTemplateColumns:'minmax(0, 65fr) minmax(0, 20fr)',
+                   gap: 120, alignItems:'center'}}>
 
-        <div style={{display:'flex', flexDirection:'column', gap: 10}}>
-          <div style={{display:'flex', alignItems:'center', gap: 14}}>
-            <WordmarkAVE size={22} color={T.aveInk}/>
-            <Filet w={24} color={T.aveAloes} opacity={0.85}/>
-            <span style={{
-              fontFamily: T.ffDisplay, fontStyle:'italic',
-              fontVariationSettings:'"opsz" 96, "wght" 400',
-              fontSize: 14, color: T.aveAloes, letterSpacing:'.005em',
-            }}>
-              Aloe Vera Excellence
-            </span>
-          </div>
-          <div style={{
-            fontFamily: T.ffBody, fontSize: 11, lineHeight: 1.5,
-            color: T.ink2, fontWeight: 300,
-            fontStyle: tagline.startsWith('[') ? 'italic' : 'normal',
+        <div style={{display:'flex', flexDirection:'column', gap: 44, minWidth: 0}}>
+          <h1 style={{
+            fontFamily: T.ffDisplay, fontWeight: 400,
+            fontVariationSettings:'"opsz" 144, "wght" 400, "SOFT" 0',
+            fontSize: 192, lineHeight: 1.02,
+            color: T.aveInk, letterSpacing:'.02em',
+            maxWidth: '14ch', margin: 0,
+            textWrap: 'balance',
           }}>
-            {tagline}
+            Aloe Vera<br/>Excellence
+          </h1>
+
+          <div style={{display:'flex', flexDirection:'column', gap: 20}}>
+            <div style={{
+              width: 96, height: 1,
+              background: T.aveAloesClair, opacity: 0.95,
+            }}/>
+            <div style={{
+              fontFamily: T.ffItalic, fontStyle:'italic',
+              fontSize: 32, lineHeight: 1.4,
+              color: T.ink2, maxWidth:'40ch',
+              opacity: tagline.startsWith('[') ? 0.6 : 1,
+            }}>
+              {tagline}
+            </div>
           </div>
-          <TaglineL4 color={T.ink2} size={10}>
-            aloeveraexcellence.com
-          </TaglineL4>
         </div>
 
         <div style={{display:'flex', justifyContent:'flex-end', alignItems:'center'}}>
-          <LogoAVE size={84}/>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
-
-// ─────────────────────────────────────────────────────────────
-// AveHeaderMobile — Variante mobile-first · 1080×320 (bonus DirCom)
-//
-// Format pages mobiles aloeveraexcellence.com. Hauteur réduite,
-// composition empilée : wordmark + tagline + sceau aligné droite.
-// ─────────────────────────────────────────────────────────────
-function AveHeaderMobile({ scale = 0.55, tagline = '[Tagline AVE · à définir]' }) {
-  return (
-    <Frame w={1080} h={320} bg={T.aveCream} scale={scale}>
-      <div style={{
-        position:'absolute', left: 0, right: 0, bottom: 0, height: 5,
-        background: T.aveAloes, opacity: 0.90,
-      }}/>
-      <div style={{
-        position:'absolute', left: 0, right: 0, bottom: 5, height: 18,
-        background: T.aveAloesClair, opacity: 0.35,
-      }}/>
-
-      <div style={{position:'absolute', inset:'56px 80px 64px 80px',
-                   display:'grid', gridTemplateColumns:'6fr 2fr', gap: 48, alignItems:'center'}}>
-
-        <div style={{display:'flex', flexDirection:'column', gap: 16}}>
-          <div style={{display:'flex', alignItems:'center', gap: 16}}>
-            <WordmarkAVE size={32} color={T.aveInk}/>
-            <Filet w={32} color={T.aveAloes} opacity={0.85}/>
-            <span style={{
-              fontFamily: T.ffDisplay, fontStyle:'italic',
-              fontVariationSettings:'"opsz" 96, "wght" 400',
-              fontSize: 18, color: T.aveAloes, letterSpacing:'.005em',
-            }}>
-              Aloe Vera Excellence
-            </span>
-          </div>
-          <div style={{
-            fontFamily: T.ffBody, fontSize: 14, lineHeight: 1.55,
-            color: T.ink2, maxWidth:'52ch', fontWeight: 300,
-            fontStyle: tagline.startsWith('[') ? 'italic' : 'normal',
-          }}>
-            {tagline}
-          </div>
-          <TaglineL4 color={T.ink2} size={11}>
-            aloeveraexcellence.com
-          </TaglineL4>
-        </div>
-
-        <div style={{display:'flex', justifyContent:'flex-end', alignItems:'center'}}>
-          <LogoAVE size={120}/>
+          <LogoAVE size={240}/>
         </div>
       </div>
     </Frame>

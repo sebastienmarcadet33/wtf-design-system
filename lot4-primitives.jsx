@@ -1,8 +1,20 @@
-// lot4-primitives.jsx — Lot 4 production · primitives partagées
+// lot4-primitives.jsx — Lot 4 production · primitives partagées · V3.0c
 //
 // Source des tokens : tokens-v3.css (inlinés ici en JS pour usage inline JSX).
 // Wordmarks typographiques propres (pas SVG d'illustration) — placeholders
 // honnêtes pour WTF / AVE en attendant validation pistes itération 3.
+//
+// ────────────────────────────────────────────────────────────
+// V3.0c · 19 mai 2026 · DirCom + Claude Design
+// ────────────────────────────────────────────────────────────
+// Synchronisation miroir tokens V3.0b finalisée :
+//   · eesRose        #E8D2C6  (rose poudré signature restauré v2.1)
+//   · eesRoseDeep    #D9B8A6  (manifeste pivot rare)
+//   · eesGoldSoft    #D9B884  (or doux V3.0b, dégradés photo)
+//   · eesRoseSoft    deprecated — re-pointé sur eesRose pour compat
+//     (à retirer définitivement quand PhotoSlot aura migré vers eesRose)
+//   · AVE enrichie : aveAloes #5E7A4E + aveAloesClair #93A984 + aveFlamme #C9622E
+// ────────────────────────────────────────────────────────────
 //
 // Exports window : T, Frame, ArtbgL4, MetaL4, NoteCard,
 //   WordmarkEES, WordmarkSES, WordmarkWTF, WordmarkVoie, WordmarkAVE,

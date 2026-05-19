@@ -373,18 +373,25 @@ function CitaA8({ scale = 0.35 }) {
 // A9 — EES annonce conférence Céline IG portrait 1080×1350
 //
 // Fond rose poudré deep #D9B8A6 (registre signature pivot, cohérent
-// CitaA8). Or terre V3.0b accents. Slot date + lieu + titre paramétriques.
-// Usage canonique · Mystika 6-7 juin Angoulême, Brantôme 19-20 septembre.
+// CitaA8). Usage canonique · Mystika 6-7 juin Angoulême, Brantôme 19-20 septembre.
 // Signature Céline seule (sa conférence — pas duo).
+//
+// V3.0c · 19 mai 2026 · patch contraste (brief §3) :
+//   Doctrine absolue · sur fond clair (rose deep #D9B8A6 inclus),
+//   textes SOMBRES uniquement. Encre par défaut --ink #1F1A14, plancher
+//   corps fin --ink-2 #3B342A (WCAG AA 4.5:1). Italique mot-cœur en
+//   --ees-gold #B8884A. Les textes clairs (cream) sont réservés aux
+//   fonds sombres (--wtf-nuit, --ses-ink) · cf. CitaA10 pour la
+//   référence inverse.
 function CitaA9({ scale = 0.35, date = '6–7 juin 2026', lieu = 'Salon Mystika · Angoulême',
                   titre = 'Le corps sait. Encore faut-il l’écouter.' }) {
   return (
-    <Frame w={1080} h={1350} bg={T.eesRoseDeep} ink={T.eesCream} scale={scale}>
-      <div style={{position:'absolute', inset:'140px 128px', display:'flex', flexDirection:'column', color: T.eesCream}}>
+    <Frame w={1080} h={1350} bg={T.eesRoseDeep} ink={T.ink} scale={scale}>
+      <div style={{position:'absolute', inset:'140px 128px', display:'flex', flexDirection:'column', color: T.ink}}>
 
         <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between'}}>
-          <WordmarkEES size={36} color={T.eesCream}/>
-          <TaglineL4 color="rgba(246,241,232,.75)" size={11}>
+          <WordmarkEES size={56} color={T.eesGold}/>
+          <TaglineL4 color={T.ink2} size={11}>
             Conférence · entrée libre
           </TaglineL4>
         </div>
@@ -392,10 +399,10 @@ function CitaA9({ scale = 0.35, date = '6–7 juin 2026', lieu = 'Salon Mystika 
         <div style={{flex: 1, display:'flex', alignItems:'center'}}>
           <div style={{display:'flex', flexDirection:'column', gap: 56}}>
             <div style={{display:'flex', flexDirection:'column', gap: 14}}>
-              <TaglineL4 color={T.eesGoldSoft} size={13}>
+              <TaglineL4 color={T.ink2} size={13}>
                 {date}
               </TaglineL4>
-              <TaglineL4 color="rgba(246,241,232,.80)" size={12}>
+              <TaglineL4 color={T.ink2} size={12}>
                 {lieu}
               </TaglineL4>
             </div>
@@ -405,7 +412,7 @@ function CitaA9({ scale = 0.35, date = '6–7 juin 2026', lieu = 'Salon Mystika 
               accent={titre.split(' ').slice(-2, -1)[0]}
               after={` ${titre.split(' ').slice(-1)[0]}`}
               accentColor={T.eesGold}
-              ink={T.eesCream}
+              ink={T.ink}
               size={86}
               maxw="13ch"
             />
@@ -414,7 +421,7 @@ function CitaA9({ scale = 0.35, date = '6–7 juin 2026', lieu = 'Salon Mystika 
 
             <div style={{
               fontFamily: T.ffBody, fontSize: 18, lineHeight: 1.55,
-              color: 'rgba(246,241,232,.88)', maxWidth:'34ch', fontWeight: 300,
+              color: T.ink2, maxWidth:'34ch', fontWeight: 300,
             }}>
               Une heure pour reposer le système nerveux,
               honorer ce qui demande à se déposer,
@@ -424,14 +431,14 @@ function CitaA9({ scale = 0.35, date = '6–7 juin 2026', lieu = 'Salon Mystika 
         </div>
 
         <div style={{display:'flex', alignItems:'flex-end', justifyContent:'space-between',
-                     paddingTop: 32, borderTop:`1px solid rgba(246,241,232,.28)`}}>
+                     paddingTop: 32, borderTop:`1px solid ${T.inkLine}`}}>
           <div style={{display:'flex', flexDirection:'column', gap: 6}}>
-            <SignatureL4 name="Céline" color={T.eesCream} size={30}/>
-            <TaglineL4 color="rgba(246,241,232,.72)" size={11}>
+            <SignatureL4 name="Céline" color={T.ink} size={30}/>
+            <TaglineL4 color={T.ink2} size={11}>
               Sanctuaire du corps
             </TaglineL4>
           </div>
-          <TaglineL4 color="rgba(246,241,232,.70)" size={11}>
+          <TaglineL4 color={T.ink2} size={11}>
             essencelensoi.fr
           </TaglineL4>
         </div>
