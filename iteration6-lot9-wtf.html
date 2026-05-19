@@ -1,0 +1,2427 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1440" />
+<title>Lot 9 · Maquettes WTF — Way To Freedom · Web System V3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style data-inlined-from="lot9-web-system.css">
+/* ============================================================
+   LOT 9 · WEB SYSTEM V3 · CSS PARTAGÉ
+   ============================================================
+   Source unique pour iteration6-lot9-wtf · ees · ave.
+   Hérite de tokens-v3.css V3.0b (palettes signature) et étend
+   avec la doctrine responsive Lot 9 (clamp(), scope, components).
+
+   NOTE PHASE 3 · Claude Code · 19 mai 2026
+   ─────────────────────────────────────────
+   Les sceaux WTF/EES/SÉSÂMES/AVE sont rendus typographiquement
+   (placeholders [W·F], [EES], [SES], [AVE]) dans ces maquettes
+   pour éviter PNG embarqués. Au passage Astro, remplacer par :
+     <img src="/logos/wtf-sceau-v2.png"      alt="Way To Freedom" />
+     <img src="/logos/ees-favicon-v1.png"    alt="EssenCel'en Soi" />
+     <img src="/logos/triangle-sesames.svg"  alt="SÉSÂMES" />
+     <img src="/logos/ave-sceau-v2.png"      alt="Aloe Vera Excellence" />
+   Voir SCELLEMENT_TEMPLATE_ECOSYSTEME_V3-0c §5 logos officiels.
+============================================================ */
+
+:root{
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-italic:  'Instrument Serif', Georgia, serif;
+  --ff-body:    'Inter Tight', system-ui, sans-serif;
+  --ff-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Palettes — figées V3.0c */
+  --wtf-light:        #FAF7F2;
+  --wtf-lin:          #F6F1E8;
+  --wtf-nuit:         #1B1814;
+  --wtf-nuit-chaude:  #2E2A22;
+  --wtf-dore-bas:     #B8884A;
+
+  --ses-light:        #FAF7F2;
+  --ses-ink:          #0F1218;
+  --ses-gold:         #C9A24E;
+  --ses-violet:       #4A3A5C;
+
+  --ees-cream:        #F6F1E8;
+  --ees-rose:         #E8D2C6;
+  --ees-rose-deep:    #D9B8A6;
+  --ees-gold:         #B8884A;
+  --ees-sage:         #7A8B6F;
+
+  --voie-cream:       #F6F1E8;
+  --voie-night:       #1F3B4D;
+  --voie-copper:      #B0732E;
+
+  --ave-cream:        #F6F1E8;
+  --ave-aloes:        #5E7A4E;
+  --ave-aloes-clair:  #93A984;
+  --ave-gold:         #C9A24E;
+  --ave-flamme:       #C9622E;
+
+  --cel-coral:        #D55B47;
+  --seb-petrol:       #2D5F6E;
+
+  --ink:        #1F1A14;
+  --ink-2:      #3B342A;
+  --ink-mute:   #5C544A;
+  --ink-line:   rgba(15, 18, 24, .12);
+  --ink-line-2: rgba(15, 18, 24, .22);
+
+  --paper:      #F6F1E8;
+  --paper-soft: #EFE8DB;
+  --paper-deep: #E6DCC9;
+
+  /* Type scale fluide */
+  --type-display: clamp(2.5rem, 5vw + 1rem, 6rem);
+  --type-h1:      clamp(2rem,   3vw + 1rem, 4rem);
+  --type-h2:      clamp(1.5rem, 2vw + 0.75rem, 2.5rem);
+  --type-h3:      clamp(1.25rem,1vw + 0.875rem, 1.75rem);
+  --type-body:    clamp(1rem,   0.5vw + 0.875rem, 1.125rem);
+  --type-small:   clamp(0.75rem,0.25vw + 0.6875rem, 0.875rem);
+
+  --ease-aesop: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html, body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-kerning:normal;
+}
+html{ background:#E8E0D0; }
+body{
+  font-family:var(--ff-body);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.6;
+}
+img{ max-width:100%; display:block; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+input, textarea, select{ font:inherit; color:inherit; }
+a{ color:inherit; text-decoration:none; }
+
+:focus-visible{
+  outline: 2px solid var(--accent, var(--wtf-dore-bas));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   SHELL DOCUMENT (livret de maquettes)
+============================================================ */
+.maquette-shell{
+  max-width: 1632px;
+  margin: 0 auto;
+  padding: 32px 0 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.maquette-shell > .shell-header{
+  padding: 0 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.maquette-shell > .shell-header strong{ color: var(--ink); font-weight: 500; }
+.maquette-shell > .shell-header h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  color: var(--ink);
+  text-transform: none;
+  font-weight: 400;
+}
+.maquette-shell > .shell-header h1 em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  color: var(--wtf-dore-bas);
+}
+
+/* Page maquette · capsule au pixel, 1440 de large */
+.page-maquette{
+  width: 1440px;
+  margin: 0 auto;
+  background: var(--bg, var(--paper));
+  box-shadow: 0 2px 32px rgba(0,0,0,.08);
+  position: relative;
+}
+.page-maquette + .page-maquette{ margin-top: 64px; }
+.maquette-shell > .page-maquette:first-of-type{ margin-top: 48px; } /* dégage le page-label du shell-header */
+.page-maquette .page-label{
+  position: absolute;
+  top: -28px;
+  left: 0;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.page-maquette .page-label strong{ color: var(--ink); font-weight: 600; }
+.page-maquette .page-label em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 14px;
+  color: var(--ink-2);
+}
+
+/* Mobile / tablette frames pour responsive snapshots */
+.responsive-row{
+  width: 1440px;
+  margin: 0 auto;
+  padding: 64px 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.responsive-row .rs-frame{
+  background: #fff;
+  border: 1px solid var(--ink-line);
+  overflow: hidden;
+  position: relative;
+}
+.responsive-row .rs-frame .rs-label{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  background: rgba(255,255,255,.92);
+  padding: 3px 8px;
+  font-weight: 500;
+}
+.responsive-row .rs-frame .rs-label strong{ color: var(--ink); font-weight: 600; }
+.responsive-row .rs-viewport{ transform-origin: top left; }
+.responsive-row .rs-375{ height: 690px; }
+.responsive-row .rs-375 .rs-viewport{ width: 375px; transform: scale(1.226); /* ≈ 460/375 */ }
+.responsive-row .rs-768{ height: 690px; }
+.responsive-row .rs-768 .rs-viewport{ width: 768px; transform: scale(0.599); /* ≈ 460/768 */ }
+.responsive-row .rs-1440{ height: 690px; }
+.responsive-row .rs-1440 .rs-viewport{ width: 1440px; transform: scale(0.319); /* ≈ 460/1440 */ }
+
+/* ============================================================
+   SCOPES — bascule chromatique par entité
+============================================================ */
+.scope-wtf{
+  --bg: var(--wtf-light);
+  --bg-2: var(--wtf-lin);
+  --ink-local: var(--ink);
+  --accent: var(--wtf-dore-bas);
+  --accent-2: var(--wtf-nuit);
+}
+.scope-ses{
+  --bg: var(--ses-light);
+  --bg-2: #F2EDE4;
+  --ink-local: var(--ses-ink);
+  --accent: var(--ses-gold);
+  --accent-2: var(--ses-violet);
+}
+.scope-ees{
+  --bg: var(--ees-cream);
+  --bg-2: var(--ees-rose);
+  --ink-local: var(--ink);
+  --accent: var(--ees-gold);
+  --accent-2: var(--ees-rose-deep);
+}
+.scope-voie{
+  --bg: var(--voie-cream);
+  --bg-2: #EFE5D2;
+  --ink-local: var(--ink);
+  --accent: var(--voie-copper);
+  --accent-2: var(--voie-night);
+}
+.scope-ave{
+  --bg: var(--ave-cream);
+  --bg-2: #ECE7DA;
+  --ink-local: var(--ink);
+  --accent: var(--ave-gold);
+  --accent-2: var(--ave-aloes);
+}
+
+/* ============================================================
+   TYPOGRAPHIE
+============================================================ */
+.t-display{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  line-height: .98;
+  letter-spacing: -.022em;
+}
+.t-h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.018em;
+}
+.t-h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+}
+.t-italic{ font-family: var(--ff-italic); font-style: italic; font-weight: 400; }
+.eyebrow{
+  font-family: var(--ff-body);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before{
+  content:"";
+  width: 28px;
+  height: 1px;
+  background: var(--accent, var(--wtf-dore-bas));
+}
+.eyebrow.no-filet::before{ display:none; }
+.body-doc{ font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+.body-doc strong{ font-weight: 500; color: var(--ink); }
+.body-doc em{ font-family: var(--ff-italic); font-style: italic; }
+.caption{ font-size: 12px; color: var(--ink-mute); letter-spacing: .04em; line-height: 1.5; }
+.mono{ font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2); }
+
+.filet{ height: 1px; background: var(--accent, var(--wtf-dore-bas)); width: 64px; }
+.filet-thin{ height: 1px; background: var(--ink-line); }
+
+/* ============================================================
+   NAV (header de page)
+============================================================ */
+.c-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 64px;
+  background: var(--bg, var(--wtf-light));
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--ff-body);
+}
+.c-nav .brand{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 22px;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.c-nav .brand em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent); }
+.c-nav .brand-mark{
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-family: var(--ff-display);
+  font-size: 12px;
+  letter-spacing: .05em;
+  font-variation-settings: "opsz" 14, "wght" 500;
+}
+.c-nav ul{
+  list-style: none;
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+.c-nav a{
+  font-size: 14px;
+  color: var(--ink-2);
+  padding-bottom: 3px;
+  position: relative;
+  transition: color 220ms var(--ease-aesop);
+}
+.c-nav a:hover{ color: var(--ink); }
+.c-nav a:hover::after{
+  content:"";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--accent);
+}
+.c-nav a.active{
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+}
+.c-nav .cta{
+  font-size: 13px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+  letter-spacing: .02em;
+}
+
+/* ============================================================
+   BOUTONS
+============================================================ */
+.c-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 18px 30px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+  transition: all 220ms var(--ease-aesop);
+}
+.c-btn:hover{ background: transparent; color: var(--accent); }
+.c-btn .arrow{ font-family: var(--ff-display); font-size: 14px; }
+.c-btn--secondary{
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.c-btn--secondary:hover{ background: var(--ink); color: var(--bg); }
+.c-btn--tertiary{
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--accent);
+  padding: 8px 0;
+  color: var(--ink);
+  letter-spacing: .14em;
+}
+.c-btn--tertiary:hover{ color: var(--accent); }
+
+/* ============================================================
+   FORMS
+============================================================ */
+.c-field{ display: flex; flex-direction: column; gap: 10px; }
+.c-field label{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.c-input,
+.c-textarea{
+  font-family: var(--ff-body);
+  font-size: 16px;
+  padding: 14px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink-line-2);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 220ms var(--ease-aesop);
+}
+.c-input:focus,
+.c-textarea:focus{ border-bottom-color: var(--accent); }
+.c-textarea{ min-height: 110px; line-height: 1.6; resize: vertical; }
+.c-checkbox-row{
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.c-checkbox{
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 1px solid var(--ink-line-2);
+  margin-top: 3px;
+  background: transparent;
+  position: relative;
+}
+.c-checkbox.checked{ background: var(--accent); border-color: var(--accent); }
+.c-checkbox.checked::after{
+  content:"";
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border: solid var(--bg);
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   CARDS
+============================================================ */
+.c-card{
+  background: var(--bg-2);
+  padding: 40px 36px;
+}
+.c-card .eyebrow-l{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.c-card h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.c-card h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ink-2); font-weight: 400; }
+.c-card .body-doc{ font-size: 14px; line-height: 1.6; }
+.c-card .meta{
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink-line);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+   PHOTO SLOT — placeholder typographique honnête
+============================================================ */
+.c-photo-slot{
+  background: var(--bg-2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  border: 1px dashed var(--ink-line-2);
+}
+.c-photo-slot .slot-inner{
+  text-align: center;
+  max-width: 32ch;
+}
+.c-photo-slot .slot-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.c-photo-slot .slot-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   FOOTER ÉCOSYSTÈME INVARIANT (nuit chaude · 5 entités)
+============================================================ */
+.eco-footer{
+  background: var(--wtf-nuit-chaude);
+  color: #E6DDC9;
+  padding: 96px 80px 48px;
+  font-family: var(--ff-body);
+}
+.eco-footer .top{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(230, 221, 201, .18);
+}
+.eco-footer h5{
+  font-family: var(--ff-body);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--wtf-dore-bas);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.eco-footer ul{ list-style: none; }
+.eco-footer li{ margin-bottom: 10px; font-size: 13px; color: #C9BFA9; }
+.eco-footer li a{ transition: color 220ms var(--ease-aesop); }
+.eco-footer li a:hover{ color: #FAF7F2; }
+.eco-footer .brand-block .mark{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400;
+  font-size: 24px;
+  color: #FAF7F2;
+  letter-spacing: -.01em;
+  margin-bottom: 14px;
+}
+.eco-footer .brand-block .mark em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.eco-footer .brand-block .quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #C9BFA9;
+  max-width: 32ch;
+}
+.eco-footer .seal-row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 0 32px;
+}
+.eco-footer .seal{
+  /* Placeholder typographique — voir NOTE PHASE 3 en tête de fichier */
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--wtf-dore-bas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wtf-dore-bas);
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 300;
+  font-size: 22px;
+  letter-spacing: .05em;
+}
+.eco-footer .seal-quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 17px;
+  color: #C9BFA9;
+  margin-top: 22px;
+  text-align: center;
+  max-width: 42ch;
+  line-height: 1.5;
+}
+.eco-footer .bottom{
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #948A78;
+}
+.eco-footer .bottom strong{ color: #E6DDC9; font-weight: 500; }
+.eco-footer .bottom .legal a{ margin-left: 22px; transition: color 220ms; }
+.eco-footer .bottom .legal a:hover{ color: #E6DDC9; }
+
+/* ============================================================
+   PRIMITIVES DE SECTION (utilisées dans les pages)
+============================================================ */
+.section{ padding: 128px 96px; }
+.section--lean{ padding: 96px 96px; }
+.section--cream{ background: var(--wtf-lin); }
+.section--rose{ background: var(--ees-rose); }
+.section--nuit{ background: var(--wtf-nuit); color: #E6DDC9; }
+
+.section-eyebrow{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.section-eyebrow::before{
+  content:"";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+.section--nuit .section-eyebrow{ color: var(--wtf-dore-bas); }
+.section--nuit .section-eyebrow::before{ background: var(--wtf-dore-bas); }
+
+.section-title{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.08;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  max-width: 22ch;
+}
+.section-title em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent); font-weight: 400; }
+.section--nuit .section-title{ color: #FAF7F2; }
+.section--nuit .section-title em{ color: var(--wtf-dore-bas); }
+
+.section-lede{
+  font-family: var(--ff-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 62ch;
+  font-weight: 300;
+  margin-top: 32px;
+}
+.section--nuit .section-lede{ color: #C9BFA9; }
+
+</style>
+
+<style>
+/* ============================================================
+   STYLES SPÉCIFIQUES MAQUETTES WTF · Passe 9.2
+   ============================================================
+   N'écrasent pas la library partagée — n'ajoutent que ce qui
+   ne sert qu'aux pages WTF + SÉSÂMES sous-page + Voie sous-page +
+   À propos + Contact.
+============================================================ */
+
+/* Hero spécifiques WTF · variation chromatique nuit profonde */
+.hero-wtf{
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 96px;
+  padding: 112px 96px 128px;
+  background: var(--wtf-light);
+  align-items: center;
+  min-height: 720px;
+}
+.hero-wtf .hero-content{ display: flex; flex-direction: column; gap: 32px; }
+.hero-wtf h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  font-size: 84px;
+  line-height: .98;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 14ch;
+}
+.hero-wtf h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); font-weight: 400; }
+.hero-wtf .lede{
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 46ch;
+  font-weight: 300;
+}
+.hero-wtf .cta-row{ display: flex; gap: 32px; align-items: center; margin-top: 12px; }
+.hero-wtf .hero-aside{ display: flex; flex-direction: column; align-items: stretch; gap: 32px; }
+.hero-wtf .hero-figure{
+  background: var(--wtf-lin);
+  border: 1px dashed var(--ink-line-2);
+  padding: 48px;
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hero-wtf .hero-figure .seal-large{
+  width: 88px;
+  height: 88px;
+  border: 1.5px solid var(--wtf-dore-bas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wtf-dore-bas);
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 300;
+  font-size: 32px;
+  letter-spacing: .05em;
+  margin: 0 auto;
+}
+.hero-wtf .hero-figure .figure-quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+  text-align: center;
+  max-width: 28ch;
+  margin: 0 auto;
+}
+.hero-wtf .hero-figure .figure-sub{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Trois chemins (cards de présentation) */
+.three-paths{
+  background: var(--wtf-lin);
+  padding: 128px 96px;
+}
+.three-paths .grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 64px;
+}
+.path-card{
+  background: var(--wtf-light);
+  padding: 48px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 2px solid var(--path-accent, var(--wtf-dore-bas));
+  position: relative;
+  min-height: 480px;
+}
+.path-card .path-num{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.path-card .path-num strong{ color: var(--path-accent); font-weight: 600; }
+.path-card h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 36px;
+  line-height: 1.08;
+  color: var(--ink);
+  letter-spacing: -.012em;
+  font-weight: 400;
+}
+.path-card h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--path-accent); }
+.path-card .path-by{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.path-card .path-lede{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  flex: 1;
+}
+.path-card .path-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--path-accent);
+  padding-bottom: 4px;
+  align-self: flex-start;
+  margin-top: 8px;
+  transition: color 220ms var(--ease-aesop);
+}
+.path-card .path-link:hover{ color: var(--path-accent); }
+
+.path-card.ses{ --path-accent: var(--ses-gold); }
+.path-card.ees{ --path-accent: var(--ees-gold); }
+.path-card.voie{ --path-accent: var(--voie-copper); }
+
+/* Manifeste WTF · bloc nuit chaude */
+.manifeste-wtf{
+  background: var(--wtf-nuit);
+  color: #E6DDC9;
+  padding: 144px 96px;
+}
+.manifeste-wtf .row{
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: 96px;
+  align-items: start;
+}
+.manifeste-wtf h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 300;
+  font-size: 56px;
+  line-height: 1.05;
+  color: #FAF7F2;
+  letter-spacing: -.022em;
+  font-weight: 300;
+}
+.manifeste-wtf h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.manifeste-wtf .manifeste-body p{
+  font-size: 19px;
+  line-height: 1.7;
+  color: #C9BFA9;
+  max-width: 56ch;
+}
+.manifeste-wtf .manifeste-body p + p{ margin-top: 28px; }
+.manifeste-wtf .manifeste-body em{ font-family: var(--ff-italic); font-style: italic; color: #FAF7F2; }
+.manifeste-wtf .manifeste-body .signature{
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(230,221,201,.18);
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--wtf-dore-bas);
+}
+
+/* Citation pivot (style passé sous le manifeste) */
+.citation-pivot{
+  background: var(--wtf-lin);
+  padding: 144px 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.citation-pivot .filet{ width: 64px; margin-bottom: 40px; }
+.citation-pivot blockquote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 40px;
+  line-height: 1.3;
+  color: var(--ink);
+  max-width: 28ch;
+  letter-spacing: -.005em;
+}
+.citation-pivot .attr{
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+/* Approche commune (5 valeurs) */
+.approche{
+  padding: 128px 96px;
+  background: var(--wtf-light);
+}
+.approche .values{
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+}
+.value-item{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 28px;
+  border-top: 1px solid var(--wtf-dore-bas);
+}
+.value-item .num{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--wtf-dore-bas);
+}
+.value-item h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.value-item h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.value-item p{
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* SES sous-page · filet violet vertical signature */
+.sub-hero-ses{
+  position: relative;
+  background: var(--ses-light);
+  padding: 80px 96px 120px;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 96px;
+  align-items: end;
+  min-height: 720px;
+}
+.sub-hero-ses::before{
+  content:"";
+  position: absolute;
+  left: 48px;
+  top: 80px;
+  bottom: 80px;
+  width: 2px;
+  background: var(--ses-violet);
+  opacity: .85;
+}
+.sub-hero-ses .breadcrumb{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sub-hero-ses .breadcrumb .sep{ color: var(--ses-gold); }
+.sub-hero-ses .breadcrumb strong{ color: var(--ses-ink); font-weight: 500; }
+.sub-hero-ses h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 88px;
+  line-height: .98;
+  letter-spacing: -.024em;
+  color: var(--ses-ink);
+  max-width: 18ch;
+  font-weight: 300;
+}
+.sub-hero-ses h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ses-gold); font-weight: 400; }
+.sub-hero-ses .lede{
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 48ch;
+  margin-top: 32px;
+}
+.sub-hero-ses .hero-side{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-left: 32px;
+  border-left: 1px solid var(--ses-gold);
+}
+.sub-hero-ses .hero-side .label{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ses-gold);
+  font-weight: 500;
+}
+.sub-hero-ses .hero-side .by{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ses-ink);
+}
+.sub-hero-ses .hero-side .triangle{
+  width: 72px;
+  height: 72px;
+  border: 1px solid var(--ses-gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ses-gold);
+  font-family: var(--ff-display);
+  font-size: 11px;
+  letter-spacing: .15em;
+  font-variation-settings: "opsz" 14, "wght" 500;
+}
+.sub-hero-ses .hero-side .triangle-caption{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* SES · passages signatures (4 cartes) */
+.ses-passages{
+  background: var(--ses-light);
+  padding: 128px 96px;
+  border-top: 1px solid var(--ink-line);
+}
+.ses-passages .grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 64px;
+}
+.passage-card{
+  background: #F2EDE4;
+  padding: 48px 40px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.passage-card .seuil{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--ses-gold);
+  font-weight: 300;
+  letter-spacing: -.02em;
+}
+.passage-card h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--ses-ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.passage-card h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ses-gold); }
+.passage-card p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 16px;
+}
+
+/* Voie · hero sous-page */
+.sub-hero-voie{
+  background: var(--voie-cream);
+  padding: 80px 96px 120px;
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  gap: 80px;
+  align-items: center;
+  min-height: 680px;
+  position: relative;
+}
+.sub-hero-voie .breadcrumb{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--voie-night);
+  font-weight: 500;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.sub-hero-voie .breadcrumb .sep{ color: var(--voie-copper); }
+.sub-hero-voie h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 84px;
+  line-height: .98;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 18ch;
+  font-weight: 300;
+}
+.sub-hero-voie h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--voie-copper); font-weight: 400; }
+.sub-hero-voie .lede{
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 46ch;
+  margin-top: 32px;
+}
+.sub-hero-voie .hero-figure{
+  height: 480px;
+  background: linear-gradient(135deg, var(--voie-night) 0%, var(--voie-night) 60%, var(--voie-copper) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 56px 48px;
+  color: #E6DDC9;
+}
+.sub-hero-voie .hero-figure .fig-eyebrow{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--voie-copper);
+  font-weight: 500;
+}
+.sub-hero-voie .hero-figure .fig-quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.3;
+  color: #FAF7F2;
+  max-width: 22ch;
+}
+.sub-hero-voie .hero-figure .fig-signature{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #C9BFA9;
+  font-weight: 500;
+}
+
+/* Voie · 3 piliers */
+.voie-piliers{
+  padding: 128px 96px;
+  background: var(--voie-cream);
+}
+.voie-piliers .grid{
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+.pilier{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.pilier .pilier-mark{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--voie-copper);
+  font-weight: 300;
+  letter-spacing: -.02em;
+}
+.pilier h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.pilier h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--voie-copper); }
+.pilier p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+/* Voie · formulaire prospect Brevo 4 étapes (carte process) */
+.voie-process{
+  background: var(--voie-night);
+  color: #E6DDC9;
+  padding: 144px 96px;
+}
+.voie-process .row{
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 96px;
+  align-items: start;
+}
+.voie-process h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 300;
+  font-size: 48px;
+  line-height: 1.05;
+  color: #FAF7F2;
+  letter-spacing: -.022em;
+  font-weight: 300;
+  max-width: 14ch;
+}
+.voie-process h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--voie-copper); font-weight: 400; }
+.voie-process .steps{ display: flex; flex-direction: column; }
+.process-step{
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(230,221,201,.18);
+  align-items: start;
+}
+.process-step:last-child{ border-bottom: 1px solid rgba(230,221,201,.18); }
+.process-step .step-num{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--voie-copper);
+  font-weight: 300;
+}
+.process-step h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 22px;
+  line-height: 1.15;
+  color: #FAF7F2;
+  letter-spacing: -.005em;
+  font-weight: 400;
+}
+.process-step h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--voie-copper); }
+.process-step p{
+  font-size: 14px;
+  line-height: 1.6;
+  color: #C9BFA9;
+  margin-top: 8px;
+  max-width: 56ch;
+}
+
+/* À propos · les Marcadet */
+.apropos-hero{
+  background: var(--wtf-lin);
+  padding: 128px 96px 96px;
+}
+.apropos-hero .row{
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  gap: 96px;
+  align-items: center;
+}
+.apropos-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 80px;
+  line-height: .98;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 14ch;
+  font-weight: 300;
+}
+.apropos-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); font-weight: 400; }
+.apropos-hero .lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 46ch;
+  margin-top: 32px;
+  font-weight: 300;
+}
+.apropos-hero .duo-portrait{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 480px;
+}
+.apropos-hero .portrait-slot{
+  border: 1px dashed var(--ink-line-2);
+  background: var(--wtf-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+.apropos-hero .portrait-slot:first-child{ background: linear-gradient(180deg, var(--seb-petrol) 0%, var(--seb-petrol) 100%); border: 0; color: #E6DDC9; }
+.apropos-hero .portrait-slot:last-child{ background: linear-gradient(180deg, var(--cel-coral) 0%, var(--cel-coral) 100%); border: 0; color: #FAF7F2; }
+.apropos-hero .portrait-slot .ps-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 8px;
+  opacity: .8;
+}
+.apropos-hero .portrait-slot .ps-name{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+.apropos-hero .portrait-slot .ps-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 8px;
+  opacity: .85;
+}
+
+.fondateurs-bio{
+  background: var(--wtf-light);
+  padding: 128px 96px;
+}
+.fondateurs-bio .grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+}
+.bio{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid var(--accent-bio, var(--wtf-dore-bas));
+}
+.bio.seb{ --accent-bio: var(--seb-petrol); }
+.bio.cel{ --accent-bio: var(--cel-coral); }
+.bio .bio-tag{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--accent-bio);
+  font-weight: 500;
+}
+.bio h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 36px;
+  line-height: 1.08;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -.012em;
+}
+.bio h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent-bio); }
+.bio p{
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+.bio em.in-text{ font-family: var(--ff-italic); font-style: italic; color: var(--ink); }
+
+/* Contact WTF */
+.contact-hero{
+  background: var(--wtf-light);
+  padding: 96px 96px 80px;
+}
+.contact-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 14ch;
+  font-weight: 300;
+  margin-top: 24px;
+}
+.contact-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); font-weight: 400; }
+
+.contact-body{
+  padding: 96px 96px 128px;
+  background: var(--wtf-light);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 96px;
+  align-items: start;
+}
+.contact-body .channels{ display: flex; flex-direction: column; gap: 32px; }
+.contact-channel{
+  padding-top: 24px;
+  border-top: 1px solid var(--ink-line-2);
+}
+.contact-channel .ch-eyebrow{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.contact-channel .ch-label{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-top: 8px;
+  font-weight: 400;
+}
+.contact-channel .ch-label em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.contact-channel .ch-value{
+  font-family: var(--ff-body);
+  font-size: 16px;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+.contact-channel .ch-note{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-mute);
+  margin-top: 4px;
+}
+
+.contact-form-card{
+  background: var(--wtf-lin);
+  padding: 64px 64px;
+}
+.contact-form-card h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -.012em;
+}
+.contact-form-card h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.contact-form-card .form-body{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.contact-form-card .form-row-2{ display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+</style>
+</head>
+<body>
+
+<main class="maquette-shell scope-wtf" style="--accent: var(--wtf-dore-bas);">
+
+  <header class="shell-header">
+    <div>
+      <h1>Lot 9 · Maquettes <em>WTF + sous-pages</em></h1>
+      <p style="margin-top: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute);">
+        Passe 9.2 · waytofreedom.fr maison-mère + /clarification-interieure + /revenu-complementaire-independant + à propos + contact
+      </p>
+    </div>
+    <div style="text-align: right; line-height: 2;">
+      <span><strong>5 maquettes</strong> · desktop 1440</span><br>
+      <span>+ <strong>responsive snapshots</strong> sur Home</span><br>
+      <span>19 mai 2026 · V3.0c</span>
+    </div>
+  </header>
+
+  <!-- ==========================================================
+       PAGE 1 · HOME WTF MAISON-MÈRE
+  =========================================================== -->
+  <div class="page-maquette scope-wtf">
+    <div class="page-label"><strong>01</strong> Home WTF maison-mère <em>· waytofreedom.fr</em></div>
+
+    <!-- NAV -->
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark">W·F</span>
+        Way To <em>Freedom</em>
+      </div>
+      <ul>
+        <li><a href="#" class="active">Accueil</a></li>
+        <li><a href="#">Clarification intérieure</a></li>
+        <li><a href="#">Voie d'autonomie</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#" class="cta">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-wtf">
+      <div class="hero-content">
+        <div class="eyebrow no-filet" style="color: var(--wtf-dore-bas);">
+          <span style="width: 28px; height: 1px; background: var(--wtf-dore-bas); display: inline-block;"></span>
+          Way To Freedom · maison-mère
+        </div>
+        <h1>Une maison. <em>Trois chemins.</em> Un rythme propre.</h1>
+        <p class="lede">
+          Way To Freedom rassemble trois chemins distincts portés par Céline &amp; Sébastien Marcadet. Le sanctuaire
+          du corps. La clarification intérieure. La voie d'autonomie économique. Aucun n'est obligatoire. Chacun
+          se tient seul.
+        </p>
+        <div class="cta-row">
+          <button class="c-btn">Découvrir les trois chemins <span class="arrow">→</span></button>
+          <a href="#" class="c-btn--tertiary" style="display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 4px;">Lire le manifeste</a>
+        </div>
+      </div>
+
+      <aside class="hero-aside">
+        <div class="hero-figure">
+          <div class="figure-sub">Doctrine fondatrice nomade</div>
+          <div class="figure-quote">
+            « Les fondateurs sont les fondations qui voyagent. La maison se porte avec eux. »
+          </div>
+          <div class="seal-large">W·F</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- TROIS CHEMINS -->
+    <section class="three-paths">
+      <div class="section-eyebrow">Les trois chemins</div>
+      <h2 class="section-title">Trois territoires distincts. <em>Une seule voix.</em></h2>
+
+      <div class="grid">
+        <article class="path-card ses">
+          <div class="path-num"><strong>I.</strong> Clarification intérieure</div>
+          <h3>Cartographier ce qui se <em>répète.</em></h3>
+          <div class="path-by">Chemin porté par Sébastien · SÉSÂMES</div>
+          <p class="path-lede">
+            Reconnaître les passages. Nommer les seuils. Tenir l'espace pendant qu'on les traverse. Vingt-six ans
+            de management, mis au service de la clarification intérieure.
+          </p>
+          <a class="path-link">Découvrir SÉSÂMES <span>→</span></a>
+        </article>
+
+        <article class="path-card ees">
+          <div class="path-num"><strong>II.</strong> Sanctuaire du corps</div>
+          <h3>Reposer ce qui demande à <em>l'être.</em></h3>
+          <div class="path-by">Chemin porté par Céline · EssenCel'en Soi</div>
+          <p class="path-lede">
+            Pratique énergétique et corporelle au cabinet de Sainte-Hélène en Médoc. Une heure pour reposer le
+            système nerveux, retrouver la fluidité du souffle, honorer ce qui se dépose.
+          </p>
+          <a class="path-link">Visiter EssenCel'en Soi <span>↗</span></a>
+        </article>
+
+        <article class="path-card voie">
+          <div class="path-num"><strong>III.</strong> Voie d'autonomie économique</div>
+          <h3>Construire un revenu <em>durable.</em></h3>
+          <div class="path-by">Chemin partagé · Céline &amp; Sébastien</div>
+          <p class="path-lede">
+            Pour les indépendants qui choisissent l'autonomie patiente sur la promesse pressée. Sans urgence,
+            au rythme propre. Lettre de chemin envoyée sous 48 heures à la demande.
+          </p>
+          <a class="path-link">Recevoir la lettre <span>→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- MANIFESTE -->
+    <section class="manifeste-wtf">
+      <div class="row">
+        <div>
+          <div class="section-eyebrow">Manifeste</div>
+          <h2>Une maison qui se porte avec <em>ceux qui la tiennent.</em></h2>
+        </div>
+        <div class="manifeste-body">
+          <p>
+            Way To Freedom n'est pas une marque. C'est une <em>maison commune</em> où trois pratiques se tiennent
+            côte à côte, sans concurrence. Une personne qui vient pour le corps n'a pas à se justifier de ne pas
+            venir pour le souffle intérieur. Une personne qui cherche un revenu n'a pas à se justifier de ne pas
+            méditer.
+          </p>
+          <p>
+            Nous croyons à l'autonomie. Au temps long. Au rythme propre. À la voix qui ne presse pas. Aux gestes
+            qui se répètent jusqu'à devenir naturels. Nous refusons l'urgence marketing, la promesse pressée,
+            la transformation garantie, le coaching à étages.
+          </p>
+          <p>
+            Ce que nous proposons est <em>simple</em> : un espace qui tient, une présence qui écoute, des passages
+            qui se reconnaissent. Si vous reconnaissez quelque chose, vous vous avancez. Sinon, vous passez votre
+            chemin — et c'est bien.
+          </p>
+          <div class="signature">— Céline &amp; Sébastien Marcadet</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITATION PIVOT -->
+    <section class="citation-pivot">
+      <div class="filet"></div>
+      <blockquote>
+        Tenir l'espace. Pas convaincre.<br>Si la personne reconnaît, elle s'avance.
+      </blockquote>
+      <div class="attr">Voix maison · Way To Freedom</div>
+    </section>
+
+    <!-- APPROCHE COMMUNE · 5 valeurs -->
+    <section class="approche">
+      <div class="section-eyebrow">Notre approche</div>
+      <h2 class="section-title">Cinq tensions tenues <em>simultanément.</em></h2>
+
+      <div class="values">
+        <div class="value-item">
+          <div class="num">01</div>
+          <h4>Profond sans <em>grandiloquence.</em></h4>
+          <p>On va à la racine, on ne fait pas semblant d'y aller.</p>
+        </div>
+        <div class="value-item">
+          <div class="num">02</div>
+          <h4>Simple sans <em>pauvreté.</em></h4>
+          <p>Peu d'éléments, beaucoup de soin. Ce qui reste compte.</p>
+        </div>
+        <div class="value-item">
+          <div class="num">03</div>
+          <h4>Clair sans <em>froideur.</em></h4>
+          <p>Une voix qui ne presse pas, qui ne flatte pas non plus.</p>
+        </div>
+        <div class="value-item">
+          <div class="num">04</div>
+          <h4>Chaleureux sans <em>mollesse.</em></h4>
+          <p>L'accueil tient la porte, il ne tire pas vers l'intérieur.</p>
+        </div>
+        <div class="value-item">
+          <div class="num">05</div>
+          <h4>Premium sans <em>arrogance.</em></h4>
+          <p>Le soin de la forme au service du contenu, jamais l'inverse.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER ÉCOSYSTÈME -->
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div>
+          <h5>Way To Freedom</h5>
+          <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>SÉSÂMES</h5>
+          <ul>
+            <li><a href="#">Clarification intérieure</a></li>
+            <li><a href="#">Profil Sébastien</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>EssenCel'en Soi</h5>
+          <ul>
+            <li><a href="#">essencelensoi.fr ↗</a></li>
+            <li><a href="#">Soins &amp; Parcours</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Voie d'autonomie</h5>
+          <ul>
+            <li><a href="#">La voie</a></li>
+            <li><a href="#">Recevoir la lettre</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Aloe Vera Excellence</h5>
+          <ul>
+            <li><a href="#">aloeveraexcellence.com ↗</a></li>
+            <li><a href="#">Ressources hub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="seal-row">
+        <div class="seal">W·F</div>
+        <p class="seal-quote">
+          Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.<br>
+          Les fondateurs sont les fondations qui voyagent.
+        </p>
+      </div>
+      <div class="bottom">
+        <span><strong>© 2026 Way To Freedom</strong> · Tous droits réservés</span>
+        <span class="legal">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+          <a href="#">Cookies</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 2 · SÉSÂMES SOUS-PAGE CARACTÉRISÉE
+  =========================================================== -->
+  <div class="page-maquette scope-ses">
+    <div class="page-label"><strong>02</strong> SÉSÂMES sous-page <em>· waytofreedom.fr/clarification-interieure</em></div>
+
+    <!-- NAV (scope-ses) -->
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark" style="border-color: var(--ses-gold); color: var(--ses-gold);">△</span>
+        SÉSÂMES <em>—</em> par Sébastien
+      </div>
+      <ul>
+        <li><a href="#">Way To Freedom</a></li>
+        <li><a href="#" class="active">Clarification intérieure</a></li>
+        <li><a href="#">Passages</a></li>
+        <li><a href="#">Lettre du seuil</a></li>
+        <li><a href="#" class="cta">Demander un appel</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO SES -->
+    <section class="sub-hero-ses">
+      <div>
+        <div class="breadcrumb">
+          <a href="#">Way To Freedom</a> <span class="sep">/</span> <strong>Clarification intérieure</strong>
+        </div>
+        <h1>Cartographier ce qui se <em>répète.</em></h1>
+        <p class="lede">
+          Vingt-six ans de management dans la grande distribution. Une pratique qui en est sortie : reconnaître
+          les passages, nommer les seuils, tenir l'espace pendant qu'on les traverse. Pas une méthode. Une
+          présence outillée.
+        </p>
+        <div style="margin-top: 40px; display: flex; gap: 32px; align-items: center;">
+          <button class="c-btn">Demander un appel découverte</button>
+          <a class="c-btn--tertiary">Lire la lettre du seuil →</a>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="label">Le chemin</div>
+        <p class="by">
+          « Pas par manque de sérieux.<br>Par manque de système. »
+        </p>
+        <div style="display: flex; align-items: center; gap: 20px; margin-top: 24px;">
+          <span class="triangle">SES</span>
+          <div>
+            <div class="triangle-caption">Sébastien Marcadet</div>
+            <div style="font-family: var(--ff-italic); font-style: italic; font-size: 14px; color: var(--ses-ink); margin-top: 4px;">cofondateur · 28 avril 2026</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PASSAGES (4 cartes) -->
+    <section class="ses-passages">
+      <div class="section-eyebrow">Les passages reconnus</div>
+      <h2 class="section-title" style="max-width: 26ch;">Quatre seuils <em>que nous traversons tous,</em> sans toujours les nommer.</h2>
+
+      <div class="grid">
+        <article class="passage-card">
+          <div class="seuil">I</div>
+          <div>
+            <h4>Le seuil de la <em>fatigue d'usure.</em></h4>
+            <p>
+              Reconnaître la fatigue qui ne se répare plus avec du sommeil. Celle qui s'installe parce qu'on porte
+              un poste, un rôle, une responsabilité qui ne correspond plus.
+            </p>
+          </div>
+        </article>
+
+        <article class="passage-card">
+          <div class="seuil">II</div>
+          <div>
+            <h4>Le seuil du <em>désalignement.</em></h4>
+            <p>
+              L'écart entre ce qu'on fait et ce qu'on est. Quand le décalage devient assez audible pour qu'on
+              s'autorise à l'entendre — et pas avant.
+            </p>
+          </div>
+        </article>
+
+        <article class="passage-card">
+          <div class="seuil">III</div>
+          <div>
+            <h4>Le seuil du <em>passage</em> proprement dit.</h4>
+            <p>
+              L'étape où l'on quitte un état pour un autre — démission, reconversion, séparation, héritage. Tenir
+              l'espace pendant la traversée, sans presser, sans alimenter la panique.
+            </p>
+          </div>
+        </article>
+
+        <article class="passage-card">
+          <div class="seuil">IV</div>
+          <div>
+            <h4>Le seuil de l'<em>installation.</em></h4>
+            <p>
+              L'arrivée dans le nouveau, qui demande autant de soin que le départ. Reconnaître qu'on est arrivé,
+              déposer, laisser le nouveau prendre forme à son rythme.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Citation pivot (scope-ses) -->
+    <section class="citation-pivot" style="background: #F2EDE4;">
+      <div class="filet" style="background: var(--ses-gold);"></div>
+      <blockquote style="color: var(--ses-ink);">
+        L'attention précède l'action.<br>Le seuil précède le geste.
+      </blockquote>
+      <div class="attr" style="color: var(--ses-gold);">Voix SÉSÂMES · Sébastien Marcadet</div>
+    </section>
+
+    <!-- CTA bas de page -->
+    <section style="padding: 128px 96px; background: var(--ses-light); display: grid; grid-template-columns: 6fr 6fr; gap: 96px; align-items: center; border-top: 1px solid var(--ink-line);">
+      <div>
+        <div class="section-eyebrow">Aller plus loin</div>
+        <h2 class="section-title" style="color: var(--ses-ink);">Recevoir <em>la lettre du seuil.</em></h2>
+        <p class="section-lede" style="margin-top: 32px;">
+          Une fois par mois — pas plus. Une lettre courte sur un passage observé, une question patiente, un repère
+          qui aide à reconnaître. Pas de séquence marketing. Pas de tunnel. Vous vous désabonnez d'un clic.
+        </p>
+        <button class="c-btn" style="margin-top: 40px;">Recevoir la lettre</button>
+      </div>
+      <div style="background: #F2EDE4; padding: 64px; border: 1px solid var(--ses-gold);">
+        <div class="eyebrow" style="color: var(--ses-gold);">
+          <span style="width: 28px; height: 1px; background: var(--ses-gold); display: inline-block;"></span>
+          Appel découverte
+        </div>
+        <h3 style="font-family: var(--ff-display); font-variation-settings: 'opsz' 96, 'wght' 400; font-size: 32px; line-height: 1.1; color: var(--ses-ink); margin-top: 24px; font-weight: 400;">
+          30 minutes, sans engagement, <em style="font-family: var(--ff-italic); font-style: italic; color: var(--ses-gold);">pour voir.</em>
+        </h3>
+        <p style="font-size: 15px; line-height: 1.65; color: var(--ink-2); margin-top: 24px;">
+          Un échange téléphonique pour reconnaître ce qui vous traverse, sans présupposer qu'il faut un parcours.
+          Si la rencontre fait sens, nous parlons d'un parcours possible. Sinon, vous repartez avec une lecture
+          plus claire — et c'est déjà beaucoup.
+        </p>
+        <a href="#" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ses-ink); border-bottom: 1px solid var(--ses-gold); padding-bottom: 4px;">Demander un appel <span>→</span></a>
+      </div>
+    </section>
+
+    <!-- FOOTER ÉCOSYSTÈME (invariant) -->
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>À propos</a></li><li><a>Contact</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li><li><a>Profil Sébastien</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>essencelensoi.fr ↗</a></li><li><a>Soins &amp; Parcours</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li><li><a>Recevoir la lettre</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li><li><a>Ressources hub</a></li></ul></div>
+      </div>
+      <div class="seal-row">
+        <div class="seal">W·F</div>
+        <p class="seal-quote">
+          Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.
+        </p>
+      </div>
+      <div class="bottom">
+        <span><strong>© 2026 Way To Freedom</strong> · Tous droits réservés</span>
+        <span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 3 · VOIE D'AUTONOMIE SOUS-PAGE
+  =========================================================== -->
+  <div class="page-maquette scope-voie">
+    <div class="page-label"><strong>03</strong> Voie d'autonomie sous-page <em>· waytofreedom.fr/revenu-complementaire-independant</em></div>
+
+    <!-- NAV (scope-voie) -->
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark" style="border-color: var(--voie-copper); color: var(--voie-copper);">V·A</span>
+        Voie <em>d'autonomie</em>
+      </div>
+      <ul>
+        <li><a href="#">Way To Freedom</a></li>
+        <li><a href="#" class="active">La voie</a></li>
+        <li><a href="#">Pour qui</a></li>
+        <li><a href="#">Méthode</a></li>
+        <li><a href="#" class="cta">Recevoir la lettre</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO Voie -->
+    <section class="sub-hero-voie">
+      <div>
+        <div class="breadcrumb">
+          <a href="#">Way To Freedom</a> <span class="sep">/</span> <strong>Voie d'autonomie économique</strong>
+        </div>
+        <h1>Construire un revenu <em>durable.</em></h1>
+        <p class="lede">
+          Pour les indépendants, salariés en réflexion, ou jeunes retraités qui choisissent l'autonomie patiente
+          sur la promesse pressée. Sans urgence. Au rythme propre. Avec une logique d'investissement temps qui
+          ne demande pas d'abandonner le quotidien.
+        </p>
+        <div style="margin-top: 40px; display: flex; gap: 32px; align-items: center;">
+          <button class="c-btn">Recevoir la lettre du chemin</button>
+          <a class="c-btn--tertiary">Lire la méthode →</a>
+        </div>
+      </div>
+
+      <div class="hero-figure">
+        <div class="fig-eyebrow">Doctrine du chemin</div>
+        <p class="fig-quote">« Le mouvement avant la méthode. La pratique avant la promesse. »</p>
+        <div class="fig-signature">— Voie d'autonomie · Way To Freedom</div>
+      </div>
+    </section>
+
+    <!-- 3 PILIERS -->
+    <section class="voie-piliers">
+      <div class="section-eyebrow">Les trois piliers</div>
+      <h2 class="section-title" style="max-width: 28ch;">Trois principes <em>qui se tiennent l'un l'autre.</em></h2>
+
+      <div class="grid">
+        <div class="pilier">
+          <div class="pilier-mark">I.</div>
+          <h4>Le <em>temps</em> investi ne se reprend pas.</h4>
+          <p>
+            Une activité bâtie sur des heures qu'on ne facture qu'une fois reste plafonnée. Une activité bâtie sur
+            des actifs qui travaillent en arrière-plan respire — y compris quand le quotidien demande d'être
+            ailleurs.
+          </p>
+        </div>
+
+        <div class="pilier">
+          <div class="pilier-mark">II.</div>
+          <h4>Pas d'<em>urgence</em> commerciale.</h4>
+          <p>
+            Aucune offre limitée, aucun compteur, aucune relance forcée. Le chemin trouve les personnes qui le
+            cherchent, à leur rythme. Si la rencontre n'est pas mûre, elle reviendra ou ne reviendra pas.
+          </p>
+        </div>
+
+        <div class="pilier">
+          <div class="pilier-mark">III.</div>
+          <h4>Un <em>compagnon</em>, pas un mentor.</h4>
+          <p>
+            On marche côte à côte. On partage les passages traversés, les erreurs commises, les repères trouvés.
+            Ce n'est pas une formation, ce n'est pas un coaching — c'est une compagnie patiente.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS BREVO 4 ÉTAPES -->
+    <section class="voie-process">
+      <div class="row">
+        <div>
+          <div class="section-eyebrow">Recevoir la lettre du chemin</div>
+          <h2>Quatre étapes. <em>Aucune relance automatisée.</em></h2>
+        </div>
+
+        <div class="steps">
+          <div class="process-step">
+            <div class="step-num">01</div>
+            <div>
+              <h4>Vous écrivez <em>un mot.</em></h4>
+              <p>Prénom, nom, email — et un texte libre sur ce qui vous traverse. Pas besoin de raison de venir. Pas besoin d'urgence. Ce qui vous traverse aujourd'hui suffit.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">02</div>
+            <div>
+              <h4>Une page <em>de confirmation</em> apparaît.</h4>
+              <p>Votre message est arrivé. Une réponse humaine est promise sous 48 heures, signée Céline &amp; Sébastien. Pas de bot, pas de séquence automatique.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">03</div>
+            <div>
+              <h4>Un <em>auto-répondeur humain</em> arrive dans la minute.</h4>
+              <p>Un message texte court qui dit ce que vous venez de faire et ce qui se passe ensuite. Signé Céline &amp; Sébastien. Pas d'argumentaire, pas de cadeau, pas de lien de désabonnement caché.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">04</div>
+            <div>
+              <h4>Sébastien ou Céline vous <em>répond</em>, à la main.</h4>
+              <p>Sous 48 heures ouvrées. Une réponse personnalisée à votre message. Si une suite fait sens, elle est proposée. Sinon, vous repartez avec une lecture plus claire — c'est déjà beaucoup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULAIRE -->
+    <section style="padding: 128px 96px; background: var(--voie-cream);">
+      <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 96px; align-items: start;">
+        <div>
+          <div class="section-eyebrow">Recevez la lettre</div>
+          <h2 class="section-title" style="max-width: 16ch;">Écrivez-nous <em>un mot.</em></h2>
+          <p class="section-lede" style="margin-top: 32px;">
+            Pas de formule. Pas de raison de venir. Ce qui vous traverse aujourd'hui suffit. Réponse manuelle sous
+            48 heures.
+          </p>
+        </div>
+
+        <form style="background: var(--voie-cream); display: flex; flex-direction: column; gap: 32px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+            <div class="c-field"><label>Prénom &amp; Nom</label><input type="text" class="c-input"></div>
+            <div class="c-field"><label>Email</label><input type="email" class="c-input"></div>
+          </div>
+          <div class="c-field"><label>Téléphone <em style="font-style: italic; text-transform: none; letter-spacing: normal; font-family: var(--ff-italic); font-size: 13px; color: var(--ink-mute);">(facultatif)</em></label><input type="tel" class="c-input"></div>
+          <div class="c-field"><label>Votre question · ce qui vous traverse</label><textarea class="c-textarea"></textarea></div>
+          <div class="c-checkbox-row">
+            <span class="c-checkbox checked"></span>
+            <span>J'accepte que mon message soit lu par <em style="font-family: var(--ff-italic); font-style: italic;">Céline &amp; Sébastien</em> et que mon adresse email serve à la seule réponse à ce message — pas de mise en liste, pas de newsletter automatique, pas de transfert tiers.</span>
+          </div>
+          <button class="c-btn" style="align-self: flex-start;">Envoyer le message <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer écosystème -->
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>À propos</a></li><li><a>Contact</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>essencelensoi.fr ↗</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li><li><a>Recevoir la lettre</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row">
+        <div class="seal">W·F</div>
+        <p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p>
+      </div>
+      <div class="bottom">
+        <span><strong>© 2026 Way To Freedom</strong> · Tous droits réservés</span>
+        <span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 4 · À PROPOS WTF
+  =========================================================== -->
+  <div class="page-maquette scope-wtf">
+    <div class="page-label"><strong>04</strong> À propos WTF <em>· /a-propos</em></div>
+
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark">W·F</span>
+        Way To <em>Freedom</em>
+      </div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Clarification intérieure</a></li>
+        <li><a href="#">Voie d'autonomie</a></li>
+        <li><a href="#" class="active">À propos</a></li>
+        <li><a href="#" class="cta">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- À PROPOS HERO -->
+    <section class="apropos-hero">
+      <div class="row">
+        <div>
+          <div class="section-eyebrow">Céline &amp; Sébastien Marcadet</div>
+          <h1>Les fondateurs sont les <em>fondations qui voyagent.</em></h1>
+          <p class="lede">
+            Way To Freedom porte trois chemins. Aucun ne se serait construit sans l'autre. Une praticienne du
+            corps. Un cartographe de l'intériorité. Une voie d'autonomie économique partagée — qui est la
+            condition pratique de pouvoir tenir les deux autres.
+          </p>
+        </div>
+        <div class="duo-portrait">
+          <div class="portrait-slot">
+            <div>
+              <div class="ps-tag">Slot photo · Sébastien</div>
+              <div class="ps-name">Sébastien Marcadet</div>
+              <div class="ps-sujet">Trois-quarts · fenêtre matinale · carnet ouvert · lumière naturelle</div>
+            </div>
+          </div>
+          <div class="portrait-slot">
+            <div>
+              <div class="ps-tag">Slot photo · Céline</div>
+              <div class="ps-name">Céline Marcadet</div>
+              <div class="ps-sujet">Cabinet · main posée sur ventre · lumière chaude · contexte praticienne</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIO SÉBASTIEN + BIO CÉLINE -->
+    <section class="fondateurs-bio">
+      <div class="grid">
+        <article class="bio seb">
+          <div class="bio-tag">Sébastien · SÉSÂMES · Voie d'autonomie</div>
+          <h3>Vingt-six ans de <em>management.</em><br>Une pratique qui en est sortie.</h3>
+          <p>
+            Sébastien a dirigé pendant vingt-six ans des équipes dans la grande distribution. Du terrain à la
+            direction régionale. C'est là — dans les passages observés chez les autres et traversés en soi — qu'il
+            a construit ce qu'il appelle aujourd'hui <em class="in-text">SÉSÂMES</em> : un cadre pour cartographier
+            ce qui se répète, nommer les seuils, tenir l'espace pendant qu'on les traverse.
+          </p>
+          <p>
+            Il porte aussi, avec Céline, la <em class="in-text">Voie d'autonomie économique</em> — la condition
+            pratique sans laquelle aucun des deux autres chemins ne se serait construit.
+          </p>
+        </article>
+
+        <article class="bio cel">
+          <div class="bio-tag">Céline · EssenCel'en Soi</div>
+          <h3>Praticienne énergétique <em>en Médoc.</em><br>Le corps sait, encore faut-il l'écouter.</h3>
+          <p>
+            Céline est praticienne énergétique et corporelle. Elle reçoit en Médoc, à Sainte-Hélène. Sa pratique
+            tient en une intuition simple : <em class="in-text">le système nerveux ne demande pas à être réparé,
+            il demande à être écouté</em>. Le repos n'est pas une absence d'action, c'est une action en soi —
+            patiente, lente, dépose.
+          </p>
+          <p>
+            Elle propose des séances individuelles, un parcours <em class="in-text">Cocoon</em> sur plusieurs
+            mois, et des soins complémentaires. Son site propre vit à <em class="in-text">essencelensoi.fr</em> —
+            sous la même maison-mère.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Mots qui portent / mots qui trahissent -->
+    <section style="padding: 144px 96px; background: var(--wtf-nuit); color: #E6DDC9;">
+      <div style="max-width: 1248px; margin: 0 auto;">
+        <div class="section-eyebrow">Notre langue</div>
+        <h2 class="section-title" style="color: #FAF7F2; max-width: 24ch;">Les mots qui portent. <em>Ceux qui trahissent.</em></h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 80px;">
+          <div>
+            <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--wtf-dore-bas); font-weight: 500; padding-bottom: 16px; border-bottom: 1px solid rgba(184, 136, 74, .35);">
+              Les mots qui portent
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;">
+              <span style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.5; color: #E6DDC9;">tenir l'espace · reconnaître · nommer · accueillir · un seuil · une porte · un passage · reposer le système nerveux · retrouver la fluidité du souffle · une présence · un témoin · là où vous en êtes · le chemin · le rythme propre · honorer · déposer · traverser.</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--cel-coral); font-weight: 500; padding-bottom: 16px; border-bottom: 1px solid rgba(213, 91, 71, .35);">
+              Les mots qui trahissent
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;">
+              <span style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.5; color: #948A78; text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: rgba(213, 91, 71, .55);">solution · méthode · programme · transformation garantie · bien-être · mieux-être · healing · découvrez · profitez · libérez · vibrations · communauté · tribu · coaching · expert · boost · débloque · libère · soigner · guérir.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer écosystème -->
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>À propos</a></li><li><a>Contact</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>essencelensoi.fr ↗</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row">
+        <div class="seal">W·F</div>
+        <p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p>
+      </div>
+      <div class="bottom">
+        <span><strong>© 2026 Way To Freedom</strong> · Tous droits réservés</span>
+        <span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 5 · CONTACT WTF
+  =========================================================== -->
+  <div class="page-maquette scope-wtf">
+    <div class="page-label"><strong>05</strong> Contact WTF <em>· /contact</em></div>
+
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark">W·F</span>
+        Way To <em>Freedom</em>
+      </div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Clarification intérieure</a></li>
+        <li><a href="#">Voie d'autonomie</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#" class="active cta">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="contact-hero">
+      <div class="section-eyebrow">Contact général · Way To Freedom</div>
+      <h1>Un canal, <em>par chemin.</em></h1>
+      <p class="section-lede" style="margin-top: 32px;">
+        Chaque chemin a son canal de contact propre. Pour le sanctuaire du corps, on écrit à Céline. Pour la
+        clarification intérieure ou la voie d'autonomie, à Sébastien. Pour autre chose — partenariat, presse,
+        proposition — le formulaire général ci-dessous.
+      </p>
+    </section>
+
+    <section class="contact-body">
+      <div class="channels">
+        <div class="contact-channel">
+          <div class="ch-eyebrow">Sanctuaire du corps</div>
+          <div class="ch-label">Écrire à <em>Céline</em></div>
+          <div class="ch-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4a7abaab0a5a7b084a1b7b7a1aaa7a1a8a1aab7abadeaa2b6">[email&#160;protected]</a></div>
+          <div class="ch-value">+33 6 62 73 73 00</div>
+          <p class="ch-note">Pour soins, parcours Cocoon, soins complémentaires, bons cadeaux.</p>
+        </div>
+
+        <div class="contact-channel">
+          <div class="ch-eyebrow">Clarification intérieure &amp; voie d'autonomie</div>
+          <div class="ch-label">Écrire à <em>Sébastien</em></div>
+          <div class="ch-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95f6fafbe1f4f6e1d5e2f4ece1faf3e7f0f0f1faf8bbf3e7">[email&#160;protected]</a></div>
+          <div class="ch-value">+33 7 85 87 60 79</div>
+          <p class="ch-note">Pour SÉSÂMES, voie d'autonomie économique, demandes liées au management.</p>
+        </div>
+
+        <div class="contact-channel">
+          <div class="ch-eyebrow">Adresse postale</div>
+          <div class="ch-label">Le siège</div>
+          <div class="ch-value">17 Allée des Marronniers</div>
+          <div class="ch-value">33480 Sainte-Hélène · Médoc, France</div>
+          <p class="ch-note">Les rendez-vous EES se tiennent à cette adresse, uniquement sur RDV.</p>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h3>Autre demande · <em>partenariat, presse, proposition.</em></h3>
+
+        <form class="form-body">
+          <div class="form-row-2">
+            <div class="c-field"><label>Prénom &amp; Nom</label><input type="text" class="c-input"></div>
+            <div class="c-field"><label>Email</label><input type="email" class="c-input"></div>
+          </div>
+          <div class="c-field">
+            <label>Nature de la demande</label>
+            <select class="c-input" style="appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--ink-mute) 50%), linear-gradient(135deg, var(--ink-mute) 50%, transparent 50%); background-position: calc(100% - 14px) calc(50% + 2px), calc(100% - 8px) calc(50% + 2px); background-size: 6px 6px, 6px 6px; background-repeat: no-repeat;">
+              <option>Partenariat</option>
+              <option>Presse / média</option>
+              <option>Proposition de collaboration</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="c-field"><label>Votre message</label><textarea class="c-textarea"></textarea></div>
+          <div class="c-checkbox-row">
+            <span class="c-checkbox checked"></span>
+            <span>J'accepte que ma demande soit lue par <em style="font-family: var(--ff-italic); font-style: italic;">Céline &amp; Sébastien</em>. Réponse manuelle sous 48 heures ouvrées. Pas de mise en liste, pas de transfert tiers.</span>
+          </div>
+          <button class="c-btn" style="align-self: flex-start;">Envoyer le message <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer écosystème -->
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>À propos</a></li><li><a>Contact</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>essencelensoi.fr ↗</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row">
+        <div class="seal">W·F</div>
+        <p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p>
+      </div>
+      <div class="bottom">
+        <span><strong>© 2026 Way To Freedom</strong> · Tous droits réservés</span>
+        <span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       RESPONSIVE SNAPSHOTS · Home WTF
+  =========================================================== -->
+  <div style="width: 1440px; margin: 96px auto 0; padding: 0 0 64px;">
+    <h2 style="font-family: var(--ff-display); font-variation-settings: 'opsz' 96, 'wght' 400; font-size: 36px; line-height: 1.1; color: var(--ink); letter-spacing: -.015em; max-width: 32ch; font-weight: 400;">
+      Home WTF · <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas);">375 · 768 · 1440.</em>
+    </h2>
+    <p style="font-size: 15px; line-height: 1.65; color: var(--ink-2); margin-top: 16px; max-width: 56ch;">
+      La même page Home aux trois breakpoints validés. Le hero passe de pile 3:4 (mobile) à 4:3 (tablette) à
+      split 7:5 (desktop). Le footer écosystème s'adapte sans perdre les cinq entités.
+    </p>
+  </div>
+
+  <div class="responsive-row">
+    <!-- 375 -->
+    <div class="rs-frame rs-375">
+      <span class="rs-label">375 · <strong>mobile</strong></span>
+      <div class="rs-viewport scope-wtf" style="background: var(--wtf-light);">
+        <!-- mobile nav -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--ink-line);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 22px; height: 22px; border: 1px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 9px; letter-spacing: .05em;">W·F</div>
+            <span style="font-family: var(--ff-display); font-variation-settings: 'opsz' 24, 'wght' 400; font-size: 16px; color: var(--ink);">Way To <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas);">Freedom</em></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <span style="display: block; width: 22px; height: 1px; background: var(--ink);"></span>
+            <span style="display: block; width: 22px; height: 1px; background: var(--ink);"></span>
+          </div>
+        </div>
+        <!-- hero mobile -->
+        <div style="padding: 40px 24px 32px;">
+          <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--wtf-dore-bas); font-weight: 500; margin-bottom: 24px;">Maison-mère</div>
+          <h1 style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 40px; line-height: 1; letter-spacing: -.022em; color: var(--ink); font-weight: 300;">Une maison.<br>Trois <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); font-weight: 400;">chemins.</em></h1>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 20px;">Way To Freedom rassemble trois chemins distincts portés par Céline &amp; Sébastien Marcadet.</p>
+          <div style="background: var(--wtf-lin); padding: 32px 24px; border: 1px dashed var(--ink-line-2); margin-top: 28px; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+            <div style="font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500;">Doctrine fondatrice</div>
+            <p style="font-family: var(--ff-italic); font-style: italic; font-size: 16px; line-height: 1.35; color: var(--ink); text-align: center;">« Les fondateurs sont les fondations qui voyagent. »</p>
+            <div style="width: 44px; height: 44px; border: 1px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 14px; letter-spacing: .05em;">W·F</div>
+          </div>
+          <button style="margin-top: 32px; width: 100%; padding: 16px; background: var(--wtf-dore-bas); border: 0; color: var(--wtf-light); font-family: var(--ff-body); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;">Découvrir les trois chemins</button>
+        </div>
+        <!-- footer eco mobile preview -->
+        <div style="background: var(--wtf-nuit-chaude); color: #E6DDC9; padding: 32px 24px; margin-top: 0;">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 36, 'wght' 400; font-size: 18px; color: #FAF7F2;">Way To <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas);">Freedom</em></div>
+          <p style="font-family: var(--ff-italic); font-style: italic; font-size: 13px; color: #C9BFA9; margin-top: 8px;">Écosystème porté par Céline &amp; Sébastien Marcadet.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 768 -->
+    <div class="rs-frame rs-768">
+      <span class="rs-label">768 · <strong>tablette</strong></span>
+      <div class="rs-viewport scope-wtf" style="background: var(--wtf-light);">
+        <!-- nav tablette -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 22px 40px; border-bottom: 1px solid var(--ink-line);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 26px; height: 26px; border: 1px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 11px;">W·F</div>
+            <span style="font-family: var(--ff-display); font-variation-settings: 'opsz' 36, 'wght' 400; font-size: 20px;">Way To <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas);">Freedom</em></span>
+          </div>
+          <div style="display: flex; gap: 28px; font-family: var(--ff-body); font-size: 14px;">
+            <span>Accueil</span><span>SÉSÂMES</span><span>Voie</span><span style="border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 3px;">Contact</span>
+          </div>
+        </div>
+        <!-- hero tablette · pile recomposée -->
+        <div style="padding: 56px 48px;">
+          <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--wtf-dore-bas); font-weight: 500; margin-bottom: 28px;">Way To Freedom · maison-mère</div>
+          <h1 style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 64px; line-height: .98; letter-spacing: -.024em; color: var(--ink); max-width: 14ch; font-weight: 300;">Une maison. <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); font-weight: 400;">Trois chemins.</em> Un rythme propre.</h1>
+          <p style="font-size: 17px; line-height: 1.65; color: var(--ink-2); margin-top: 32px; max-width: 48ch;">Way To Freedom rassemble trois chemins distincts portés par Céline &amp; Sébastien Marcadet.</p>
+          <div style="background: var(--wtf-lin); padding: 40px; border: 1px dashed var(--ink-line-2); margin-top: 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px;">
+            <div style="flex: 1;">
+              <p style="font-family: var(--ff-italic); font-style: italic; font-size: 20px; line-height: 1.4; color: var(--ink);">« Les fondateurs sont les fondations qui voyagent. »</p>
+              <div style="font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-mute); margin-top: 16px;">Doctrine fondatrice nomade</div>
+            </div>
+            <div style="width: 64px; height: 64px; border: 1px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 18px; letter-spacing: .05em; flex-shrink: 0;">W·F</div>
+          </div>
+          <button style="margin-top: 32px; padding: 18px 32px; background: var(--wtf-dore-bas); border: 0; color: var(--wtf-light); font-family: var(--ff-body); font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;">Découvrir les trois chemins →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1440 -->
+    <div class="rs-frame rs-1440">
+      <span class="rs-label">1440 · <strong>desktop · vue d'ensemble</strong></span>
+      <div class="rs-viewport scope-wtf" style="background: var(--wtf-light);">
+        <!-- nav 1440 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 28px 64px; border-bottom: 1px solid var(--ink-line); background: var(--wtf-light);">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 28px; height: 28px; border: 1px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 12px;">W·F</div>
+            <span style="font-family: var(--ff-display); font-variation-settings: 'opsz' 36, 'wght' 400; font-size: 22px; color: var(--ink);">Way To <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas);">Freedom</em></span>
+          </div>
+          <div style="display: flex; gap: 36px; font-family: var(--ff-body); font-size: 14px; align-items: center; color: var(--ink-2);">
+            <span style="color: var(--ink); border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 3px;">Accueil</span>
+            <span>Clarification intérieure</span>
+            <span>Voie d'autonomie</span>
+            <span>À propos</span>
+            <span style="color: var(--ink); border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 3px;">Contact</span>
+          </div>
+        </div>
+        <!-- hero 1440 split -->
+        <div style="display: grid; grid-template-columns: 7fr 5fr; gap: 96px; padding: 112px 96px 128px; align-items: center;">
+          <div>
+            <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--wtf-dore-bas); font-weight: 500; margin-bottom: 32px;">Way To Freedom · maison-mère</div>
+            <h1 style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 84px; line-height: .98; letter-spacing: -.024em; color: var(--ink); max-width: 14ch; font-weight: 300;">Une maison. <em style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); font-weight: 400;">Trois chemins.</em> Un rythme propre.</h1>
+            <p style="font-size: 19px; line-height: 1.6; color: var(--ink-2); margin-top: 40px; max-width: 46ch;">Way To Freedom rassemble trois chemins distincts portés par Céline &amp; Sébastien Marcadet. Le sanctuaire du corps. La clarification intérieure. La voie d'autonomie économique.</p>
+            <div style="display: flex; gap: 32px; align-items: center; margin-top: 40px;">
+              <button style="padding: 18px 30px; background: var(--wtf-dore-bas); border: 0; color: var(--wtf-light); font-family: var(--ff-body); font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;">Découvrir les trois chemins →</button>
+              <span style="font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 4px;">Lire le manifeste</span>
+            </div>
+          </div>
+          <div style="background: var(--wtf-lin); border: 1px dashed var(--ink-line-2); padding: 48px; height: 460px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-mute); text-align: center; font-weight: 500;">Doctrine fondatrice nomade</div>
+            <p style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.4; color: var(--ink); text-align: center; max-width: 28ch; margin: 0 auto;">« Les fondateurs sont les fondations qui voyagent. La maison se porte avec eux. »</p>
+            <div style="width: 88px; height: 88px; border: 1.5px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 32px; letter-spacing: .05em; margin: 0 auto;">W·F</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

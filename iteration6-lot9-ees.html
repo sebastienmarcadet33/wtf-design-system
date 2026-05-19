@@ -1,0 +1,3231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1440" />
+<title>Lot 9 · Maquettes EssenCel'en Soi — Web System V3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style data-inlined-from="lot9-web-system.css">
+/* ============================================================
+   LOT 9 · WEB SYSTEM V3 · CSS PARTAGÉ
+   ============================================================
+   Source unique pour iteration6-lot9-wtf · ees · ave.
+   Hérite de tokens-v3.css V3.0b (palettes signature) et étend
+   avec la doctrine responsive Lot 9 (clamp(), scope, components).
+
+   NOTE PHASE 3 · Claude Code · 19 mai 2026
+   ─────────────────────────────────────────
+   Les sceaux WTF/EES/SÉSÂMES/AVE sont rendus typographiquement
+   (placeholders [W·F], [EES], [SES], [AVE]) dans ces maquettes
+   pour éviter PNG embarqués. Au passage Astro, remplacer par :
+     <img src="/logos/wtf-sceau-v2.png"      alt="Way To Freedom" />
+     <img src="/logos/ees-favicon-v1.png"    alt="EssenCel'en Soi" />
+     <img src="/logos/triangle-sesames.svg"  alt="SÉSÂMES" />
+     <img src="/logos/ave-sceau-v2.png"      alt="Aloe Vera Excellence" />
+   Voir SCELLEMENT_TEMPLATE_ECOSYSTEME_V3-0c §5 logos officiels.
+============================================================ */
+
+:root{
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-italic:  'Instrument Serif', Georgia, serif;
+  --ff-body:    'Inter Tight', system-ui, sans-serif;
+  --ff-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Palettes — figées V3.0c */
+  --wtf-light:        #FAF7F2;
+  --wtf-lin:          #F6F1E8;
+  --wtf-nuit:         #1B1814;
+  --wtf-nuit-chaude:  #2E2A22;
+  --wtf-dore-bas:     #B8884A;
+
+  --ses-light:        #FAF7F2;
+  --ses-ink:          #0F1218;
+  --ses-gold:         #C9A24E;
+  --ses-violet:       #4A3A5C;
+
+  --ees-cream:        #F6F1E8;
+  --ees-rose:         #E8D2C6;
+  --ees-rose-deep:    #D9B8A6;
+  --ees-gold:         #B8884A;
+  --ees-sage:         #7A8B6F;
+
+  --voie-cream:       #F6F1E8;
+  --voie-night:       #1F3B4D;
+  --voie-copper:      #B0732E;
+
+  --ave-cream:        #F6F1E8;
+  --ave-aloes:        #5E7A4E;
+  --ave-aloes-clair:  #93A984;
+  --ave-gold:         #C9A24E;
+  --ave-flamme:       #C9622E;
+
+  --cel-coral:        #D55B47;
+  --seb-petrol:       #2D5F6E;
+
+  --ink:        #1F1A14;
+  --ink-2:      #3B342A;
+  --ink-mute:   #5C544A;
+  --ink-line:   rgba(15, 18, 24, .12);
+  --ink-line-2: rgba(15, 18, 24, .22);
+
+  --paper:      #F6F1E8;
+  --paper-soft: #EFE8DB;
+  --paper-deep: #E6DCC9;
+
+  /* Type scale fluide */
+  --type-display: clamp(2.5rem, 5vw + 1rem, 6rem);
+  --type-h1:      clamp(2rem,   3vw + 1rem, 4rem);
+  --type-h2:      clamp(1.5rem, 2vw + 0.75rem, 2.5rem);
+  --type-h3:      clamp(1.25rem,1vw + 0.875rem, 1.75rem);
+  --type-body:    clamp(1rem,   0.5vw + 0.875rem, 1.125rem);
+  --type-small:   clamp(0.75rem,0.25vw + 0.6875rem, 0.875rem);
+
+  --ease-aesop: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html, body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-kerning:normal;
+}
+html{ background:#E8E0D0; }
+body{
+  font-family:var(--ff-body);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.6;
+}
+img{ max-width:100%; display:block; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+input, textarea, select{ font:inherit; color:inherit; }
+a{ color:inherit; text-decoration:none; }
+
+:focus-visible{
+  outline: 2px solid var(--accent, var(--wtf-dore-bas));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   SHELL DOCUMENT (livret de maquettes)
+============================================================ */
+.maquette-shell{
+  max-width: 1632px;
+  margin: 0 auto;
+  padding: 32px 0 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.maquette-shell > .shell-header{
+  padding: 0 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.maquette-shell > .shell-header strong{ color: var(--ink); font-weight: 500; }
+.maquette-shell > .shell-header h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  color: var(--ink);
+  text-transform: none;
+  font-weight: 400;
+}
+.maquette-shell > .shell-header h1 em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  color: var(--wtf-dore-bas);
+}
+
+/* Page maquette · capsule au pixel, 1440 de large */
+.page-maquette{
+  width: 1440px;
+  margin: 0 auto;
+  background: var(--bg, var(--paper));
+  box-shadow: 0 2px 32px rgba(0,0,0,.08);
+  position: relative;
+}
+.page-maquette + .page-maquette{ margin-top: 64px; }
+.maquette-shell > .page-maquette:first-of-type{ margin-top: 48px; } /* dégage le page-label du shell-header */
+.page-maquette .page-label{
+  position: absolute;
+  top: -28px;
+  left: 0;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.page-maquette .page-label strong{ color: var(--ink); font-weight: 600; }
+.page-maquette .page-label em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 14px;
+  color: var(--ink-2);
+}
+
+/* Mobile / tablette frames pour responsive snapshots */
+.responsive-row{
+  width: 1440px;
+  margin: 0 auto;
+  padding: 64px 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.responsive-row .rs-frame{
+  background: #fff;
+  border: 1px solid var(--ink-line);
+  overflow: hidden;
+  position: relative;
+}
+.responsive-row .rs-frame .rs-label{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  background: rgba(255,255,255,.92);
+  padding: 3px 8px;
+  font-weight: 500;
+}
+.responsive-row .rs-frame .rs-label strong{ color: var(--ink); font-weight: 600; }
+.responsive-row .rs-viewport{ transform-origin: top left; }
+.responsive-row .rs-375{ height: 690px; }
+.responsive-row .rs-375 .rs-viewport{ width: 375px; transform: scale(1.226); /* ≈ 460/375 */ }
+.responsive-row .rs-768{ height: 690px; }
+.responsive-row .rs-768 .rs-viewport{ width: 768px; transform: scale(0.599); /* ≈ 460/768 */ }
+.responsive-row .rs-1440{ height: 690px; }
+.responsive-row .rs-1440 .rs-viewport{ width: 1440px; transform: scale(0.319); /* ≈ 460/1440 */ }
+
+/* ============================================================
+   SCOPES — bascule chromatique par entité
+============================================================ */
+.scope-wtf{
+  --bg: var(--wtf-light);
+  --bg-2: var(--wtf-lin);
+  --ink-local: var(--ink);
+  --accent: var(--wtf-dore-bas);
+  --accent-2: var(--wtf-nuit);
+}
+.scope-ses{
+  --bg: var(--ses-light);
+  --bg-2: #F2EDE4;
+  --ink-local: var(--ses-ink);
+  --accent: var(--ses-gold);
+  --accent-2: var(--ses-violet);
+}
+.scope-ees{
+  --bg: var(--ees-cream);
+  --bg-2: var(--ees-rose);
+  --ink-local: var(--ink);
+  --accent: var(--ees-gold);
+  --accent-2: var(--ees-rose-deep);
+}
+.scope-voie{
+  --bg: var(--voie-cream);
+  --bg-2: #EFE5D2;
+  --ink-local: var(--ink);
+  --accent: var(--voie-copper);
+  --accent-2: var(--voie-night);
+}
+.scope-ave{
+  --bg: var(--ave-cream);
+  --bg-2: #ECE7DA;
+  --ink-local: var(--ink);
+  --accent: var(--ave-gold);
+  --accent-2: var(--ave-aloes);
+}
+
+/* ============================================================
+   TYPOGRAPHIE
+============================================================ */
+.t-display{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  line-height: .98;
+  letter-spacing: -.022em;
+}
+.t-h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.018em;
+}
+.t-h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+}
+.t-italic{ font-family: var(--ff-italic); font-style: italic; font-weight: 400; }
+.eyebrow{
+  font-family: var(--ff-body);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before{
+  content:"";
+  width: 28px;
+  height: 1px;
+  background: var(--accent, var(--wtf-dore-bas));
+}
+.eyebrow.no-filet::before{ display:none; }
+.body-doc{ font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+.body-doc strong{ font-weight: 500; color: var(--ink); }
+.body-doc em{ font-family: var(--ff-italic); font-style: italic; }
+.caption{ font-size: 12px; color: var(--ink-mute); letter-spacing: .04em; line-height: 1.5; }
+.mono{ font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2); }
+
+.filet{ height: 1px; background: var(--accent, var(--wtf-dore-bas)); width: 64px; }
+.filet-thin{ height: 1px; background: var(--ink-line); }
+
+/* ============================================================
+   NAV (header de page)
+============================================================ */
+.c-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 64px;
+  background: var(--bg, var(--wtf-light));
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--ff-body);
+}
+.c-nav .brand{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 22px;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.c-nav .brand em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent); }
+.c-nav .brand-mark{
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-family: var(--ff-display);
+  font-size: 12px;
+  letter-spacing: .05em;
+  font-variation-settings: "opsz" 14, "wght" 500;
+}
+.c-nav ul{
+  list-style: none;
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+.c-nav a{
+  font-size: 14px;
+  color: var(--ink-2);
+  padding-bottom: 3px;
+  position: relative;
+  transition: color 220ms var(--ease-aesop);
+}
+.c-nav a:hover{ color: var(--ink); }
+.c-nav a:hover::after{
+  content:"";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--accent);
+}
+.c-nav a.active{
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+}
+.c-nav .cta{
+  font-size: 13px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+  letter-spacing: .02em;
+}
+
+/* ============================================================
+   BOUTONS
+============================================================ */
+.c-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 18px 30px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+  transition: all 220ms var(--ease-aesop);
+}
+.c-btn:hover{ background: transparent; color: var(--accent); }
+.c-btn .arrow{ font-family: var(--ff-display); font-size: 14px; }
+.c-btn--secondary{
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.c-btn--secondary:hover{ background: var(--ink); color: var(--bg); }
+.c-btn--tertiary{
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--accent);
+  padding: 8px 0;
+  color: var(--ink);
+  letter-spacing: .14em;
+}
+.c-btn--tertiary:hover{ color: var(--accent); }
+
+/* ============================================================
+   FORMS
+============================================================ */
+.c-field{ display: flex; flex-direction: column; gap: 10px; }
+.c-field label{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.c-input,
+.c-textarea{
+  font-family: var(--ff-body);
+  font-size: 16px;
+  padding: 14px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink-line-2);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 220ms var(--ease-aesop);
+}
+.c-input:focus,
+.c-textarea:focus{ border-bottom-color: var(--accent); }
+.c-textarea{ min-height: 110px; line-height: 1.6; resize: vertical; }
+.c-checkbox-row{
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.c-checkbox{
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 1px solid var(--ink-line-2);
+  margin-top: 3px;
+  background: transparent;
+  position: relative;
+}
+.c-checkbox.checked{ background: var(--accent); border-color: var(--accent); }
+.c-checkbox.checked::after{
+  content:"";
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border: solid var(--bg);
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   CARDS
+============================================================ */
+.c-card{
+  background: var(--bg-2);
+  padding: 40px 36px;
+}
+.c-card .eyebrow-l{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.c-card h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.c-card h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ink-2); font-weight: 400; }
+.c-card .body-doc{ font-size: 14px; line-height: 1.6; }
+.c-card .meta{
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink-line);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+   PHOTO SLOT — placeholder typographique honnête
+============================================================ */
+.c-photo-slot{
+  background: var(--bg-2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  border: 1px dashed var(--ink-line-2);
+}
+.c-photo-slot .slot-inner{
+  text-align: center;
+  max-width: 32ch;
+}
+.c-photo-slot .slot-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.c-photo-slot .slot-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   FOOTER ÉCOSYSTÈME INVARIANT (nuit chaude · 5 entités)
+============================================================ */
+.eco-footer{
+  background: var(--wtf-nuit-chaude);
+  color: #E6DDC9;
+  padding: 96px 80px 48px;
+  font-family: var(--ff-body);
+}
+.eco-footer .top{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(230, 221, 201, .18);
+}
+.eco-footer h5{
+  font-family: var(--ff-body);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--wtf-dore-bas);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.eco-footer ul{ list-style: none; }
+.eco-footer li{ margin-bottom: 10px; font-size: 13px; color: #C9BFA9; }
+.eco-footer li a{ transition: color 220ms var(--ease-aesop); }
+.eco-footer li a:hover{ color: #FAF7F2; }
+.eco-footer .brand-block .mark{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400;
+  font-size: 24px;
+  color: #FAF7F2;
+  letter-spacing: -.01em;
+  margin-bottom: 14px;
+}
+.eco-footer .brand-block .mark em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.eco-footer .brand-block .quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #C9BFA9;
+  max-width: 32ch;
+}
+.eco-footer .seal-row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 0 32px;
+}
+.eco-footer .seal{
+  /* Placeholder typographique — voir NOTE PHASE 3 en tête de fichier */
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--wtf-dore-bas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wtf-dore-bas);
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 300;
+  font-size: 22px;
+  letter-spacing: .05em;
+}
+.eco-footer .seal-quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 17px;
+  color: #C9BFA9;
+  margin-top: 22px;
+  text-align: center;
+  max-width: 42ch;
+  line-height: 1.5;
+}
+.eco-footer .bottom{
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #948A78;
+}
+.eco-footer .bottom strong{ color: #E6DDC9; font-weight: 500; }
+.eco-footer .bottom .legal a{ margin-left: 22px; transition: color 220ms; }
+.eco-footer .bottom .legal a:hover{ color: #E6DDC9; }
+
+/* ============================================================
+   PRIMITIVES DE SECTION (utilisées dans les pages)
+============================================================ */
+.section{ padding: 128px 96px; }
+.section--lean{ padding: 96px 96px; }
+.section--cream{ background: var(--wtf-lin); }
+.section--rose{ background: var(--ees-rose); }
+.section--nuit{ background: var(--wtf-nuit); color: #E6DDC9; }
+
+.section-eyebrow{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.section-eyebrow::before{
+  content:"";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+.section--nuit .section-eyebrow{ color: var(--wtf-dore-bas); }
+.section--nuit .section-eyebrow::before{ background: var(--wtf-dore-bas); }
+
+.section-title{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.08;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  max-width: 22ch;
+}
+.section-title em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent); font-weight: 400; }
+.section--nuit .section-title{ color: #FAF7F2; }
+.section--nuit .section-title em{ color: var(--wtf-dore-bas); }
+
+.section-lede{
+  font-family: var(--ff-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 62ch;
+  font-weight: 300;
+  margin-top: 32px;
+}
+.section--nuit .section-lede{ color: #C9BFA9; }
+
+</style>
+
+<style>
+/* ============================================================
+   STYLES SPÉCIFIQUES MAQUETTES EES · Passe 9.3
+============================================================ */
+
+/* Hero EES — sanctuaire du corps */
+.hero-ees{
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  gap: 80px;
+  padding: 96px 96px 112px;
+  background: var(--ees-cream);
+  align-items: center;
+  min-height: 720px;
+  position: relative;
+}
+.hero-ees::after{
+  content:"";
+  position: absolute;
+  right: 0;
+  top: 96px;
+  bottom: 96px;
+  width: 3px;
+  background: var(--ees-rose);
+}
+.hero-ees h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 80px;
+  line-height: .98;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 14ch;
+  font-weight: 300;
+}
+.hero-ees h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.hero-ees .lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 44ch;
+  margin-top: 32px;
+  font-weight: 300;
+}
+.hero-ees .meta{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.hero-ees .meta::before{
+  content:"";
+  width: 8px;
+  height: 8px;
+  background: var(--ees-rose);
+  border: 1px solid var(--ees-gold);
+}
+.hero-ees .cta-row{ display: flex; gap: 28px; align-items: center; margin-top: 40px; }
+.hero-ees .photo-slot{
+  height: 580px;
+  background: var(--ees-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 32px;
+  border: 1px solid rgba(184, 136, 74, .25);
+}
+.hero-ees .photo-slot .slot-content{
+  text-align: center;
+  max-width: 30ch;
+}
+.hero-ees .photo-slot .slot-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.hero-ees .photo-slot .slot-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+/* Sous-titre signature EES (3 piliers de la pratique) */
+.ees-pillars{
+  background: var(--ees-cream);
+  padding: 128px 96px;
+  border-top: 1px solid rgba(184, 136, 74, .15);
+}
+.ees-pillars .grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin-top: 72px;
+}
+.ees-pillar{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ees-pillar .pillar-num{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--ees-gold);
+  font-weight: 300;
+  letter-spacing: -.02em;
+}
+.ees-pillar h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.ees-pillar h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.ees-pillar p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+/* Soins · carte d'offre EES */
+.ees-soins{
+  background: var(--ees-rose);
+  padding: 128px 96px;
+}
+.soin-list{
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.soin-row{
+  display: grid;
+  grid-template-columns: 80px 4fr 2fr 1fr;
+  gap: 48px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(31, 26, 20, .15);
+  align-items: center;
+}
+.soin-row:first-child{ border-top: 1px solid rgba(31, 26, 20, .25); }
+.soin-row .soin-num{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--ees-gold);
+  text-transform: uppercase;
+}
+.soin-row h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.soin-row h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.soin-row .soin-meta{
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.soin-row .soin-meta strong{ color: var(--ink); font-weight: 500; }
+.soin-row .soin-link{
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ees-gold);
+  padding-bottom: 4px;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Citation pivot EES */
+.ees-citation{
+  background: var(--ees-cream);
+  padding: 144px 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.ees-citation .filet{ width: 64px; background: var(--ees-gold); margin-bottom: 40px; }
+.ees-citation blockquote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 44px;
+  line-height: 1.3;
+  color: var(--ink);
+  max-width: 26ch;
+  letter-spacing: -.005em;
+}
+.ees-citation .attr{
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+}
+
+/* Page pratique · header */
+.pratique-header{
+  background: var(--ees-cream);
+  padding: 96px 96px 80px;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 96px;
+  align-items: end;
+  border-bottom: 1px solid rgba(184, 136, 74, .25);
+}
+.pratique-header .breadcrumb{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 28px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.pratique-header .breadcrumb .sep{ color: var(--ees-gold); }
+.pratique-header .breadcrumb strong{ color: var(--ink); font-weight: 500; }
+.pratique-header h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 14ch;
+  font-weight: 300;
+}
+.pratique-header h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.pratique-header .lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 42ch;
+  margin-top: 28px;
+  font-weight: 300;
+}
+.pratique-header .info-card{
+  background: var(--ees-rose);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.pratique-header .info-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(31, 26, 20, .2);
+}
+.pratique-header .info-row:last-child{ border-bottom: 0; padding-bottom: 0; }
+.pratique-header .info-row .label{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.pratique-header .info-row .value{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400;
+  font-size: 20px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.pratique-header .info-row .value em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+
+.pratique-photo{
+  background: var(--ees-rose);
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+.pratique-photo .slot-content{
+  text-align: center;
+  max-width: 32ch;
+}
+.pratique-photo .slot-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.pratique-photo .slot-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.pratique-body{
+  background: var(--ees-cream);
+  padding: 96px 96px 128px;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 96px;
+  align-items: start;
+}
+.pratique-body .copy h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -.015em;
+  font-weight: 400;
+}
+.pratique-body .copy h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.pratique-body .copy h2 + p{ margin-top: 28px; }
+.pratique-body .copy p{
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+.pratique-body .copy p + p{ margin-top: 24px; }
+.pratique-body .copy h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 24px;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.pratique-body .copy em{ font-family: var(--ff-italic); font-style: italic; color: var(--ink); }
+.pratique-body .copy strong{ color: var(--ink); font-weight: 500; }
+
+.pratique-aside{
+  background: var(--ees-rose);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 32px;
+}
+.pratique-aside h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink);
+  font-weight: 400;
+}
+.pratique-aside h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.pratique-aside p{
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* Article EES · type */
+.article-header{
+  background: var(--ees-cream);
+  padding: 96px 96px 64px;
+}
+.article-header .crumbs{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 40px;
+  display: flex;
+  gap: 14px;
+}
+.article-header .crumbs .sep{ color: var(--ees-gold); }
+.article-header h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1.02;
+  letter-spacing: -.022em;
+  color: var(--ink);
+  max-width: 18ch;
+  font-weight: 300;
+}
+.article-header h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.article-header .article-meta{
+  margin-top: 40px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--ink-mute);
+  padding-top: 24px;
+  border-top: 1px solid rgba(184, 136, 74, .25);
+  max-width: 56ch;
+}
+.article-header .article-meta strong{ color: var(--ink); font-weight: 500; }
+
+.article-body{
+  background: var(--ees-cream);
+  padding: 80px 96px 128px;
+  display: grid;
+  grid-template-columns: 3fr 8fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.article-toc{
+  position: sticky;
+  top: 32px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ees-gold);
+}
+.article-toc .toc-label{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.article-toc ul{ list-style: none; }
+.article-toc li{ margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
+.article-toc li a{ color: var(--ink-2); }
+.article-toc li a.active{ color: var(--ink); border-bottom: 1px solid var(--ees-gold); padding-bottom: 2px; }
+.article-content h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 24px;
+  margin-top: 64px;
+  letter-spacing: -.015em;
+  font-weight: 400;
+}
+.article-content h2:first-child{ margin-top: 0; }
+.article-content h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.article-content p{
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+.article-content p + p{ margin-top: 20px; }
+.article-content em{ font-family: var(--ff-italic); font-style: italic; color: var(--ink); }
+.article-content strong{ color: var(--ink); font-weight: 500; }
+.article-content blockquote{
+  margin: 48px 0;
+  padding: 32px 0 32px 40px;
+  border-left: 2px solid var(--ees-gold);
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 48ch;
+}
+
+/* Listing Ressources · catégories (emojis remplacés par eyebrows italiques) */
+.listing-hero{
+  background: var(--ees-cream);
+  padding: 96px 96px 64px;
+}
+.listing-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 18ch;
+  font-weight: 300;
+}
+.listing-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.listing-hero p{
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 60ch;
+  margin-top: 32px;
+  font-weight: 300;
+}
+
+.listing-filters{
+  background: var(--ees-cream);
+  padding: 16px 96px 64px;
+}
+.listing-filters .filter-row{
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 0;
+  border-top: 1px solid var(--ees-gold);
+  border-bottom: 1px solid var(--ink-line);
+}
+.listing-filters .filter-label{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.listing-filters .filter-chip{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-2);
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition: all 220ms var(--ease-aesop);
+  cursor: pointer;
+}
+.listing-filters .filter-chip.active{ color: var(--ink); border-bottom-color: var(--ees-gold); }
+.listing-filters .filter-chip:hover{ color: var(--ink); }
+
+.listing-grid{
+  background: var(--ees-cream);
+  padding: 32px 96px 128px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+}
+.article-card{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+}
+.article-card .card-photo{
+  height: 280px;
+  background: var(--ees-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+  transition: transform 220ms var(--ease-aesop);
+}
+.article-card .card-photo .ph-tag{
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+}
+.article-card .card-photo .ph-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-top: 10px;
+}
+.article-card .card-category{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ees-gold);
+  margin-top: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ees-gold);
+  display: inline-block;
+  align-self: flex-start;
+}
+.article-card h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.article-card h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.article-card .card-excerpt{
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.article-card .card-meta{
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* À propos EES · Céline portrait */
+.apropos-ees-hero{
+  background: var(--ees-cream);
+  padding: 96px 96px 112px;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 96px;
+  align-items: center;
+  min-height: 720px;
+}
+.apropos-ees-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 76px;
+  line-height: 1;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 16ch;
+  font-weight: 300;
+}
+.apropos-ees-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.apropos-ees-hero .lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 42ch;
+  margin-top: 32px;
+  font-weight: 300;
+}
+.apropos-ees-hero .photo-cel{
+  height: 580px;
+  background: linear-gradient(180deg, var(--cel-coral) 0%, var(--cel-coral) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  color: #FAF7F2;
+}
+.apropos-ees-hero .photo-cel .ph-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .85;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.apropos-ees-hero .photo-cel .ph-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+/* Bio Céline · prose */
+.apropos-bio{
+  background: var(--ees-cream);
+  padding: 128px 96px;
+}
+.apropos-bio .row{
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: 96px;
+  align-items: start;
+}
+.apropos-bio .label{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+  padding-top: 16px;
+  border-top: 1px solid var(--ees-gold);
+}
+.apropos-bio h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 44px;
+  line-height: 1.08;
+  color: var(--ink);
+  letter-spacing: -.018em;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+.apropos-bio h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.apropos-bio p{
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+.apropos-bio p + p{ margin-top: 24px; }
+.apropos-bio em.in-text{ font-family: var(--ff-italic); font-style: italic; color: var(--ink); }
+.apropos-bio strong{ color: var(--ink); font-weight: 500; }
+
+/* Contact EES */
+.contact-ees-hero{
+  background: var(--ees-cream);
+  padding: 96px 96px 64px;
+}
+.contact-ees-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  font-weight: 300;
+  margin-top: 24px;
+  max-width: 18ch;
+}
+.contact-ees-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.contact-ees-hero p{
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin-top: 32px;
+  font-weight: 300;
+}
+
+.contact-ees-body{
+  padding: 80px 96px 128px;
+  background: var(--ees-cream);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-ees-channels{ display: flex; flex-direction: column; gap: 40px; }
+.contact-ch-ees{
+  padding: 32px 0;
+  border-top: 1px solid var(--ees-gold);
+}
+.contact-ch-ees .ch-label{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.contact-ch-ees h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--ink);
+  font-weight: 400;
+  margin-top: 12px;
+}
+.contact-ch-ees h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.contact-ch-ees .ch-value{
+  font-family: var(--ff-body);
+  font-size: 16px;
+  color: var(--ink-2);
+  margin-top: 10px;
+}
+.contact-ch-ees .ch-note{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.contact-ch-ees .ch-action{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ees-gold);
+  padding-bottom: 4px;
+}
+
+.contact-gbp{
+  background: var(--ees-rose);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.contact-gbp .gbp-mock{
+  height: 360px;
+  background: linear-gradient(135deg, #C9D9C9 0%, #B5C2A5 50%, #93A984 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(15, 18, 24, .65);
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  position: relative;
+}
+.contact-gbp .gbp-mock::after{
+  content:"";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: var(--ees-gold);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 6px rgba(184, 136, 74, .25);
+}
+.contact-gbp h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 24px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.contact-gbp h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.contact-gbp .gbp-info{
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.contact-gbp .gbp-info strong{ color: var(--ink); font-weight: 500; }
+
+/* Le Cocoon · variante Pratique */
+.cocoon-hero{
+  background: var(--ees-cream);
+  padding: 96px 96px;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 96px;
+  align-items: center;
+}
+.cocoon-hero .crumb{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 14px;
+}
+.cocoon-hero .crumb strong{ color: var(--ink); }
+.cocoon-hero .crumb .sep{ color: var(--ees-gold); }
+.cocoon-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 88px;
+  line-height: .96;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  font-weight: 300;
+}
+.cocoon-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.cocoon-hero .lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 46ch;
+  margin-top: 36px;
+  font-weight: 300;
+}
+.cocoon-hero .cocoon-figure{
+  height: 540px;
+  background: var(--ees-rose);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  position: relative;
+}
+.cocoon-hero .cocoon-figure::before{
+  content:"";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid var(--ees-gold);
+  pointer-events: none;
+  opacity: .45;
+}
+.cocoon-hero .cocoon-figure .fig-label{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+}
+.cocoon-hero .cocoon-figure .fig-quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.3;
+  color: var(--ink);
+  max-width: 22ch;
+}
+.cocoon-hero .cocoon-figure .fig-signature{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ees-gold);
+  font-weight: 500;
+}
+
+.cocoon-process{
+  background: var(--ees-rose);
+  padding: 128px 96px;
+}
+.cocoon-process .steps{
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.cocoon-step{
+  padding: 40px 28px;
+  background: var(--ees-cream);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+.cocoon-step .step-num{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--ees-gold);
+  text-transform: uppercase;
+}
+.cocoon-step h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.cocoon-step h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.cocoon-step p{ font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+.cocoon-step .step-duree{
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink-line);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* Soins complémentaires · listing */
+.complementaires-hero{
+  background: var(--ees-cream);
+  padding: 96px 96px 64px;
+}
+.complementaires-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -.024em;
+  color: var(--ink);
+  max-width: 16ch;
+  font-weight: 300;
+}
+.complementaires-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.complementaires-hero p{
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin-top: 32px;
+  font-weight: 300;
+}
+.complementaires-grid{
+  background: var(--ees-cream);
+  padding: 64px 96px 128px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+.complement-card{
+  background: var(--ees-rose);
+  padding: 56px 48px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.complement-card .num{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--ees-gold);
+  font-weight: 300;
+}
+.complement-card h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.complement-card h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.complement-card .by{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ees-gold);
+  margin-top: 8px;
+}
+.complement-card p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 18px;
+}
+.complement-card .meta{
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(31, 26, 20, .2);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* Bons cadeaux web */
+.bcw-hero{
+  background: var(--ees-cream);
+  padding: 96px 96px 128px;
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  gap: 96px;
+  align-items: center;
+  min-height: 720px;
+}
+.bcw-hero h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 88px;
+  line-height: .96;
+  letter-spacing: -.026em;
+  color: var(--ink);
+  max-width: 14ch;
+  font-weight: 300;
+}
+.bcw-hero h1 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); font-weight: 400; }
+.bcw-hero .lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 44ch;
+  margin-top: 36px;
+  font-weight: 300;
+}
+.bcw-hero .card-preview{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bcw-hero .card-preview .bc{
+  width: 360px;
+  height: 510px;
+  background: #F6F1E8;
+  box-shadow: 0 8px 48px rgba(0,0,0,.12);
+  padding: 56px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  font-family: var(--ff-display);
+}
+.bcw-hero .card-preview .bc::before{
+  content:"";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid var(--ees-gold);
+  opacity: .25;
+  pointer-events: none;
+}
+.bcw-hero .card-preview .bc .wordmark{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ees-gold);
+}
+.bcw-hero .card-preview .bc .label{
+  font-family: var(--ff-body);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  text-align: right;
+}
+.bcw-hero .card-preview .bc .label::before{
+  content:"";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--ees-gold);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.bcw-hero .card-preview .bc .topline{ display: flex; justify-content: space-between; align-items: flex-start; }
+.bcw-hero .card-preview .bc .mainline{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.bcw-hero .card-preview .bc .mainline .eyebrow-tx{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-2);
+}
+.bcw-hero .card-preview .bc .mainline .big{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 96px;
+  line-height: 1;
+  color: var(--ees-gold);
+  letter-spacing: -.025em;
+  font-weight: 300;
+}
+.bcw-hero .card-preview .bc .mainline .suffix{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--ees-gold);
+}
+.bcw-hero .card-preview .bc .pied{
+  font-family: var(--ff-body);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  text-align: center;
+  border-top: 1px solid var(--ees-gold);
+  padding-top: 16px;
+}
+
+.bcw-formats{
+  background: var(--ees-rose);
+  padding: 128px 96px;
+}
+.bcw-formats h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 44px;
+  line-height: 1.08;
+  color: var(--ink);
+  letter-spacing: -.018em;
+  font-weight: 400;
+  max-width: 28ch;
+}
+.bcw-formats h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.bcw-formats .formats{
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.format-card{
+  background: var(--ees-cream);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.format-card h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 24px;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.format-card h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.format-card .price{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--ees-gold);
+  font-weight: 300;
+  letter-spacing: -.02em;
+}
+.format-card p{
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.format-card .meta{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding-top: 16px;
+  border-top: 1px solid rgba(31, 26, 20, .15);
+}
+
+.bcw-process{
+  background: var(--ees-cream);
+  padding: 128px 96px;
+}
+.bcw-process .steps{
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+.bcw-step{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.bcw-step .step-num{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--ees-gold);
+  font-weight: 300;
+}
+.bcw-step h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  font-weight: 400;
+}
+.bcw-step h4 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.bcw-step p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.bcw-variantes{
+  background: var(--ees-cream);
+  padding: 0 96px 128px;
+}
+.bcw-variantes h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400;
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -.015em;
+  font-weight: 400;
+  max-width: 28ch;
+  margin-bottom: 64px;
+}
+.bcw-variantes h2 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold); }
+.bcw-variantes .grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 16px;
+}
+.variante{
+  background: #F6F1E8;
+  border: 1px solid rgba(184, 136, 74, .25);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  min-height: 240px;
+  justify-content: space-between;
+}
+.variante .vw{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ees-gold);
+}
+.variante .vbig{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ees-gold);
+  letter-spacing: -.025em;
+  font-weight: 300;
+}
+.variante .vsuffix{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ees-gold);
+}
+.variante .vlabel{
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  padding-top: 10px;
+  border-top: 1px solid rgba(184, 136, 74, .2);
+}
+</style>
+</head>
+<body>
+
+<main class="maquette-shell scope-ees" style="--accent: var(--ees-gold);">
+
+  <header class="shell-header">
+    <div>
+      <h1>Lot 9 · Maquettes <em>EssenCel'en Soi</em></h1>
+      <p style="margin-top: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute);">
+        Passe 9.3 · essencelensoi.fr · Home + Pratique + Article + Listing Ressources + À propos + Contact + Le Cocoon + Soins complémentaires + Bons cadeaux web
+      </p>
+    </div>
+    <div style="text-align: right; line-height: 2;">
+      <span><strong>9 maquettes</strong> · desktop 1440</span><br>
+      <span>palette EES <strong>rose poudré + or terre</strong></span><br>
+      <span>19 mai 2026 · V3.0c</span>
+    </div>
+  </header>
+
+  <!-- ==========================================================
+       PAGE 1 · HOME EES
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>01</strong> Home EES <em>· essencelensoi.fr</em></div>
+
+    <!-- NAV -->
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark">EES</span>
+        <span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span>
+      </div>
+      <ul>
+        <li><a href="#" class="active">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#">Soins complémentaires</a></li>
+        <li><a href="#">Ressources</a></li>
+        <li><a href="#">Bons cadeaux</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#" class="cta">Prendre rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-ees">
+      <div>
+        <div class="meta">Sanctuaire du corps · Sainte-Hélène en Médoc</div>
+        <h1>Reposer ce qui demande à <em>l'être.</em></h1>
+        <p class="lede">
+          Pratique énergétique et corporelle au cabinet de Sainte-Hélène. Une heure pour reposer le système
+          nerveux, retrouver la fluidité du souffle, honorer ce qui se dépose. Sans urgence. Au rythme propre.
+        </p>
+        <div class="cta-row">
+          <button class="c-btn">Demander un rendez-vous <span class="arrow">→</span></button>
+          <a class="c-btn--tertiary">Découvrir les soins →</a>
+        </div>
+      </div>
+
+      <div class="photo-slot">
+        <div class="slot-content">
+          <div class="slot-tag">Slot photo · Hero EES</div>
+          <div class="slot-sujet">Main de praticienne en geste · cabinet Sainte-Hélène · lumière matinale chaude · trois-quarts cadre serré · liseré rose poudré 0.16em</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 PILIERS DE LA PRATIQUE -->
+    <section class="ees-pillars">
+      <div class="section-eyebrow">La pratique</div>
+      <h2 class="section-title" style="max-width: 26ch;">Trois principes qui se <em>tiennent l'un l'autre.</em></h2>
+
+      <div class="grid">
+        <div class="ees-pillar">
+          <div class="pillar-num">I.</div>
+          <h4>Le corps <em>sait.</em></h4>
+          <p>Le corps n'attend pas d'être réparé. Il attend d'être écouté. Le rôle de la praticienne est de tenir un cadre où cette écoute peut avoir lieu.</p>
+        </div>
+        <div class="ees-pillar">
+          <div class="pillar-num">II.</div>
+          <h4>Le repos est <em>une action.</em></h4>
+          <p>Le système nerveux ne se repose pas en absence d'action. Il se repose dans une présence patiente, qui ne demande rien, qui ne presse rien.</p>
+        </div>
+        <div class="ees-pillar">
+          <div class="pillar-num">III.</div>
+          <h4>Le temps <em>fait son œuvre.</em></h4>
+          <p>Une séance dépose. Plusieurs séances installent. Un parcours Cocoon réorganise. Aucune transformation n'est promise — seul le travail du temps est respecté.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITATION -->
+    <section class="ees-citation">
+      <div class="filet"></div>
+      <blockquote>Le corps sait.<br>Encore faut-il <em style="font-family: var(--ff-italic); font-style: italic;">l'écouter.</em></blockquote>
+      <div class="attr">Céline Marcadet · 30 avril 2026</div>
+    </section>
+
+    <!-- LES SOINS -->
+    <section class="ees-soins">
+      <div class="section-eyebrow">Les soins proposés</div>
+      <h2 class="section-title" style="max-width: 22ch;">Soins individuels. <em>Parcours Cocoon.</em> Soins complémentaires.</h2>
+
+      <div class="soin-list">
+        <div class="soin-row">
+          <div class="soin-num">I.</div>
+          <div>
+            <h4>Soin <em>énergétique &amp; corporel</em> de référence</h4>
+          </div>
+          <div class="soin-meta">
+            <strong>1h15 · cabinet</strong><br>
+            Première séance ou suivi
+          </div>
+          <a class="soin-link">Voir la fiche <span>→</span></a>
+        </div>
+
+        <div class="soin-row">
+          <div class="soin-num">II.</div>
+          <div>
+            <h4>Parcours <em>Cocoon</em></h4>
+          </div>
+          <div class="soin-meta">
+            <strong>6 séances · 3 mois</strong><br>
+            Réorganisation du système nerveux
+          </div>
+          <a class="soin-link">Découvrir <span>→</span></a>
+        </div>
+
+        <div class="soin-row">
+          <div class="soin-num">III.</div>
+          <div>
+            <h4>Chi Nei Tsang · <em>massage viscéral</em></h4>
+          </div>
+          <div class="soin-meta">
+            <strong>1h · cabinet</strong><br>
+            Pratique complémentaire
+          </div>
+          <a class="soin-link">Voir <span>→</span></a>
+        </div>
+
+        <div class="soin-row">
+          <div class="soin-num">IV.</div>
+          <div>
+            <h4>Harmonisation <em>énergétique</em></h4>
+          </div>
+          <div class="soin-meta">
+            <strong>1h · cabinet</strong><br>
+            Pratique complémentaire
+          </div>
+          <a class="soin-link">Voir <span>→</span></a>
+        </div>
+
+        <div class="soin-row">
+          <div class="soin-num">V.</div>
+          <div>
+            <h4>Reconnexion énergétique <em>profonde</em></h4>
+          </div>
+          <div class="soin-meta">
+            <strong>1h30 · cabinet</strong><br>
+            Pratique complémentaire
+          </div>
+          <a class="soin-link">Voir <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESSOURCES PREVIEW -->
+    <section style="background: var(--ees-cream); padding: 128px 96px;">
+      <div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 64px;">
+        <div>
+          <div class="section-eyebrow">Ressources</div>
+          <h2 class="section-title">Des lectures patientes <em>pour le corps qui écoute.</em></h2>
+        </div>
+        <a class="c-btn--tertiary">Toutes les ressources →</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+        <article class="article-card">
+          <div class="card-photo">
+            <div>
+              <div class="ph-tag">Slot photo · article</div>
+              <div class="ph-sujet">Mains posées paume vers le haut · lumière de fenêtre · texture lin chaud</div>
+            </div>
+          </div>
+          <div class="card-category">— le corps &amp; l'énergie</div>
+          <h3>Reposer le système nerveux <em>quand le corps ne lâche pas.</em></h3>
+          <p class="card-excerpt">Reconnaître la fatigue d'usure. Nommer les seuils. Tenir l'espace pendant qu'on les traverse.</p>
+          <div class="card-meta">7 min · Céline Marcadet</div>
+        </article>
+
+        <article class="article-card">
+          <div class="card-photo" style="background: #ECDFD0;">
+            <div>
+              <div class="ph-tag">Slot photo · article</div>
+              <div class="ph-sujet">Tasse en céramique posée · respiration matinale · contre-jour doux</div>
+            </div>
+          </div>
+          <div class="card-category">— chemins d'apaisement</div>
+          <h3>Chi Nei Tsang à <em>Sainte-Hélène.</em></h3>
+          <p class="card-excerpt">Le massage viscéral comme pratique d'écoute du ventre. Une approche taoïste adaptée au cabinet contemporain.</p>
+          <div class="card-meta">5 min · Céline Marcadet</div>
+        </article>
+
+        <article class="article-card">
+          <div class="card-photo" style="background: #E8DAB8;">
+            <div>
+              <div class="ph-tag">Slot photo · article</div>
+              <div class="ph-sujet">Branche de saison sur table en bois · ombre portée nette · texture mate</div>
+            </div>
+          </div>
+          <div class="card-category">— rythmes &amp; saisons</div>
+          <h3>Honorer <em>les seuils</em> des saisons.</h3>
+          <p class="card-excerpt">Les passages d'équinoxe et de solstice comme appuis d'observation, sans surinterpréter ni sacraliser.</p>
+          <div class="card-meta">6 min · Céline Marcadet</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer écosystème -->
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>À propos</a></li><li><a>Contact</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins &amp; Parcours</a></li><li><a>Le Cocoon</a></li><li><a>Ressources</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row">
+        <div class="seal">W·F</div>
+        <p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p>
+      </div>
+      <div class="bottom">
+        <span><strong>© 2026 EssenCel'en Soi</strong> · marque portée par Way To Freedom</span>
+        <span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 2 · PAGE PRATIQUE (Soin de référence)
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>02</strong> Page Pratique · soin de référence <em>· /soins/soin-energetique-corporel</em></div>
+
+    <nav class="c-nav">
+      <div class="brand">
+        <span class="brand-mark">EES</span>
+        <span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span>
+      </div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#" class="active">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#">Soins complémentaires</a></li>
+        <li><a href="#">Ressources</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="pratique-header">
+      <div>
+        <div class="breadcrumb">
+          <a href="#">Soins &amp; Parcours</a> <span class="sep">/</span> <strong>Soin énergétique &amp; corporel</strong>
+        </div>
+        <h1>Le soin <em>de référence.</em></h1>
+        <p class="lede">
+          Une heure quinze pour déposer ce qui s'est accumulé. Soin énergétique et corporel combiné, pensé pour
+          rencontrer le corps là où il en est — sans présupposer ce qu'il doit devenir.
+        </p>
+      </div>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="label">Durée</span>
+          <span class="value">1h15</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Lieu</span>
+          <span class="value">Cabinet, <em>Sainte-Hélène</em></span>
+        </div>
+        <div class="info-row">
+          <span class="label">Première séance</span>
+          <span class="value">Sur rendez-vous</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Tarif</span>
+          <span class="value">85 €</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: var(--ees-cream); padding: 0 96px 64px;">
+      <div class="pratique-photo">
+        <div class="slot-content">
+          <div class="slot-tag">Slot photo · pratique en cabinet</div>
+          <div class="slot-sujet">Vue de table de soin · linge clair · plante posée · lumière de fenêtre orientée nord — ratio 21:9 paysage</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pratique-body">
+      <div class="copy">
+        <h2>Ce qui se passe pendant <em>une séance.</em></h2>
+        <p>
+          La séance commence par un temps d'écoute — non pas pour évaluer, mais pour reconnaître ce qui se présente
+          aujourd'hui. Ce n'est pas une consultation, c'est une <em>arrivée</em>. Vous déposez votre journée, votre
+          semaine, ce qui vous traverse, et la séance se construit à partir de là.
+        </p>
+        <p>
+          La pratique combine deux approches qui se tiennent : un <strong>soin énergétique</strong> qui agit sur les
+          tensions de circulation, et un <strong>travail corporel</strong> doux qui rejoint la respiration et le
+          système nerveux. Aucun protocole figé. Le déroulé s'adapte à la séance.
+        </p>
+
+        <h3>À qui s'adresse ce soin.</h3>
+        <p>
+          Aux personnes en fatigue d'usure — celle qui ne se répare plus avec du sommeil. Aux personnes en passage
+          de vie — séparation, reconversion, deuil. Aux personnes qui sentent que le corps demande quelque chose
+          sans savoir le nommer. La séance ne demande pas de pré-requis. <em>Là où vous en êtes suffit.</em>
+        </p>
+
+        <h3>Ce que le soin <em>ne fait pas.</em></h3>
+        <p>
+          Aucun diagnostic médical. Aucun substitut à un suivi médical en cours. Aucune promesse de transformation
+          garantie. Si une situation demande un avis médical, je vous oriente. La pratique est une <em>présence
+          outillée</em>, pas une réponse médicale.
+        </p>
+
+        <blockquote>
+          Le repos n'est pas une absence d'action.<br>
+          C'est une action en soi — patiente, lente, dépose.
+        </blockquote>
+
+        <h3>Suite des séances.</h3>
+        <p>
+          Une séance unique dépose. Plusieurs séances espacées installent. Si la situation appelle un travail plus
+          long, je propose le parcours <em>Cocoon</em> — six séances sur trois mois, pour un travail de
+          réorganisation plus profond. Sans abonnement, sans engagement automatique. À chaque étape, vous choisissez.
+        </p>
+      </div>
+
+      <aside class="pratique-aside">
+        <div style="font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--ees-gold); font-weight: 500;">Réserver une séance</div>
+        <h4>Demander un <em>rendez-vous.</em></h4>
+        <p>
+          Le plus simple : un message WhatsApp ou un email. Je vous propose des créneaux sous 48 heures. Si vous
+          souhaitez d'abord un échange téléphonique, je suis disponible la semaine en soirée.
+        </p>
+        <button class="c-btn" style="margin-top: 12px;">WhatsApp <span class="arrow">→</span></button>
+        <button class="c-btn c-btn--secondary">Écrire par email</button>
+        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(31, 26, 20, .2); font-size: 12px; line-height: 1.65; color: var(--ink-2);">
+          <strong style="color: var(--ink);">+33 6 62 73 73 00</strong><br>
+          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781b17160c191b0c381d0b0b1d161b1d141d160b1711561e0a">[email&#160;protected]</a><br>
+          17 Allée des Marronniers · 33480 Sainte-Hélène
+        </div>
+      </aside>
+    </section>
+
+    <!-- Mention légale bien-être -->
+    <section style="background: var(--ees-rose); padding: 56px 96px;">
+      <p style="font-family: var(--ff-italic); font-style: italic; font-size: 14px; line-height: 1.6; color: var(--ink-2); max-width: 80ch; text-align: center; margin: 0 auto;">
+        Les soins proposés chez EssenCel'en Soi sont des pratiques de bien-être non médicales et ne se substituent
+        pas à un suivi ou à un avis médical.
+      </p>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>Contact</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Cocoon</a></li><li><a>Ressources</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong> · marque portée par Way To Freedom</span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 3 · ARTICLE
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>03</strong> Article EES <em>· /ressources/reposer-systeme-nerveux</em></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#" class="active">Ressources</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="article-header">
+      <div class="crumbs">
+        <a href="#">Ressources</a> <span class="sep">/</span> <a href="#">Chemins d'apaisement</a> <span class="sep">/</span> <strong>Article</strong>
+      </div>
+      <h1>Reposer le système nerveux <em>par où commencer.</em></h1>
+      <div class="article-meta">
+        <span><strong>Céline Marcadet</strong></span>
+        <span>·</span>
+        <span>7 minutes de lecture</span>
+        <span>·</span>
+        <span>15 mai 2026</span>
+        <span>·</span>
+        <span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">— chemins d'apaisement</span>
+      </div>
+    </section>
+
+    <section class="article-body">
+      <aside class="article-toc">
+        <div class="toc-label">Au fil de l'article</div>
+        <ul>
+          <li><a class="active">I. Reconnaître la fatigue d'usure</a></li>
+          <li><a>II. Ce que le système nerveux enregistre</a></li>
+          <li><a>III. La présence patiente comme cadre</a></li>
+          <li><a>IV. Les trois gestes du retour</a></li>
+          <li><a>V. Quand demander un appui</a></li>
+        </ul>
+      </aside>
+
+      <div class="article-content">
+        <h2>I. Reconnaître <em>la fatigue d'usure.</em></h2>
+        <p>
+          Il existe une fatigue qui se répare avec du sommeil — un coup de fatigue de fin de journée, une semaine
+          plus dense, un voyage long. Et il en existe une autre, qui ne se répare plus. Celle qui revient le
+          dimanche soir alors qu'on a dormi neuf heures. Celle qui s'installe sans cause identifiable.
+          <em>C'est la fatigue d'usure.</em>
+        </p>
+        <p>
+          Cette fatigue n'est pas une faiblesse. C'est un <strong>signal d'information</strong> : le système nerveux
+          autonome a accumulé, intégré, mis de côté — et il demande de pouvoir <em>déposer</em>. Le travail
+          commence là, pas dans l'évaluation de ce qui l'a causée.
+        </p>
+
+        <h2>II. Ce que <em>le système nerveux</em> enregistre.</h2>
+        <p>
+          Le système nerveux autonome n'attend pas qu'on lui parle. Il enregistre les microsignaux du quotidien —
+          la posture qu'on tient sans le savoir, le ton de voix qu'on prend en réunion, l'attention qu'on porte aux
+          autres sans la rendre à soi. Il accumule. Il garde une trace. Il met de côté.
+        </p>
+        <p>
+          Pour qu'il <em>dépose</em>, il faut un environnement qui ne demande rien. Pas un environnement vide — un
+          environnement qui ne <em>presse</em> rien.
+        </p>
+
+        <blockquote>
+          Le système nerveux ne se repose pas en absence d'action.<br>
+          Il se repose dans une présence patiente.
+        </blockquote>
+
+        <h2>III. La <em>présence patiente</em> comme cadre.</h2>
+        <p>
+          C'est précisément ce que la séance offre : un cadre où la présence est patiente. Pas de checklist, pas
+          d'évaluation, pas de question pressée. Vous arrivez, vous déposez, le travail se fait. La praticienne
+          tient l'espace.
+        </p>
+        <p>
+          Cette présence n'est pas passive. Elle est <em>outillée</em> — par vingt ans de pratique, par l'écoute
+          énergétique, par le travail corporel doux. Mais elle ne <em>demande</em> rien. Elle accueille ce qui se
+          présente. C'est cette qualité d'accueil qui permet au système nerveux de déposer.
+        </p>
+      </div>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Ressources</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong> · marque portée par Way To Freedom</span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 4 · LISTING RESSOURCES (emojis remplacés)
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>04</strong> Listing Ressources EES <em>· /ressources</em> · <span style="color: var(--ees-gold);">emojis remplacés par eyebrows italiques</span></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#" class="active">Ressources</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="listing-hero">
+      <div class="section-eyebrow" style="margin-bottom: 24px;">Ressources EssenCel'en Soi</div>
+      <h1>Lectures patientes <em>pour le corps qui écoute.</em></h1>
+      <p>
+        Des articles courts, écrits par Céline, sur le corps, l'énergie, les passages de vie, les saisons. Une
+        publication régulière sans algorithme imposé. À lire à votre rythme.
+      </p>
+    </section>
+
+    <section class="listing-filters">
+      <div class="filter-row">
+        <div class="filter-label">Catégories</div>
+        <span class="filter-chip active">— tout</span>
+        <span class="filter-chip">— le corps &amp; l'énergie</span>
+        <span class="filter-chip">— chemins d'apaisement</span>
+        <span class="filter-chip">— rythmes &amp; saisons</span>
+      </div>
+    </section>
+
+    <section class="listing-grid">
+      <article class="article-card">
+        <div class="card-photo">
+          <div>
+            <div class="ph-tag">Slot · pilier</div>
+            <div class="ph-sujet">Mains posées paume vers le haut · lumière de fenêtre matinale</div>
+          </div>
+        </div>
+        <div class="card-category">— chemins d'apaisement</div>
+        <h3>Reposer le système nerveux <em>par où commencer.</em></h3>
+        <p class="card-excerpt">Reconnaître la fatigue d'usure. Nommer les seuils. Tenir l'espace pendant qu'on les traverse.</p>
+        <div class="card-meta">7 min · 15 mai 2026</div>
+      </article>
+
+      <article class="article-card">
+        <div class="card-photo" style="background: #ECDFD0;">
+          <div>
+            <div class="ph-tag">Slot · article</div>
+            <div class="ph-sujet">Tasse en céramique · respiration matinale · texture lin chaud</div>
+          </div>
+        </div>
+        <div class="card-category">— chemins d'apaisement</div>
+        <h3>Chi Nei Tsang à <em>Sainte-Hélène.</em></h3>
+        <p class="card-excerpt">Le massage viscéral comme pratique d'écoute du ventre. Une approche taoïste adaptée au cabinet contemporain.</p>
+        <div class="card-meta">5 min · 8 mai 2026</div>
+      </article>
+
+      <article class="article-card">
+        <div class="card-photo" style="background: #E8DAB8;">
+          <div>
+            <div class="ph-tag">Slot · article</div>
+            <div class="ph-sujet">Branche posée table en bois · ombre nette · texture mate</div>
+          </div>
+        </div>
+        <div class="card-category">— rythmes &amp; saisons</div>
+        <h3>Honorer <em>les seuils</em> des saisons.</h3>
+        <p class="card-excerpt">Les passages d'équinoxe et de solstice comme appuis d'observation, sans surinterpréter ni sacraliser.</p>
+        <div class="card-meta">6 min · 1 mai 2026</div>
+      </article>
+
+      <article class="article-card">
+        <div class="card-photo" style="background: #E0CFC1;">
+          <div>
+            <div class="ph-tag">Slot · article</div>
+            <div class="ph-sujet">Plante en pot · texture céramique · lumière oblique</div>
+          </div>
+        </div>
+        <div class="card-category">— le corps &amp; l'énergie</div>
+        <h3>Harmonisation énergétique · <em>de quoi parle-t-on.</em></h3>
+        <p class="card-excerpt">Une approche qui rejoint la circulation sans présupposer ce qu'on doit y trouver.</p>
+        <div class="card-meta">4 min · 24 avril 2026</div>
+      </article>
+
+      <article class="article-card">
+        <div class="card-photo" style="background: #DCC8B7;">
+          <div>
+            <div class="ph-tag">Slot · article</div>
+            <div class="ph-sujet">Bougie allumée · lin froissé · soir d'hiver</div>
+          </div>
+        </div>
+        <div class="card-category">— le corps &amp; l'énergie</div>
+        <h3>Reconnexion énergétique <em>profonde.</em></h3>
+        <p class="card-excerpt">Un soin long, pour les passages de vie qui demandent plus qu'une séance ponctuelle.</p>
+        <div class="card-meta">8 min · 17 avril 2026</div>
+      </article>
+
+      <article class="article-card">
+        <div class="card-photo" style="background: #D8C3B0;">
+          <div>
+            <div class="ph-tag">Slot · article</div>
+            <div class="ph-sujet">Promenade en forêt · lumière de sous-bois · automne tardif</div>
+          </div>
+        </div>
+        <div class="card-category">— rythmes &amp; saisons</div>
+        <h3>L'automne, <em>déposer.</em></h3>
+        <p class="card-excerpt">L'automne en Médoc, un repère saisonnier pour reconnaître ce qui demande à se déposer.</p>
+        <div class="card-meta">5 min · 10 octobre 2025</div>
+      </article>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Ressources</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong></span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 5 · À PROPOS EES
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>05</strong> À propos EES <em>· /a-propos</em></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#">Ressources</a></li>
+        <li><a href="#" class="active">À propos</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="apropos-ees-hero">
+      <div>
+        <div class="section-eyebrow">Céline Marcadet</div>
+        <h1>Praticienne énergétique <em>en Médoc.</em></h1>
+        <p class="lede">
+          Une intuition simple, un cabinet à Sainte-Hélène, vingt ans d'écoute du corps. Le sanctuaire EssenCel'en
+          Soi est né de la rencontre entre une pratique personnelle et un territoire — le Médoc, qui a son rythme
+          propre.
+        </p>
+      </div>
+      <div class="photo-cel">
+        <div class="ph-tag">Slot photo · Céline portrait</div>
+        <div class="ph-sujet">Portrait au cabinet · trois-quarts naturel · lumière de fenêtre matinale · texture lin chaud · arrière-plan flou doux</div>
+      </div>
+    </section>
+
+    <section class="apropos-bio">
+      <div class="row">
+        <div class="label">Le chemin</div>
+        <div>
+          <h2>Le corps <em>ne demande pas à être réparé.</em><br>Il demande à être écouté.</h2>
+          <p>
+            J'ai mis vingt ans à formuler cette phrase telle qu'elle est. Avant, j'étais dans le faire — la
+            méthode, le protocole, la séance qui devait <em class="in-text">aboutir</em>. Et puis quelque chose a
+            cédé. Un client qui m'a dit, à la fin d'une séance, <em class="in-text">« je n'ai pas besoin que vous
+            répariez. J'ai juste besoin que vous teniez. »</em>
+          </p>
+          <p>
+            Ce jour-là, ma pratique a changé. Pas dans les gestes — dans la <strong>posture</strong>. J'ai cessé
+            de présupposer que je devais faire arriver quelque chose. J'ai commencé à <em class="in-text">tenir
+            l'espace</em>. Et c'est à partir de là que les séances ont commencé à déposer pour de bon.
+          </p>
+          <p>
+            Aujourd'hui, je reçois à Sainte-Hélène, dans le Médoc. Je propose des séances individuelles, un parcours
+            Cocoon, et quelques soins complémentaires. Pas de transformation promise. Pas de méthode brevetée.
+            Une présence outillée par vingt ans de pratique, et un cadre qui ne presse rien.
+          </p>
+          <p>
+            Way To Freedom — la maison commune — porte aussi le chemin de mon mari Sébastien (SÉSÂMES, clarification
+            intérieure) et la voie d'autonomie économique que nous construisons ensemble. EssenCel'en Soi est
+            <em class="in-text">mon</em> chemin, mon cabinet, ma pratique. Mais il vit dans une maison qui me porte
+            et que je porte.
+          </p>
+          <div style="margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--ees-gold); font-family: var(--ff-italic); font-style: italic; font-size: 18px; color: var(--ees-gold);">
+            — Céline Marcadet, praticienne
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Le cabinet -->
+    <section style="background: var(--ees-rose); padding: 128px 96px;">
+      <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 96px; align-items: center;">
+        <div>
+          <div class="section-eyebrow">Le cabinet</div>
+          <h2 class="section-title">Une maison <em>de Sainte-Hélène.</em></h2>
+          <p style="font-size: 17px; line-height: 1.7; color: var(--ink-2); margin-top: 32px; max-width: 46ch;">
+            Le cabinet est installé dans une maison ancienne de l'Allée des Marronniers, à Sainte-Hélène. Une pièce
+            au calme, avec une fenêtre orientée nord — la lumière y est constante, jamais agressive. Un parking
+            facile, un accès direct depuis Bordeaux ou Lacanau.
+          </p>
+          <div style="margin-top: 32px; font-size: 14px; line-height: 1.65; color: var(--ink-2);">
+            <strong style="color: var(--ink);">17 Allée des Marronniers</strong><br>
+            33480 Sainte-Hélène · Gironde, France<br>
+            Sur rendez-vous uniquement
+          </div>
+        </div>
+        <div style="height: 480px; background: var(--ees-cream); border: 1px solid rgba(184, 136, 74, .25); display: flex; align-items: center; justify-content: center; padding: 32px;">
+          <div style="text-align: center; max-width: 32ch;">
+            <div style="font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--ees-gold); font-weight: 500; margin-bottom: 12px;">Slot photo · cabinet</div>
+            <div style="font-family: var(--ff-italic); font-style: italic; font-size: 16px; line-height: 1.5; color: var(--ink-2);">Vue d'ensemble de la pièce · table de soin recouverte de lin clair · plante posée près de la fenêtre · ombre douce sur mur clair · ratio 4:3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li><li><a>À propos</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Cocoon</a></li><li><a>Ressources</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong> · marque portée par Way To Freedom</span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 6 · CONTACT EES
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>06</strong> Contact EES <em>· /contact</em></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#">Ressources</a></li>
+        <li><a href="#" class="active cta">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="contact-ees-hero">
+      <div class="section-eyebrow">Prendre rendez-vous</div>
+      <h1>Un message. <em>Une réponse humaine.</em></h1>
+      <p>
+        Pas d'embed Calendly, pas de réservation automatique. Le contact se fait par WhatsApp ou email — Céline
+        répond personnellement et propose un créneau adapté.
+      </p>
+    </section>
+
+    <section class="contact-ees-body">
+      <div class="contact-ees-channels">
+        <div class="contact-ch-ees">
+          <div class="ch-label">Le plus simple</div>
+          <h3>WhatsApp <em>direct.</em></h3>
+          <div class="ch-value">+33 6 62 73 73 00</div>
+          <p class="ch-note">Réponse sous 24h en jour ouvré. Un message court suffit, je rappelle si nécessaire.</p>
+          <a href="#" class="ch-action">Ouvrir WhatsApp <span>↗</span></a>
+        </div>
+
+        <div class="contact-ch-ees">
+          <div class="ch-label">Plus posé</div>
+          <h3>Par <em>email.</em></h3>
+          <div class="ch-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9dfef2f3e9fcfee9ddf8eeeef8f3fef8f1f8f3eef2f4b3fbef">[email&#160;protected]</a></div>
+          <p class="ch-note">Pour un message plus long, ou si vous préférez ce canal. Réponse sous 48h ouvrées.</p>
+          <a href="#" class="ch-action">Écrire un email <span>→</span></a>
+        </div>
+
+        <div class="contact-ch-ees">
+          <div class="ch-label">Sur place</div>
+          <h3>Cabinet <em>de Sainte-Hélène.</em></h3>
+          <div class="ch-value">17 Allée des Marronniers</div>
+          <div class="ch-value">33480 Sainte-Hélène · Médoc</div>
+          <p class="ch-note">Sur rendez-vous uniquement. Parking facile, accès direct depuis Bordeaux ou Lacanau.</p>
+        </div>
+      </div>
+
+      <div class="contact-gbp">
+        <div class="gbp-mock">Vignette carte · GBP EssenCel'en Soi</div>
+        <h3>Voir <em>l'itinéraire.</em></h3>
+        <div class="gbp-info">
+          <strong>17 Allée des Marronniers</strong><br>
+          33480 Sainte-Hélène, Gironde<br>
+          <em style="font-family: var(--ff-italic); font-style: italic;">Sur rendez-vous</em>
+        </div>
+        <a href="#" style="display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ees-gold); padding-bottom: 4px; align-self: flex-start;">Voir sur Google Maps <span>↗</span></a>
+        <div style="margin-top: 12px; padding-top: 16px; border-top: 1px solid rgba(31, 26, 20, .15); font-family: var(--ff-italic); font-style: italic; font-size: 13px; line-height: 1.55; color: var(--ink-mute);">
+          Les soins proposés sont des pratiques de bien-être non médicales et ne se substituent pas à un suivi ou
+          à un avis médical.
+        </div>
+      </div>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Cocoon</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong> · marque portée par Way To Freedom</span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a><a>Cookies</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 7 · LE COCOON
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>07</strong> Le Cocoon <em>· /le-cocoon</em></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#" class="active">Le Cocoon</a></li>
+        <li><a href="#">Ressources</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="cocoon-hero">
+      <div>
+        <div class="crumb">
+          <a href="#">Soins &amp; Parcours</a> <span class="sep">/</span> <strong>Le Cocoon</strong>
+        </div>
+        <h1>Le <em>Cocoon.</em></h1>
+        <p class="lede">
+          Un parcours de six séances sur trois mois. Pour les personnes qui sentent qu'une séance unique ne suffira
+          pas — sans pour autant chercher un suivi indéfini. Le temps d'une réorganisation patiente du système
+          nerveux.
+        </p>
+        <div style="margin-top: 40px; display: flex; gap: 32px; align-items: center;">
+          <button class="c-btn">Demander un appel découverte</button>
+          <a class="c-btn--tertiary">Tarifs &amp; modalités →</a>
+        </div>
+      </div>
+
+      <div class="cocoon-figure">
+        <div class="fig-label">Le parcours</div>
+        <p class="fig-quote">« Un cadre patient. Une dépose qui s'installe. »</p>
+        <div class="fig-signature">— Céline Marcadet · EES</div>
+      </div>
+    </section>
+
+    <section class="cocoon-process">
+      <div class="section-eyebrow">Le déroulé</div>
+      <h2 class="section-title" style="max-width: 26ch;">Quatre temps. <em>Six séances.</em> Trois mois.</h2>
+
+      <div class="steps">
+        <div class="cocoon-step">
+          <div class="step-num">I.</div>
+          <h4>L'appel <em>découverte.</em></h4>
+          <p>Un échange téléphonique de 30 minutes, sans engagement. Pour reconnaître si le Cocoon est le bon cadre, ou si une autre formule fait sens.</p>
+          <div class="step-duree">30 min · gratuit</div>
+        </div>
+        <div class="cocoon-step">
+          <div class="step-num">II.</div>
+          <h4>La séance <em>d'arrivée.</em></h4>
+          <p>Une première séance plus longue, pour poser le cadre du parcours. Le travail commence là — pas dans un bilan, dans une dépose.</p>
+          <div class="step-duree">1h30 · cabinet</div>
+        </div>
+        <div class="cocoon-step">
+          <div class="step-num">III.</div>
+          <h4>Le travail <em>régulier.</em></h4>
+          <p>Quatre séances espacées de 2 à 3 semaines. Chaque séance s'appuie sur la précédente. Le rythme s'adapte à ce qui émerge.</p>
+          <div class="step-duree">4 × 1h15 · cabinet</div>
+        </div>
+        <div class="cocoon-step">
+          <div class="step-num">IV.</div>
+          <h4>La séance <em>de clôture.</em></h4>
+          <p>Une dernière séance pour reconnaître le chemin parcouru. Pas un bilan — un repère pour la suite. Vous repartez avec ce que vous avez déposé.</p>
+          <div class="step-duree">1h15 · cabinet</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: var(--ees-cream); padding: 128px 96px; display: grid; grid-template-columns: 7fr 5fr; gap: 96px; align-items: start;">
+      <div>
+        <div class="section-eyebrow">Pour qui</div>
+        <h2 class="section-title" style="max-width: 24ch;">Pour les corps en <em>passage long.</em></h2>
+        <p style="font-size: 18px; line-height: 1.7; color: var(--ink-2); margin-top: 32px; max-width: 56ch;">
+          Le Cocoon s'adresse aux personnes en <em style="font-family: var(--ff-italic); font-style: italic; color: var(--ink);">fatigue d'usure profonde</em>,
+          en <em style="font-family: var(--ff-italic); font-style: italic; color: var(--ink);">traversée d'un passage de vie</em>
+          (séparation, reconversion, héritage, retour de maternité), ou en
+          <em style="font-family: var(--ff-italic); font-style: italic; color: var(--ink);">phase d'installation post-bouleversement</em>.
+        </p>
+        <p style="font-size: 18px; line-height: 1.7; color: var(--ink-2); margin-top: 20px; max-width: 56ch;">
+          Aucun pré-requis. La séance d'appel découverte sert précisément à reconnaître si le moment est juste —
+          si ce n'est pas le cas, je vous oriente vers une séance individuelle, ou simplement vers une attente.
+        </p>
+      </div>
+      <div style="background: var(--ees-rose); padding: 48px; display: flex; flex-direction: column; gap: 24px;">
+        <div class="section-eyebrow">Tarifs &amp; modalités</div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid rgba(31, 26, 20, .2);">
+          <span style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute);">Six séances</span>
+          <span style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 44px; color: var(--ees-gold); line-height: 1; letter-spacing: -.02em;">580 €</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid rgba(31, 26, 20, .2);">
+          <span style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute);">Paiement</span>
+          <span style="font-family: var(--ff-display); font-size: 16px; color: var(--ink);">en 1 ou 3 fois</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid rgba(31, 26, 20, .2);">
+          <span style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute);">Engagement</span>
+          <span style="font-family: var(--ff-display); font-size: 16px; color: var(--ink);">aucun, libre annulation</span>
+        </div>
+        <button class="c-btn" style="margin-top: 12px;">Demander un appel</button>
+      </div>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Cocoon</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong></span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 8 · SOINS COMPLÉMENTAIRES
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>08</strong> Soins complémentaires <em>· /soins-complementaires</em></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#" class="active">Soins complémentaires</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="complementaires-hero">
+      <div class="section-eyebrow">Pratiques complémentaires</div>
+      <h1>Soins <em>complémentaires.</em></h1>
+      <p>
+        Quatre pratiques qui rejoignent le soin de référence, sans le remplacer. Pour les corps qui ont besoin
+        d'une approche spécifique — viscérale, énergétique pure, ou de longue durée.
+      </p>
+    </section>
+
+    <section class="complementaires-grid">
+      <article class="complement-card">
+        <div class="num">I.</div>
+        <div>
+          <h4>Chi Nei Tsang · <em>massage viscéral.</em></h4>
+          <div class="by">Pratique taoïste · 1h en cabinet</div>
+          <p>
+            Le Chi Nei Tsang est un massage abdominal d'origine taoïste, qui rejoint le ventre comme lieu d'écoute
+            et de dépose. Particulièrement indiqué pour les tensions digestives chroniques, les passages
+            émotionnels difficiles, les corps qui « gardent dans le ventre ».
+          </p>
+          <div class="meta">1h · 85 € · sur RDV</div>
+        </div>
+      </article>
+
+      <article class="complement-card">
+        <div class="num">II.</div>
+        <div>
+          <h4>Harmonisation <em>énergétique.</em></h4>
+          <div class="by">Soin de circulation · 1h en cabinet</div>
+          <p>
+            Un soin uniquement énergétique, sans travail corporel manuel. Pour les corps qui demandent une approche
+            plus subtile, ou qui ne souhaitent pas de contact direct. Travail sur la circulation, les points de
+            stagnation, les zones de tension diffuse.
+          </p>
+          <div class="meta">1h · 80 € · sur RDV</div>
+        </div>
+      </article>
+
+      <article class="complement-card">
+        <div class="num">III.</div>
+        <div>
+          <h4>Reconnexion énergétique <em>profonde.</em></h4>
+          <div class="by">Soin long · 1h30 en cabinet</div>
+          <p>
+            Un soin de longue durée, plus enveloppant. Conçu pour les passages de vie qui demandent plus qu'une
+            séance ponctuelle — deuil, reconversion lourde, retour de maladie. Combinaison énergétique et
+            corporelle dans un cadre élargi.
+          </p>
+          <div class="meta">1h30 · 110 € · sur RDV</div>
+        </div>
+      </article>
+
+      <article class="complement-card">
+        <div class="num">IV.</div>
+        <div>
+          <h4>Séance <em>découverte.</em></h4>
+          <div class="by">Premier contact · 45 min en cabinet</div>
+          <p>
+            Une séance plus courte, pour les personnes qui souhaitent un premier contact avec la pratique sans
+            engagement. Permet de reconnaître si EssenCel'en Soi est le bon cadre pour vous, avant de réserver une
+            séance complète.
+          </p>
+          <div class="meta">45 min · 55 € · sur RDV</div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Cocoon</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong></span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a></span></div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       PAGE 9 · BONS CADEAUX (page web)
+  =========================================================== -->
+  <div class="page-maquette scope-ees">
+    <div class="page-label"><strong>09</strong> Bons cadeaux EES <em>· /bons-cadeaux · page web uniquement (carte imprimable reportée passe dédiée)</em></div>
+
+    <nav class="c-nav">
+      <div class="brand"><span class="brand-mark">EES</span><span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">EssenCel'en Soi</span></div>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Soins &amp; Parcours</a></li>
+        <li><a href="#">Le Cocoon</a></li>
+        <li><a href="#" class="active">Bons cadeaux</a></li>
+        <li><a href="#" class="cta">Rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <section class="bcw-hero">
+      <div>
+        <div class="section-eyebrow">Offrir une heure</div>
+        <h1>Un bon cadeau, <em>pour offrir une heure.</em></h1>
+        <p class="lede">
+          Une carte imprimée, manuscrite, glissée dans une enveloppe kraft. Pour offrir une séance — ou n'importe
+          quelle valeur déductible d'un soin. Sept variantes selon l'occasion : anniversaire, fête, naissance,
+          Saint-Valentin, Noël, convalescence, ou neutre.
+        </p>
+        <div style="margin-top: 40px; display: flex; gap: 32px; align-items: center;">
+          <button class="c-btn">Commander un bon · WhatsApp</button>
+          <a class="c-btn--tertiary">Voir les formats →</a>
+        </div>
+      </div>
+
+      <div class="card-preview">
+        <div class="bc">
+          <div class="topline">
+            <div class="wordmark">EssenCel'en Soi</div>
+            <div class="label">Bon cadeau</div>
+          </div>
+          <div class="mainline">
+            <div class="eyebrow-tx">Une heure</div>
+            <div class="suffix">pour vous.</div>
+          </div>
+          <div class="pied">À ouvrir à l'intérieur</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bcw-formats">
+      <div class="section-eyebrow" style="margin-bottom: 24px;">Les formats disponibles</div>
+      <h2>Trois formats. <em>Ou une valeur libre.</em></h2>
+
+      <div class="formats">
+        <div class="format-card">
+          <h4>Une <em>séance.</em></h4>
+          <div class="price">85 €</div>
+          <p>Le soin énergétique &amp; corporel de référence, à offrir tel quel. Déductible sur tout autre soin si la personne souhaite changer.</p>
+          <div class="meta">1h15 · cabinet</div>
+        </div>
+        <div class="format-card">
+          <h4>Une <em>séance longue.</em></h4>
+          <div class="price">110 €</div>
+          <p>La reconnexion énergétique profonde, ou toute séance équivalente. Pour offrir plus qu'une dépose ponctuelle.</p>
+          <div class="meta">1h30 · cabinet</div>
+        </div>
+        <div class="format-card">
+          <h4>Une <em>valeur libre.</em></h4>
+          <div class="price" style="font-size: 32px;">à partir de 50 €</div>
+          <p>Vous choisissez le montant. Il est déductible sur n'importe quelle prestation au moment du rendez-vous. La personne reste libre.</p>
+          <div class="meta">déduction libre</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bcw-process">
+      <div class="section-eyebrow">Comment ça se passe</div>
+      <h2 class="section-title" style="max-width: 26ch;">Trois étapes <em>patientes,</em> par WhatsApp.</h2>
+
+      <div class="steps">
+        <div class="bcw-step">
+          <div class="step-num">I.</div>
+          <h4>Vous m'envoyez un <em>message WhatsApp.</em></h4>
+          <p>Vous me dites pour qui c'est, à quelle occasion, et quel format ou quelle valeur. Pas besoin de tout savoir — on ajuste ensemble.</p>
+        </div>
+        <div class="bcw-step">
+          <div class="step-num">II.</div>
+          <h4>Je prépare la <em>carte imprimée.</em></h4>
+          <p>Je paramètre la variante (anniversaire, fête, neutre…), j'imprime, je manuscris un mot si vous le souhaitez, je glisse dans une enveloppe kraft. Paiement par SumUp ou virement.</p>
+        </div>
+        <div class="bcw-step">
+          <div class="step-num">III.</div>
+          <h4>Vous récupérez <em>ou je poste.</em></h4>
+          <p>Selon votre préférence : récupération au cabinet de Sainte-Hélène, ou envoi postal en France métropolitaine sous 48h ouvrées.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bcw-variantes">
+      <h2>Sept variantes <em>typographiques.</em></h2>
+      <div class="grid">
+        <div class="variante">
+          <div class="vw">Pour vos</div>
+          <div class="vbig">30</div>
+          <div class="vsuffix">ans.</div>
+          <div class="vlabel">Anniversaire</div>
+        </div>
+        <div class="variante">
+          <div class="vw">Une heure</div>
+          <div class="vbig" style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.1;">pour Maman.</div>
+          <div class="vsuffix" style="opacity: 0;">·</div>
+          <div class="vlabel">Fêtes</div>
+        </div>
+        <div class="variante">
+          <div class="vw">Une heure</div>
+          <div class="vbig" style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.1; color: var(--cel-coral);">pour toi.</div>
+          <div class="vsuffix" style="opacity: 0;">·</div>
+          <div class="vlabel">Saint-Valentin</div>
+        </div>
+        <div class="variante">
+          <div class="vw" style="opacity: 0;">·</div>
+          <div class="vbig" style="font-family: var(--ff-italic); font-style: italic; font-size: 20px; line-height: 1.1;">Joyeux Noël.</div>
+          <div class="vsuffix" style="opacity: 0;">·</div>
+          <div class="vlabel">Noël</div>
+        </div>
+        <div class="variante">
+          <div class="vw">Pour fêter la venue de</div>
+          <div class="vbig" style="font-size: 22px;">Léon</div>
+          <div class="vsuffix" style="opacity: 0;">·</div>
+          <div class="vlabel">Naissance</div>
+        </div>
+        <div class="variante">
+          <div class="vw">Pour se</div>
+          <div class="vbig" style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.1;">déposer.</div>
+          <div class="vsuffix" style="opacity: 0;">·</div>
+          <div class="vlabel">Convalescence</div>
+        </div>
+        <div class="variante">
+          <div class="vw">Une heure</div>
+          <div class="vbig" style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.1;">pour vous.</div>
+          <div class="vsuffix" style="opacity: 0;">·</div>
+          <div class="vlabel">Neutre</div>
+        </div>
+      </div>
+      <p style="margin-top: 40px; font-family: var(--ff-italic); font-style: italic; font-size: 14px; color: var(--ink-mute); max-width: 64ch;">
+        Les 7 variantes imprimables A4 pliées en deux (4 faces A5) seront produites dans une passe dédiée — mini-template
+        PageTransactionnelle V3, doctrine validée §10 du brief Lot 9.
+      </p>
+    </section>
+
+    <footer class="eco-footer">
+      <div class="top">
+        <div class="brand-block">
+          <div class="mark">Way To <em>Freedom</em></div>
+          <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+        </div>
+        <div><h5>Way To Freedom</h5><ul><li><a>Accueil</a></li></ul></div>
+        <div><h5>SÉSÂMES</h5><ul><li><a>Clarification intérieure</a></li></ul></div>
+        <div><h5>EssenCel'en Soi</h5><ul><li><a>Soins</a></li><li><a>Cocoon</a></li><li><a>Bons cadeaux</a></li></ul></div>
+        <div><h5>Voie d'autonomie</h5><ul><li><a>La voie</a></li></ul></div>
+        <div><h5>Aloe Vera Excellence</h5><ul><li><a>aloeveraexcellence.com ↗</a></li></ul></div>
+      </div>
+      <div class="seal-row"><div class="seal">W·F</div><p class="seal-quote">Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.</p></div>
+      <div class="bottom"><span><strong>© 2026 EssenCel'en Soi</strong></span><span class="legal"><a>Mentions légales</a><a>Confidentialité</a></span></div>
+    </footer>
+  </div>
+
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
