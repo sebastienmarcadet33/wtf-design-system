@@ -1,0 +1,2251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1440" />
+<title>Lot 9 · Web System V3 · Doctrine + Library — Way To Freedom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DOCTRINE LOT 9 · WEB SYSTEM V3
+   Document de spécification responsive · 3 breakpoints validés
+   Continuité visuelle Way To Freedom — Design System v2.1
+   ============================================================ */
+
+:root{
+  /* Familles — héritées tokens-v3.css V3.0b */
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-italic:  'Instrument Serif', Georgia, serif;
+  --ff-body:    'Inter Tight', system-ui, sans-serif;
+  --ff-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Palettes — figées V3.0c */
+  --wtf-light:        #FAF7F2;
+  --wtf-lin:          #F6F1E8;
+  --wtf-nuit:         #1B1814;
+  --wtf-nuit-chaude:  #2E2A22;
+  --wtf-dore-bas:     #B8884A;
+
+  --ses-light:        #FAF7F2;
+  --ses-ink:          #0F1218;
+  --ses-gold:         #C9A24E;
+  --ses-violet:       #4A3A5C;
+
+  --ees-cream:        #F6F1E8;
+  --ees-rose:         #E8D2C6;
+  --ees-rose-deep:    #D9B8A6;
+  --ees-gold:         #B8884A;
+  --ees-sage:         #7A8B6F;
+
+  --voie-cream:       #F6F1E8;
+  --voie-night:       #1F3B4D;
+  --voie-copper:      #B0732E;
+
+  --ave-cream:        #F6F1E8;
+  --ave-aloes:        #5E7A4E;
+  --ave-aloes-clair:  #93A984;
+  --ave-gold:         #C9A24E;
+  --ave-flamme:       #C9622E;
+
+  --cel-coral:        #D55B47;
+  --seb-petrol:       #2D5F6E;
+
+  /* Encres */
+  --ink:        #1F1A14;
+  --ink-2:      #3B342A;
+  --ink-mute:   #5C544A;
+  --ink-line:   rgba(15, 18, 24, .12);
+  --ink-line-2: rgba(15, 18, 24, .22);
+
+  /* Paper neutre document */
+  --paper:      #F6F1E8;
+  --paper-soft: #EFE8DB;
+  --paper-deep: #E6DCC9;
+
+  /* ============================================================
+     ÉCHELLE TYPO FLUIDE clamp() — spécifiée §2 du brief
+     ============================================================ */
+  --type-display: clamp(2.5rem, 5vw + 1rem, 6rem);            /* 40 → 96 */
+  --type-h1:      clamp(2rem,   3vw + 1rem, 4rem);            /* 32 → 64 */
+  --type-h2:      clamp(1.5rem, 2vw + 0.75rem, 2.5rem);       /* 24 → 40 */
+  --type-h3:      clamp(1.25rem,1vw + 0.875rem, 1.75rem);     /* 20 → 28 */
+  --type-body:    clamp(1rem,   0.5vw + 0.875rem, 1.125rem);  /* 16 → 18 */
+  --type-small:   clamp(0.75rem,0.25vw + 0.6875rem, 0.875rem);/* 12 → 14 */
+
+  /* Breakpoints — référence document */
+  --bp-min:  320px;
+  --bp-sm:   640px;
+  --bp-md:   1024px;
+  --bp-lg:   1280px;
+  --bp-xl:   1600px;
+  --bp-2xl:  1920px;
+
+  /* Easing & transitions */
+  --ease-aesop: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html, body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-kerning:normal;
+}
+html{ background:#E8E0D0; }
+body{
+  font-family:var(--ff-body);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.6;
+}
+img{ max-width:100%; display:block; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+input, textarea, select{ font:inherit; color:inherit; }
+a{ color:inherit; text-decoration:none; }
+
+/* ============================================================
+   SHELL DOCUMENT — largeur 1440 desktop
+============================================================ */
+.doc{
+  max-width: 1440px;
+  margin: 0 auto;
+  background: var(--paper);
+  padding: 0;
+  box-shadow: 0 2px 48px rgba(0,0,0,.10);
+}
+
+section.chapter{
+  padding: 128px 96px;
+  border-top: 1px solid var(--paper-deep);
+}
+section.chapter:first-of-type{ border-top:0; }
+section.chapter > .lede{
+  max-width: 62ch;
+  margin-top: 24px;
+}
+/* Garde-fou anti-collision · titres h2 multi-lignes avec descenders
+   peuvent chevaucher le lede qui suit. Gap élargi à 56px. */
+section.chapter > h2.section + .lede{ margin-top: 56px; }
+
+/* ============================================================
+   TYPOGRAPHIE — primitives document
+============================================================ */
+.eyebrow{
+  font-family: var(--ff-body);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before{
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--wtf-dore-bas);
+  display: inline-block;
+}
+.eyebrow .num{ color: var(--wtf-dore-bas); }
+
+h1.display{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  font-size: 88px;
+  line-height: .98;
+  letter-spacing: -.022em;
+  color: var(--ink);
+  max-width: 18ch;
+}
+h1.display em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+h2.section{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 1.05;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  max-width: 22ch;
+}
+h2.section em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+h3.block{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.18;
+  letter-spacing: -.012em;
+  color: var(--ink);
+}
+h3.block em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+.lede{
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 62ch;
+  font-weight: 300;
+}
+.body-doc{
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+.body-doc strong{ font-weight: 500; color: var(--ink); }
+.body-doc em{ font-family: var(--ff-italic); font-style: italic; }
+.body-doc p + p{ margin-top: 14px; }
+.caption{
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: .04em;
+  line-height: 1.5;
+}
+.mono{
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  letter-spacing: .01em;
+  color: var(--ink-2);
+}
+
+.italic-soft{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 24, "wght" 400, "SOFT" 50, "WONK" 0;
+}
+
+/* Filets */
+.filet{
+  height: 1px;
+  background: var(--wtf-dore-bas);
+  width: 64px;
+  margin: 0;
+}
+.filet-large{
+  height: 1px;
+  background: var(--ink-line);
+  width: 100%;
+}
+
+/* Grids */
+.grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+.grid-4{ display:grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.gap-y-l{ row-gap: 80px; }
+
+/* ============================================================
+   COUVERTURE
+============================================================ */
+.cover{
+  background: var(--wtf-light);
+  padding: 128px 96px 96px;
+  min-height: 880px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.cover-meta{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.cover-meta strong{ color: var(--ink); font-weight: 500; }
+.cover-body{
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 96px;
+  align-items: end;
+  margin-top: 160px;
+}
+.cover-title{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  font-size: 128px;
+  line-height: .94;
+  letter-spacing: -.028em;
+  color: var(--ink);
+}
+.cover-title em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.cover-aside{
+  border-left: 1px solid var(--ink-line-2);
+  padding-left: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 12px;
+}
+.cover-aside .label{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.cover-aside .value{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.cover-aside .value em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+}
+.cover-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--ink-line-2);
+}
+.cover-footer .quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  max-width: 38ch;
+}
+.cover-footer .signature{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-align: right;
+  line-height: 2;
+}
+
+/* ============================================================
+   TABLES
+============================================================ */
+table.doc-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table.doc-table th,
+table.doc-table td{
+  text-align: left;
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--ink-line);
+  vertical-align: top;
+}
+table.doc-table th{
+  font-family: var(--ff-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border-bottom-color: var(--ink-line-2);
+  padding-top: 0;
+}
+table.doc-table td strong{ color: var(--ink); font-weight: 500; }
+table.doc-table td em{ font-family: var(--ff-italic); font-style: italic; }
+table.doc-table code{
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--paper-soft);
+  padding: 1px 6px;
+}
+
+/* ============================================================
+   CODE BLOCKS
+============================================================ */
+pre.code{
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  background: #1E1A14;
+  color: #E6DDC9;
+  padding: 24px 28px;
+  overflow-x: auto;
+  letter-spacing: .005em;
+}
+pre.code .tk-comment{ color: #7E7666; font-style: italic; }
+pre.code .tk-prop{ color: #D4B260; }
+pre.code .tk-val{ color: #C9BFA9; }
+pre.code .tk-sel{ color: #E8D2C6; }
+pre.code .tk-fn{ color: #93A984; }
+
+/* ============================================================
+   ENTITY BADGES
+============================================================ */
+.ent-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.ent-badge .dot{
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+.ent-badge.wtf .dot{ background: var(--wtf-nuit); }
+.ent-badge.ses .dot{ background: var(--ses-gold); }
+.ent-badge.ees .dot{ background: var(--ees-rose); border: 1px solid var(--ees-gold); }
+.ent-badge.voie .dot{ background: var(--voie-copper); }
+.ent-badge.ave .dot{ background: var(--ave-aloes); }
+
+/* ============================================================
+   BREAKPOINT FRAMES — démo composants × 3 BP
+   Chaque frame est un viewport simulé à largeur précise.
+============================================================ */
+.bp-row{
+  display: grid;
+  grid-template-columns: 0.83fr 1.65fr 3.07fr; /* 375 / 768 / 1440 proportions */
+  gap: 24px;
+  align-items: start;
+}
+.bp-frame{
+  background: #fff;
+  border: 1px solid var(--ink-line);
+  position: relative;
+  overflow: hidden;
+}
+.bp-frame .bp-label{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink-mute);
+  background: rgba(255,255,255,.92);
+  padding: 3px 8px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.bp-frame .bp-label strong{ color: var(--ink); font-weight: 600; }
+.bp-frame .bp-viewport{
+  transform-origin: top left;
+  position: relative;
+}
+
+/* Specific frame widths — scaled to fit column width */
+.bp-frame.bp-375{ width: 100%; }
+.bp-frame.bp-375 .bp-viewport{ width: 375px; transform: scale(0.6533); }
+.bp-frame.bp-375.h-560{ height: 366px; }
+.bp-frame.bp-375.h-720{ height: 470px; }
+.bp-frame.bp-375.h-880{ height: 575px; }
+
+.bp-frame.bp-768{ width: 100%; }
+.bp-frame.bp-768 .bp-viewport{ width: 768px; transform: scale(0.642); }
+.bp-frame.bp-768.h-560{ height: 360px; }
+.bp-frame.bp-768.h-720{ height: 462px; }
+.bp-frame.bp-768.h-880{ height: 565px; }
+
+.bp-frame.bp-1440{ width: 100%; }
+.bp-frame.bp-1440 .bp-viewport{ width: 1440px; transform: scale(0.642); }
+.bp-frame.bp-1440.h-560{ height: 360px; }
+.bp-frame.bp-1440.h-720{ height: 462px; }
+.bp-frame.bp-1440.h-880{ height: 565px; }
+
+.bp-caption{
+  display: grid;
+  grid-template-columns: 0.83fr 1.65fr 3.07fr;
+  gap: 24px;
+  margin-top: 14px;
+}
+.bp-caption .cap{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: .04em;
+  line-height: 1.5;
+}
+.bp-caption .cap strong{ color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+   PIED
+============================================================ */
+.doc-footer{
+  background: var(--wtf-nuit-chaude);
+  color: #E6DDC9;
+  padding: 96px;
+  display: grid;
+  grid-template-columns: 5fr 3fr 3fr;
+  gap: 64px;
+}
+.doc-footer h4{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #FAF7F2;
+  margin-bottom: 16px;
+}
+.doc-footer h4 em{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  color: var(--wtf-dore-bas);
+}
+.doc-footer .body-doc{ color: #C9BFA9; font-size: 14px; }
+.doc-footer .label{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--wtf-dore-bas);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.doc-footer .filet{ background: var(--wtf-dore-bas); margin-bottom: 20px; }
+.doc-footer .signature{
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(230, 221, 201, .22);
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #948A78;
+}
+.doc-footer .signature strong{ color: #E6DDC9; font-weight: 500; }
+</style>
+
+<style>
+/* ============================================================
+   STYLES DES COMPOSANTS DU LIBRARY (utilisés dans bp-viewports)
+   Conventions :
+   .c-* = classes de composant ; isolées de la doc.
+   Variables CSS scope par entité appliquées sur .scope-{ees|wtf|ses|voie|ave}
+============================================================ */
+
+/* ---------- SCOPE entités (bascule chromatique sèche au routing) ---------- */
+.scope-wtf{
+  --bg: var(--wtf-light);
+  --bg-2: var(--wtf-lin);
+  --ink-local: var(--ink);
+  --accent: var(--wtf-dore-bas);
+  --accent-2: var(--wtf-nuit);
+}
+.scope-ses{
+  --bg: var(--ses-light);
+  --bg-2: #F2EDE4;
+  --ink-local: var(--ses-ink);
+  --accent: var(--ses-gold);
+  --accent-2: var(--ses-violet);
+}
+.scope-ees{
+  --bg: var(--ees-cream);
+  --bg-2: var(--ees-rose);
+  --ink-local: var(--ink);
+  --accent: var(--ees-gold);
+  --accent-2: var(--ees-rose-deep);
+}
+.scope-voie{
+  --bg: var(--voie-cream);
+  --bg-2: #EFE5D2;
+  --ink-local: var(--ink);
+  --accent: var(--voie-copper);
+  --accent-2: var(--voie-night);
+}
+.scope-ave{
+  --bg: var(--ave-cream);
+  --bg-2: #ECE7DA;
+  --ink-local: var(--ink);
+  --accent: var(--ave-gold);
+  --accent-2: var(--ave-aloes);
+}
+
+/* ---------- TYPO COMPOSANTS (réutilisable inside bp-viewport) ---------- */
+.c-display{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  line-height: .98;
+  letter-spacing: -.022em;
+}
+.c-h1{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.018em;
+}
+.c-h2{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+}
+.c-italic{ font-family: var(--ff-italic); font-style: italic; }
+.c-eyebrow{
+  font-family: var(--ff-body);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.c-body{ font-family: var(--ff-body); font-weight: 400; line-height: 1.65; color: var(--ink-2); }
+
+/* ---------- NAV ---------- */
+.c-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--ff-body);
+}
+.c-nav .brand{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 24, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 20px;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.c-nav .brand em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent); }
+.c-nav ul{
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.c-nav a{
+  font-size: 14px;
+  color: var(--ink-2);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 220ms var(--ease-aesop);
+}
+.c-nav a:hover{ color: var(--ink); }
+.c-nav a:hover::after{
+  content:"";
+  position: absolute;
+  left:0; right:0; bottom:-3px;
+  height: 1px;
+  background: var(--accent);
+  animation: drawline 220ms var(--ease-aesop);
+}
+.c-nav .cta{
+  font-size: 13px;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+  color: var(--ink);
+  letter-spacing: .02em;
+}
+@keyframes drawline{ from{transform: scaleX(0); transform-origin: left;} to{transform: scaleX(1);} }
+
+/* Mobile nav */
+.c-nav-mobile{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--ink-line);
+}
+.c-nav-mobile .brand{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 24, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 17px;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.c-nav-mobile .menu-icon{
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.c-nav-mobile .menu-icon span{
+  display:block;
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* ---------- BOUTONS ---------- */
+.c-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--ff-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 18px 32px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+  transition: all 220ms var(--ease-aesop);
+}
+.c-btn:hover{
+  background: var(--bg);
+  color: var(--accent);
+}
+.c-btn--secondary{
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.c-btn--secondary:hover{
+  background: var(--ink);
+  color: var(--bg);
+}
+.c-btn--tertiary{
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--accent);
+  padding: 8px 0;
+  color: var(--ink);
+  letter-spacing: .12em;
+}
+.c-btn--tertiary:hover{ color: var(--accent); }
+.c-btn .arrow{ font-family: var(--ff-display); font-size: 16px; }
+
+/* ---------- FORM ---------- */
+.c-field{ display: flex; flex-direction: column; gap: 8px; }
+.c-field label{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.c-input,
+.c-textarea{
+  font-family: var(--ff-body);
+  font-size: 16px;
+  padding: 16px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink-line-2);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 220ms var(--ease-aesop);
+  resize: vertical;
+}
+.c-input:focus,
+.c-textarea:focus{ border-bottom-color: var(--accent); }
+.c-textarea{ min-height: 110px; line-height: 1.6; }
+
+.c-checkbox-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.c-checkbox{
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 1px solid var(--ink-line-2);
+  margin-top: 3px;
+  background: transparent;
+  position: relative;
+}
+.c-checkbox.checked{ background: var(--accent); border-color: var(--accent); }
+.c-checkbox.checked::after{
+  content:"";
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border: solid var(--bg);
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+
+/* ---------- CARDS ---------- */
+.c-card{
+  background: var(--bg-2);
+  padding: 40px 36px;
+}
+.c-card .eyebrow-l{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.c-card h3{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 60, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.c-card h3 em{ font-family: var(--ff-italic); font-style: italic; color: var(--ink-2); }
+.c-card .meta{
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink-line);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ---------- PHOTO SLOT (placeholder typographique honnête) ---------- */
+.c-photo-slot{
+  background: var(--bg-2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  border: 1px dashed var(--ink-line-2);
+}
+.c-photo-slot .slot-inner{
+  text-align: center;
+  max-width: 28ch;
+}
+.c-photo-slot .slot-tag{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.c-photo-slot .slot-sujet{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+/* ---------- FOOTER ÉCOSYSTÈME INVARIANT ---------- */
+.c-eco-footer{
+  background: var(--wtf-nuit-chaude);
+  color: #E6DDC9;
+  padding: 80px 64px 48px;
+  font-family: var(--ff-body);
+}
+.c-eco-footer .top{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(230, 221, 201, .18);
+}
+.c-eco-footer .top h5{
+  font-family: var(--ff-body);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--wtf-dore-bas);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.c-eco-footer .top ul{ list-style: none; }
+.c-eco-footer .top li{ margin-bottom: 8px; font-size: 13px; color: #C9BFA9; }
+.c-eco-footer .top li a:hover{ color: #FAF7F2; }
+.c-eco-footer .brand-block .mark{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 36, "wght" 400, "SOFT" 0, "WONK" 0;
+  font-size: 22px;
+  color: #FAF7F2;
+  letter-spacing: -.01em;
+  margin-bottom: 12px;
+}
+.c-eco-footer .brand-block .mark em{ font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); }
+.c-eco-footer .brand-block .quote{
+  font-family: var(--ff-italic);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #C9BFA9;
+  max-width: 32ch;
+  margin-top: 8px;
+}
+.c-eco-footer .bottom{
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #948A78;
+}
+.c-eco-footer .bottom strong{ color: #E6DDC9; font-weight: 500; }
+
+/* ---------- HERO RESPONSIVE F1-F4 ---------- */
+.c-hero{
+  position: relative;
+  display: grid;
+  background: var(--bg);
+}
+.c-hero.desktop{
+  grid-template-columns: 7fr 5fr;
+  gap: 80px;
+  padding: 80px 64px;
+  min-height: 560px;
+  align-items: center;
+}
+.c-hero.tablet{
+  grid-template-columns: 1fr;
+  gap: 48px;
+  padding: 56px 48px;
+  min-height: 560px;
+}
+.c-hero.mobile{
+  grid-template-columns: 1fr;
+  gap: 32px;
+  padding: 32px 24px;
+  min-height: 560px;
+}
+.c-hero .hero-content{ display: flex; flex-direction: column; gap: 24px; }
+.c-hero .hero-tag{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.c-hero .hero-tag::before{
+  content:"";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+.c-hero .hero-title{
+  font-family: var(--ff-display);
+  font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 0, "WONK" 0;
+  font-weight: 300;
+  line-height: .98;
+  letter-spacing: -.022em;
+  color: var(--ink);
+  max-width: 18ch;
+}
+.c-hero .hero-title em{ font-family: var(--ff-italic); font-style: italic; color: var(--accent); }
+.c-hero.desktop .hero-title{ font-size: 64px; }
+.c-hero.tablet .hero-title{ font-size: 48px; }
+.c-hero.mobile .hero-title{ font-size: 36px; }
+.c-hero .hero-lede{
+  font-family: var(--ff-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 46ch;
+  font-weight: 300;
+}
+.c-hero .hero-cta{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<main class="doc">
+
+  <!-- ==========================================================
+       COUVERTURE
+  =========================================================== -->
+  <section class="cover">
+    <div class="cover-meta">
+      <span><strong>Way To Freedom</strong> · Web System V3</span>
+      <span>Lot 9 · Passe 9.1 — Doctrine + Library</span>
+      <span>19 mai 2026</span>
+    </div>
+
+    <div class="cover-body">
+      <h1 class="cover-title">
+        Le site n'est pas la marque.<br>
+        C'est le <em>lieu</em> où la marque se tient.
+      </h1>
+
+      <aside class="cover-aside">
+        <div>
+          <div class="label">Périmètre</div>
+          <div class="value">Doctrine responsive web<br><em>+ library composants</em></div>
+        </div>
+        <div>
+          <div class="label">Breakpoints validés</div>
+          <div class="value">375 · 768 · 1440<br><em>+ bonus 1920</em></div>
+        </div>
+        <div>
+          <div class="label">Stack cible</div>
+          <div class="value">Astro + CMS headless<br><em>(passe Claude Code)</em></div>
+        </div>
+        <div>
+          <div class="label">Sources de vérité</div>
+          <div class="value">tokens-v3.css V3.0b<br>Design System v2.1.1</div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="cover-footer">
+      <p class="quote">
+        Les écoles citées sont des boussoles de tension. Pas des templates.<br>
+        Ce système doit s'attribuer à l'écosystème <em>Way To Freedom</em> — et à personne d'autre.
+      </p>
+      <div class="signature">
+        DirCom Way To Freedom<br>
+        <strong>Claude Design</strong><br>
+        V3.0c · pré-scellement Lot 9
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 1 · CARTOGRAPHIE DE L'ÉCOSYSTÈME
+  =========================================================== -->
+  <section class="chapter">
+    <div class="eyebrow"><span class="num">01</span>Cartographie</div>
+    <h2 class="section" style="margin-top: 32px;">Cinq territoires. <em>Une seule maison.</em></h2>
+    <p class="lede" style="margin-top: 56px;">
+      L'écosystème Way To Freedom se déploie sur cinq sites ou sous-pages. Chacun porte sa palette signature, sa voix
+      éditoriale, son rythme propre. Le footer reste invariant : la page peut être EES en rose poudré, mais le pied dit
+      <em>maison commune</em>.
+    </p>
+
+    <div style="margin-top: 64px;">
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Entité</th>
+            <th style="width: 18%;">Statut frontalisation</th>
+            <th style="width: 22%;">Stack &amp; scope CSS</th>
+            <th style="width: 22%;">Palette dominante</th>
+            <th style="width: 16%;">URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ent-badge wtf"><span class="dot"></span>Way To Freedom</span><br><span class="caption" style="margin-top: 6px; display: block;">Maison-mère narrative</span></td>
+            <td><strong>Refonte V3</strong><br><span class="caption">Voix rare</span></td>
+            <td><code>.scope-wtf</code><br><span class="caption">Astro + CMS headless</span></td>
+            <td><span class="mono">wtf-light · wtf-ink<br>wtf-dore-bas</span></td>
+            <td><span class="caption">waytofreedom.fr</span></td>
+          </tr>
+          <tr>
+            <td><span class="ent-badge ses"><span class="dot"></span>SÉSÂMES</span><br><span class="caption" style="margin-top: 6px; display: block;">Chemin Sébastien · clarification intérieure</span></td>
+            <td><strong>Sous-page caractérisée</strong> WTF</td>
+            <td><code>.scope-ses</code><br><span class="caption">Classe scope CSS sur <code>body</code></span></td>
+            <td><span class="mono">ses-light · ses-ink<br>ses-gold · ses-violet</span></td>
+            <td><span class="caption">waytofreedom.fr<br>/clarification-interieure</span></td>
+          </tr>
+          <tr>
+            <td><span class="ent-badge voie"><span class="dot"></span>Voie d'autonomie</span><br><span class="caption" style="margin-top: 6px; display: block;">Chemin économique · <em>Forever jamais nommé</em></span></td>
+            <td><strong>Sous-page caractérisée</strong> WTF</td>
+            <td><code>.scope-voie</code></td>
+            <td><span class="mono">voie-cream · voie-night<br>voie-copper</span></td>
+            <td><span class="caption">waytofreedom.fr<br>/revenu-complementaire-independant</span></td>
+          </tr>
+          <tr>
+            <td><span class="ent-badge ees"><span class="dot"></span>EssenCel'en Soi</span><br><span class="caption" style="margin-top: 6px; display: block;">Chemin Céline · sanctuaire du corps</span></td>
+            <td><strong>Site propre</strong><br><span class="caption">Refonte structurelle complète depuis WordPress UAGB</span></td>
+            <td><code>.scope-ees</code><br><span class="caption">Astro + Sanity ou Decap</span></td>
+            <td><span class="mono">ees-cream · ees-rose<br>ees-gold</span></td>
+            <td><span class="caption">essencelensoi.fr</span></td>
+          </tr>
+          <tr>
+            <td><span class="ent-badge ave"><span class="dot"></span>Aloe Vera Excellence</span><br><span class="caption" style="margin-top: 6px; display: block;">Hub pédagogique discret · jamais en façade</span></td>
+            <td><strong>Site propre</strong></td>
+            <td><code>.scope-ave</code></td>
+            <td><span class="mono">ave-cream · ave-aloes<br>ave-gold</span></td>
+            <td><span class="caption">aloeveraexcellence.com</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top: 96px;">
+      <div>
+        <h3 class="block">Doctrine de bascule chromatique.</h3>
+        <div class="filet" style="margin-top: 24px;"></div>
+        <p class="body-doc" style="margin-top: 24px;">
+          La bascule entre territoires est <strong>sèche au routing</strong> — le rechargement de route applique une classe
+          <code>.scope-{entite}</code> sur <code>&lt;body&gt;</code> qui redéfinit les variables CSS de l'entité. Pas
+          de transition au scroll, pas de fondu, pas d'animation de bienvenue. La marque change parce qu'on a
+          changé de page.
+        </p>
+        <p class="body-doc" style="margin-top: 14px;">
+          Une seule règle de bascule par entité. Source unique : <code>tokens-v3.css</code>.
+        </p>
+      </div>
+      <div>
+        <pre class="code">
+<span class="tk-comment">/* Bascule chromatique · une règle par entité */</span>
+<span class="tk-sel">.scope-ees</span> {
+  <span class="tk-prop">--bg</span>:     <span class="tk-val">var(--ees-cream)</span>;
+  <span class="tk-prop">--bg-2</span>:   <span class="tk-val">var(--ees-rose)</span>;
+  <span class="tk-prop">--accent</span>: <span class="tk-val">var(--ees-gold)</span>;
+}
+
+<span class="tk-sel">.scope-ses</span> {
+  <span class="tk-prop">--bg</span>:     <span class="tk-val">var(--ses-light)</span>;
+  <span class="tk-prop">--accent</span>: <span class="tk-val">var(--ses-gold)</span>;
+  <span class="tk-prop">--accent-2</span>: <span class="tk-val">var(--ses-violet)</span>;
+}
+
+<span class="tk-comment">/* Le footer reste invariant.            */</span>
+<span class="tk-comment">/* La page peut être EES rose poudré,    */</span>
+<span class="tk-comment">/* mais le pied dit maison commune.      */</span>
+<span class="tk-sel">.eco-footer</span> { <span class="tk-prop">background</span>: <span class="tk-val">var(--wtf-nuit-chaude)</span>; }
+</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 2 · BREAKPOINTS
+  =========================================================== -->
+  <section class="chapter" style="background: var(--paper-soft);">
+    <div class="eyebrow"><span class="num">02</span>Breakpoints</div>
+    <h2 class="section" style="margin-top: 32px;">Six paliers CSS. <em>Trois</em> maquettes validées.</h2>
+    <p class="lede" style="margin-top: 56px;">
+      Les <strong>six breakpoints CSS</strong> structurent les media queries. Les <strong>trois breakpoints
+      maquettes</strong> sont ceux qui font foi en validation — un visuel qui tient à 375, 768 et 1440 tient le reste.
+      Au-delà de 1920, on contraint le contenu sur une largeur maximale plutôt que d'inventer une nouvelle composition.
+    </p>
+
+    <div class="grid-2" style="margin-top: 80px;">
+      <div>
+        <div class="eyebrow"><span class="num">02·a</span>Six paliers CSS</div>
+        <table class="doc-table" style="margin-top: 32px;">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Valeur</th>
+              <th>Rôle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>--bp-min</code></td><td><strong>320px</strong></td><td>Plancher garde-fou</td></tr>
+            <tr><td><code>--bp-sm</code></td><td><strong>640px</strong></td><td>Mobile large → tablette portrait</td></tr>
+            <tr><td><code>--bp-md</code></td><td><strong>1024px</strong></td><td>Tablette paysage → laptop</td></tr>
+            <tr><td><code>--bp-lg</code></td><td><strong>1280px</strong></td><td>Desktop standard</td></tr>
+            <tr><td><code>--bp-xl</code></td><td><strong>1600px</strong></td><td>Desktop large</td></tr>
+            <tr><td><code>--bp-2xl</code></td><td><strong>1920px</strong></td><td>Plafond, contraint au-delà</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class="eyebrow"><span class="num">02·b</span>Trois maquettes validées</div>
+        <table class="doc-table" style="margin-top: 32px;">
+          <thead>
+            <tr>
+              <th>Largeur</th>
+              <th>Cible</th>
+              <th>Comportement hero</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>375 px</strong></td><td>Mobile portrait<br><span class="caption">iPhone moyen, plancher Lighthouse</span></td><td>Pile verticale, ratio 3:4</td></tr>
+            <tr><td><strong>768 px</strong></td><td>Tablette portrait<br><span class="caption">iPad standard</span></td><td>Pile / 2-colonnes adapté, ratio 4:3</td></tr>
+            <tr><td><strong>1440 px</strong></td><td>Desktop standard<br><span class="caption">MacBook Air, écran moyen</span></td><td>2 colonnes, ratio 2:1</td></tr>
+          </tbody>
+        </table>
+        <p class="body-doc" style="margin-top: 24px;">
+          <em>Bonus 1920</em> sur les deux hero les plus structurants — WTF maison-mère + EES Home — quand la composition
+          le justifie.
+        </p>
+      </div>
+    </div>
+
+    <!-- Logos petites largeurs -->
+    <div style="margin-top: 96px;">
+      <h3 class="block">Logos &amp; petites largeurs. <em>Plancher minimum, fallback typo.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <table class="doc-table" style="margin-top: 32px;">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Plancher minimum</th>
+            <th>Comportement sous plancher</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Wordmarks</strong> EES, SÉSÂMES, AVE</td><td>240 px de large</td><td>Fallback typographique <em>(Fraunces 22pt)</em></td></tr>
+          <tr><td><strong>Sceaux</strong> LogoWTF, LogoAVE</td><td>32 px</td><td>Préservés intégralement <em>(PNG transparent)</em></td></tr>
+          <tr><td><strong>Triangle SÉSÂMES</strong></td><td>24 px</td><td>Préservé intégralement</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 3 · ÉCHELLE TYPOGRAPHIQUE FLUIDE
+  =========================================================== -->
+  <section class="chapter">
+    <div class="eyebrow"><span class="num">03</span>Échelle typographique fluide</div>
+    <h2 class="section" style="margin-top: 32px;">Six paliers <em>clamp()</em>. Une seule équation par registre.</h2>
+    <p class="lede" style="margin-top: 56px;">
+      L'échelle typographique fluide via <code>clamp()</code> évite les sauts brutaux entre breakpoints. Chaque palier
+      interpole linéairement entre une borne basse (mobile) et une borne haute (desktop large) selon la largeur de
+      viewport. Plancher absolu : <strong>16 px</strong> pour le body, <strong>12 px</strong> pour les méta — WCAG AA et
+      plancher TIP V3 respectés.
+    </p>
+
+    <div style="margin-top: 64px;">
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 18%;">Token</th>
+            <th style="width: 32%;">Équation</th>
+            <th style="width: 14%;">Mobile (375)</th>
+            <th style="width: 14%;">Desktop (1440)</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--type-display</code></td><td><span class="mono">clamp(2.5rem, 5vw + 1rem, 6rem)</span></td><td>40 px</td><td>76 px</td><td>Hero, signature pivot</td></tr>
+          <tr><td><code>--type-h1</code></td><td><span class="mono">clamp(2rem, 3vw + 1rem, 4rem)</span></td><td>33 px</td><td>50 px</td><td>Titre principal page</td></tr>
+          <tr><td><code>--type-h2</code></td><td><span class="mono">clamp(1.5rem, 2vw + .75rem, 2.5rem)</span></td><td>25 px</td><td>34 px</td><td>Titre section</td></tr>
+          <tr><td><code>--type-h3</code></td><td><span class="mono">clamp(1.25rem, 1vw + .875rem, 1.75rem)</span></td><td>21 px</td><td>23 px</td><td>Titre bloc</td></tr>
+          <tr><td><code>--type-body</code></td><td><span class="mono">clamp(1rem, .5vw + .875rem, 1.125rem)</span></td><td>16 px</td><td>17 px</td><td>Corps de texte courant</td></tr>
+          <tr><td><code>--type-small</code></td><td><span class="mono">clamp(.75rem, .25vw + .6875rem, .875rem)</span></td><td>12 px</td><td>13 px</td><td>Méta, tags, captions</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Démo visuelle clamp() -->
+    <div style="margin-top: 96px;">
+      <h3 class="block">Démonstration. <em>Une même phrase, trois viewports.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+
+      <div class="bp-row" style="margin-top: 32px;">
+        <!-- 375 -->
+        <div class="bp-frame bp-375 h-560">
+          <span class="bp-label">375 · <strong>mobile</strong></span>
+          <div class="bp-viewport scope-ees" style="background: var(--bg); padding: 48px 24px 32px;">
+            <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 40px; line-height: 1; letter-spacing: -.022em; color: var(--ink);">
+              Reposer ce qui demande à <span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">l'être.</span>
+            </div>
+            <p style="font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 24px;">
+              Pratique énergétique et corporelle. Une heure pour reposer le système nerveux.
+            </p>
+          </div>
+        </div>
+
+        <!-- 768 -->
+        <div class="bp-frame bp-768 h-560">
+          <span class="bp-label">768 · <strong>tablette</strong></span>
+          <div class="bp-viewport scope-ees" style="background: var(--bg); padding: 56px 48px;">
+            <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 60px; line-height: 1; letter-spacing: -.022em; color: var(--ink); max-width: 14ch;">
+              Reposer ce qui demande à <span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">l'être.</span>
+            </div>
+            <p style="font-size: 17px; line-height: 1.65; color: var(--ink-2); margin-top: 32px; max-width: 46ch;">
+              Pratique énergétique et corporelle. Une heure pour reposer le système nerveux, retrouver la fluidité du
+              souffle, honorer ce qui se dépose.
+            </p>
+          </div>
+        </div>
+
+        <!-- 1440 -->
+        <div class="bp-frame bp-1440 h-560">
+          <span class="bp-label">1440 · <strong>desktop</strong></span>
+          <div class="bp-viewport scope-ees" style="background: var(--bg); padding: 80px 96px;">
+            <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 144, 'wght' 300; font-size: 76px; line-height: .98; letter-spacing: -.022em; color: var(--ink); max-width: 14ch;">
+              Reposer ce qui demande à <span style="font-family: var(--ff-italic); font-style: italic; color: var(--ees-gold);">l'être.</span>
+            </div>
+            <p style="font-size: 18px; line-height: 1.65; color: var(--ink-2); margin-top: 40px; max-width: 46ch;">
+              Pratique énergétique et corporelle. Une heure pour reposer le système nerveux, retrouver la fluidité du
+              souffle, honorer ce qui se dépose.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bp-caption">
+        <div class="cap"><strong>40 px</strong> · plancher fluide.<br>Pile verticale, marges 24 px.</div>
+        <div class="cap"><strong>60 px</strong> · interpolation.<br>Marges 48 px, mesure 14ch.</div>
+        <div class="cap"><strong>76 px</strong> · plafond fluide.<br>Marges 96 px, lecture confortable.</div>
+      </div>
+    </div>
+
+    <!-- Tracking -->
+    <div style="margin-top: 96px;">
+      <h3 class="block">Tracking borné. <em>Trois paliers, pas un de plus.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        En rasterisation 3× les glyphes flottent au-delà de 0.22em. Le tracking est borné par paliers selon le corps :
+        au-delà du seuil, les caractères perdent leur ancrage et le texte se désintègre visuellement.
+      </p>
+      <div class="grid-3" style="margin-top: 40px;">
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">11–13 px</div>
+          <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-top: 16px; color: var(--ink);">tracking wide · .12em</div>
+          <div class="mono" style="margin-top: 12px;">--tracking-wide</div>
+        </div>
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">14–18 px</div>
+          <div style="font-size: 14px; letter-spacing: .16em; text-transform: uppercase; margin-top: 16px; color: var(--ink);">tracking wider · .16em</div>
+          <div class="mono" style="margin-top: 12px;">--tracking-wider</div>
+        </div>
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">≥ 19 px</div>
+          <div style="font-size: 19px; letter-spacing: .22em; text-transform: uppercase; margin-top: 16px; color: var(--ink);">widest · .22em</div>
+          <div class="mono" style="margin-top: 12px;">--tracking-widest</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 4 · INTERACTIONS
+  =========================================================== -->
+  <section class="chapter">
+    <div class="eyebrow"><span class="num">04</span>Interactions</div>
+    <h2 class="section" style="margin-top: 32px;">Pas de halo SaaS. <em>Pas d'urgence.</em> Une seule courbe d'easing.</h2>
+    <p class="lede" style="margin-top: 56px;">
+      Le registre éditorial impose une grammaire d'interaction sobre. Les transitions existent, mais elles
+      <em>retiennent</em> au lieu de claquer. Une seule courbe d'easing pour tout l'écosystème — la même qu'on
+      retrouverait dans le pas patient d'une visite chez Aesop.
+    </p>
+
+    <div class="grid-2" style="margin-top: 80px;">
+      <div>
+        <h3 class="block">Focus visible. <em>Outline 2px, offset 2px.</em></h3>
+        <div class="filet" style="margin-top: 24px;"></div>
+        <p class="body-doc" style="margin-top: 24px;">
+          Refus absolu du halo SaaS bleu. Le focus visible respecte la palette de l'entité — il prend la couleur
+          <code>--accent</code> du scope actif. Toujours un outline net, jamais un glow.
+        </p>
+        <pre class="code" style="margin-top: 24px;">
+<span class="tk-sel">:focus-visible</span> {
+  <span class="tk-prop">outline</span>: <span class="tk-val">2px solid var(--accent)</span>;
+  <span class="tk-prop">outline-offset</span>: <span class="tk-val">2px</span>;
+}
+<span class="tk-comment">/* Jamais box-shadow halo, jamais glow */</span>
+</pre>
+      </div>
+
+      <div>
+        <h3 class="block">Transitions normées. <em>Une courbe, trois durées.</em></h3>
+        <div class="filet" style="margin-top: 24px;"></div>
+        <table class="doc-table" style="margin-top: 24px;">
+          <thead>
+            <tr><th>Contexte</th><th>Durée</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Micro-interactions <em>(hover, focus, toggle)</em></td><td><strong>220 ms</strong></td></tr>
+            <tr><td>Bascule routing entre territoires</td><td><strong>Instantanée</strong> <span class="caption">(rechargement)</span></td></tr>
+            <tr><td>Apparition au scroll <em>(parcimonie)</em></td><td><strong>320 ms</strong></td></tr>
+          </tbody>
+        </table>
+        <pre class="code" style="margin-top: 24px;">
+<span class="tk-comment">/* Easing Aesop · une seule courbe partout */</span>
+<span class="tk-prop">--ease-aesop</span>: <span class="tk-val">cubic-bezier(0.22, 0.61, 0.36, 1)</span>;
+</pre>
+      </div>
+    </div>
+
+    <!-- Démos hover -->
+    <div style="margin-top: 96px;">
+      <h3 class="block">Hover liens. <em>Le souligné s'épaissit, il n'apparaît pas.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <div class="grid-2" style="margin-top: 40px;">
+        <div style="background: var(--paper-soft); padding: 48px;">
+          <div class="caption" style="margin-bottom: 24px;">Lien corps de texte · italique Instrument Serif</div>
+          <p style="font-family: var(--ff-body); font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 42ch;">
+            Les soins proposés s'inscrivent dans la durée — voir
+            <a href="#" style="font-family: var(--ff-italic); font-style: italic; color: var(--ink); border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 1px;">notre approche</a>
+            ou
+            <a href="#" style="font-family: var(--ff-italic); font-style: italic; color: var(--wtf-dore-bas); border-bottom: 2px solid var(--wtf-dore-bas); padding-bottom: 1px;">prendre rendez-vous</a>
+            si vous le souhaitez.
+          </p>
+          <div class="caption" style="margin-top: 24px;">
+            <strong style="color: var(--ink);">Au repos</strong> · souligné 1px<br>
+            <strong style="color: var(--ink);">Hover</strong> · souligné s'épaissit à 2px en 220ms
+          </div>
+        </div>
+
+        <div style="background: var(--paper-soft); padding: 48px;">
+          <div class="caption" style="margin-bottom: 24px;">Lien navigation · pas de souligné par défaut</div>
+          <nav style="display: flex; gap: 32px; align-items: center;">
+            <span style="font-family: var(--ff-body); font-size: 14px; color: var(--ink-2);">Accueil</span>
+            <span style="font-family: var(--ff-body); font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--wtf-dore-bas); padding-bottom: 3px;">Soins</span>
+            <span style="font-family: var(--ff-body); font-size: 14px; color: var(--ink-2);">Ressources</span>
+            <span style="font-family: var(--ff-body); font-size: 14px; color: var(--ink-2);">À propos</span>
+          </nav>
+          <div class="caption" style="margin-top: 32px;">
+            <strong style="color: var(--ink);">Au repos</strong> · pas de souligné<br>
+            <strong style="color: var(--ink);">Hover</strong> · filet bas 1px <code>--accent</code> apparaît en 220ms
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky doctrine -->
+    <div style="margin-top: 96px;">
+      <h3 class="block">Sticky. <em>Refus du sticky agressif.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <div class="grid-2" style="margin-top: 40px;">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 16px;">Refusé</div>
+          <ul class="body-doc" style="list-style: none; padding-left: 0;">
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">CTA flottant qui suit le scroll</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Header qui se réduit en taille au scroll</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Sidebar de partage social qui colle</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Bannière cookies persistante anti-respiration</li>
+            <li style="padding: 8px 0;">Newsletter pop-up déclenchée au scroll</li>
+          </ul>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom: 16px;">Accepté</div>
+          <ul class="body-doc" style="list-style: none; padding-left: 0;">
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Header standard sticky <em>sans réduction</em></li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Sidebar table des matières <em>sur articles longs desktop</em></li>
+            <li style="padding: 8px 0;">Skip link "Aller au contenu" focus-only</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 96px;">
+      <h3 class="block">Curseurs. <em>Default partout. Pointer sur cliquables. C'est tout.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        Pas de curseur personnalisé (rond suiveur, magnétisme, blob). Pas de cursor:wait abusif. Pas de cursor:not-allowed
+        décoratif. La main est silencieuse — elle bouge quand il faut, elle disparaît quand il faut.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 5 · LIBRARY WEB COMPONENTS × 3 BREAKPOINTS
+  =========================================================== -->
+  <section class="chapter" style="background: var(--paper-soft);">
+    <div class="eyebrow"><span class="num">05</span>Library web components</div>
+    <h2 class="section" style="margin-top: 32px; max-width: 28ch;">Huit composants. <em>Trois viewports.</em> Une seule grammaire.</h2>
+    <p class="lede" style="margin-top: 56px;">
+      Le library expose les composants atomiques qui structurent les cinq sites. Chacun est démontré à
+      <strong>375 / 768 / 1440</strong> — les trois breakpoints qui font foi. Les viewports sont mis à l'échelle pour
+      cohabiter sur cette double page ; les proportions internes restent fidèles.
+    </p>
+
+    <!-- ============ 05·a Nav / Header ============ -->
+    <div style="margin-top: 96px;">
+      <h3 class="block"><span class="caption" style="font-family: var(--ff-mono); display: block; margin-bottom: 8px;">05·a</span>Nav · Header de page. <em>Logo gauche, liens centre/droite, CTA seul.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        Le header de page tient la même grammaire sur les cinq territoires. Sur mobile, un menu pliable (drawer Escape-able).
+        Sur tablette et desktop, les liens s'étalent. Le CTA principal (RDV ou Contact selon entité) s'isole à droite,
+        signalé par un filet bas <code>--accent</code>.
+      </p>
+
+      <div class="bp-row" style="margin-top: 40px;">
+        <!-- 375 -->
+        <div class="bp-frame bp-375" style="height: 86px;">
+          <span class="bp-label">375</span>
+          <div class="bp-viewport scope-ees">
+            <div class="c-nav-mobile" style="height: 86px;">
+              <div class="brand">EssenCel'en Soi</div>
+              <div class="menu-icon"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 768 -->
+        <div class="bp-frame bp-768" style="height: 86px;">
+          <span class="bp-label">768</span>
+          <div class="bp-viewport scope-ees">
+            <div class="c-nav" style="padding: 22px 40px;">
+              <div class="brand">EssenCel'en Soi</div>
+              <ul>
+                <li><a href="#">Soins</a></li>
+                <li><a href="#">Ressources</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#" class="cta">Rendez-vous</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1440 -->
+        <div class="bp-frame bp-1440" style="height: 86px;">
+          <span class="bp-label">1440</span>
+          <div class="bp-viewport scope-ees">
+            <div class="c-nav">
+              <div class="brand">EssenCel'en Soi</div>
+              <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Soins &amp; Parcours</a></li>
+                <li><a href="#">Le Cocoon</a></li>
+                <li><a href="#">Ressources</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#" class="cta">Demander un rendez-vous</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bp-caption">
+        <div class="cap"><strong>375</strong> · drawer plié.<br>3 lignes hamburger,<br>brand à 17px max.</div>
+        <div class="cap"><strong>768</strong> · liens étalés.<br>4 entrées maximum,<br>CTA inline filet bas.</div>
+        <div class="cap"><strong>1440</strong> · navigation complète.<br>Tous les niveaux exposés,<br>CTA libellé long acceptable.</div>
+      </div>
+    </div>
+
+    <!-- ============ 05·b Boutons ============ -->
+    <div style="margin-top: 128px;">
+      <h3 class="block"><span class="caption" style="font-family: var(--ff-mono); display: block; margin-bottom: 8px;">05·b</span>Boutons. <em>Trois variantes, jamais une de plus.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        <strong>Primaire</strong> · plein <code>--accent</code>, fond de la couleur de marque (jamais noir, jamais blanc).
+        Tracking 0.14em, padding 18×32, hover inversion couleur.<br>
+        <strong>Secondaire</strong> · transparent + outline encre. Pour les actions de complément.<br>
+        <strong>Tertiaire</strong> · filet bas seul. Lien d'action sans poids visuel.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-top: 48px;">
+        <!-- WTF -->
+        <div class="scope-wtf" style="background: var(--bg); padding: 40px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div class="caption" style="margin-bottom: 8px;">scope-wtf</div>
+          <button class="c-btn">Lire la suite</button>
+          <button class="c-btn c-btn--secondary">Notre approche</button>
+          <button class="c-btn c-btn--tertiary">Continuer →</button>
+        </div>
+        <!-- SES -->
+        <div class="scope-ses" style="background: var(--bg); padding: 40px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div class="caption" style="margin-bottom: 8px;">scope-ses</div>
+          <button class="c-btn">Demander un appel</button>
+          <button class="c-btn c-btn--secondary">Voir les passages</button>
+          <button class="c-btn c-btn--tertiary">Continuer →</button>
+        </div>
+        <!-- EES -->
+        <div class="scope-ees" style="background: var(--bg); padding: 40px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div class="caption" style="margin-bottom: 8px;">scope-ees</div>
+          <button class="c-btn">Prendre RDV</button>
+          <button class="c-btn c-btn--secondary">Les soins</button>
+          <button class="c-btn c-btn--tertiary">Continuer →</button>
+        </div>
+        <!-- VOIE -->
+        <div class="scope-voie" style="background: var(--bg); padding: 40px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div class="caption" style="margin-bottom: 8px;">scope-voie</div>
+          <button class="c-btn">Recevoir le brief</button>
+          <button class="c-btn c-btn--secondary">La méthode</button>
+          <button class="c-btn c-btn--tertiary">Continuer →</button>
+        </div>
+        <!-- AVE -->
+        <div class="scope-ave" style="background: var(--bg); padding: 40px 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div class="caption" style="margin-bottom: 8px;">scope-ave</div>
+          <button class="c-btn">Lire l'article</button>
+          <button class="c-btn c-btn--secondary">Les catégories</button>
+          <button class="c-btn c-btn--tertiary">Continuer →</button>
+        </div>
+      </div>
+      <p class="caption" style="margin-top: 24px;">
+        Une seule grammaire de bouton. La couleur change. La forme, jamais.
+      </p>
+    </div>
+
+    <!-- ============ 05·c Forms ============ -->
+    <div style="margin-top: 128px;">
+      <h3 class="block"><span class="caption" style="font-family: var(--ff-mono); display: block; margin-bottom: 8px;">05·c</span>Forms. <em>Filet bas, jamais de cadre.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        Les champs n'ont pas de cadre — un simple filet bas qui change de couleur au focus. Pas de placeholder gris pâle
+        qui simule un label rempli. Le label vit au-dessus, en small caps tracking 0.18em.
+        La case RGPD est <em>éditorialisée</em> — elle dit ce qu'elle fait, en phrase entière.
+      </p>
+
+      <div class="bp-row" style="margin-top: 40px;">
+        <!-- 375 -->
+        <div class="bp-frame bp-375 h-720">
+          <span class="bp-label">375</span>
+          <div class="bp-viewport scope-voie" style="background: var(--bg); padding: 40px 24px; display: flex; flex-direction: column; gap: 28px;">
+            <div class="c-eyebrow">Formulaire · Voie</div>
+            <div class="c-h2" style="font-size: 30px;">Écrire à Céline &amp; Sébastien.</div>
+            <div class="c-field"><label>Prénom &amp; Nom</label><input type="text" class="c-input" value="Camille Dubois"></div>
+            <div class="c-field"><label>Email</label><input type="email" class="c-input" value="camille.dubois@…"></div>
+            <div class="c-field"><label>Votre question</label><textarea class="c-textarea">Je viens de découvrir…</textarea></div>
+            <div class="c-checkbox-row">
+              <span class="c-checkbox checked"></span>
+              <span>J'accepte que mon message soit lu par Céline &amp; Sébastien et que mon adresse email serve à la seule réponse à ce message.</span>
+            </div>
+            <button class="c-btn" style="align-self: flex-start;">Envoyer</button>
+          </div>
+        </div>
+
+        <!-- 768 -->
+        <div class="bp-frame bp-768 h-720">
+          <span class="bp-label">768</span>
+          <div class="bp-viewport scope-voie" style="background: var(--bg); padding: 56px 64px; display: flex; flex-direction: column; gap: 32px;">
+            <div class="c-eyebrow">Formulaire · Voie d'autonomie</div>
+            <div class="c-h2" style="font-size: 40px;">Écrire à <span class="c-italic" style="color: var(--voie-copper);">Céline &amp; Sébastien.</span></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+              <div class="c-field"><label>Prénom &amp; Nom</label><input type="text" class="c-input" value="Camille Dubois"></div>
+              <div class="c-field"><label>Email</label><input type="email" class="c-input" value="camille.dubois@…"></div>
+            </div>
+            <div class="c-field"><label>Votre question</label><textarea class="c-textarea">Je viens de découvrir Way To Freedom à travers le partage d'une amie. J'aimerais savoir si une démarche d'autonomie complémentaire reste possible quand on a déjà cinquante ans.</textarea></div>
+            <div class="c-checkbox-row">
+              <span class="c-checkbox checked"></span>
+              <span>J'accepte que mon message soit lu par Céline &amp; Sébastien et que mon adresse email serve à la seule réponse à ce message — pas de mise en liste, pas de newsletter automatique.</span>
+            </div>
+            <button class="c-btn" style="align-self: flex-start;">Envoyer le message</button>
+          </div>
+        </div>
+
+        <!-- 1440 -->
+        <div class="bp-frame bp-1440 h-720">
+          <span class="bp-label">1440</span>
+          <div class="bp-viewport scope-voie" style="background: var(--bg); padding: 64px 96px; display: grid; grid-template-columns: 4fr 6fr; gap: 96px; align-items: start;">
+            <div>
+              <div class="c-eyebrow">Formulaire · Voie d'autonomie</div>
+              <div class="c-h2" style="font-size: 44px; margin-top: 24px;">Écrire à <span class="c-italic" style="color: var(--voie-copper);">Céline &amp; Sébastien.</span></div>
+              <p style="font-family: var(--ff-body); font-size: 16px; line-height: 1.65; color: var(--ink-2); margin-top: 32px; max-width: 36ch;">
+                Une réponse humaine arrive sous 48 heures. Pas de bot, pas de séquence automatique.
+              </p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 32px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+                <div class="c-field"><label>Prénom &amp; Nom</label><input type="text" class="c-input" value="Camille Dubois"></div>
+                <div class="c-field"><label>Email</label><input type="email" class="c-input" value="camille.dubois@protonmail.com"></div>
+              </div>
+              <div class="c-field"><label>Téléphone <em style="font-style: italic; text-transform: none; letter-spacing: normal; font-family: var(--ff-italic); font-size: 13px;">(facultatif)</em></label><input type="tel" class="c-input" value="06 12 34 56 78"></div>
+              <div class="c-field"><label>Votre question</label><textarea class="c-textarea">Je viens de découvrir Way To Freedom à travers le partage d'une amie. J'aimerais savoir si une démarche d'autonomie complémentaire reste possible quand on a déjà cinquante ans, et comment vous accompagnez sans urgence.</textarea></div>
+              <div class="c-checkbox-row">
+                <span class="c-checkbox checked"></span>
+                <span>J'accepte que mon message soit lu par Céline &amp; Sébastien et que mon adresse email serve à la seule réponse à ce message — pas de mise en liste, pas de newsletter automatique, pas de transfert tiers.</span>
+              </div>
+              <button class="c-btn" style="align-self: flex-start;">Envoyer le message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bp-caption">
+        <div class="cap"><strong>375</strong> · pile.<br>Labels au-dessus, champs pleine largeur.</div>
+        <div class="cap"><strong>768</strong> · 2 colonnes ponctuelles.<br>Nom + email côte à côte.</div>
+        <div class="cap"><strong>1440</strong> · split éditorial.<br>Texte d'intention gauche, champs droite.</div>
+      </div>
+    </div>
+
+    <!-- ============ 05·d Cards ============ -->
+    <div style="margin-top: 128px;">
+      <h3 class="block"><span class="caption" style="font-family: var(--ff-mono); display: block; margin-bottom: 8px;">05·d</span>Cards · Article, citation, pratique. <em>Trois usages, une grammaire.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        Les cards n'ont pas de coins arrondis SaaS. Fond <code>--bg-2</code> (variation chaude du fond principal),
+        eyebrow small caps, titre Fraunces, meta en pied séparé par un filet. Pas d'ombre portée. Pas d'élévation au hover —
+        seul le titre passe en couleur d'accent.
+      </p>
+
+      <div class="grid-3" style="margin-top: 48px;">
+        <!-- Card article -->
+        <div class="scope-ees c-card">
+          <div class="eyebrow-l">Ressources · Chemins d'apaisement</div>
+          <h3>Reposer le système nerveux <em>quand le corps ne lâche pas.</em></h3>
+          <p class="body-doc" style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">
+            Reconnaître la fatigue d'usure. Nommer les seuils. Tenir l'espace pendant qu'on les traverse —
+            sans urgence, sans promesse pressée.
+          </p>
+          <div class="meta">Lecture 6 min · Céline Marcadet</div>
+        </div>
+
+        <!-- Card citation -->
+        <div class="scope-ses c-card" style="background: var(--ses-light); border-top: 1px solid var(--ses-gold);">
+          <div class="eyebrow-l">Citation · SÉSÂMES</div>
+          <h3 style="font-family: var(--ff-italic); font-style: italic; font-weight: 400; color: var(--ses-ink); font-size: 32px; line-height: 1.2;">
+            Pas par manque de sérieux.<br>Par manque de système.
+          </h3>
+          <div class="meta" style="color: var(--ses-gold);">Sébastien Marcadet · 28 avril 2026</div>
+        </div>
+
+        <!-- Card pratique -->
+        <div class="scope-ave c-card">
+          <div class="eyebrow-l">Signal du corps · Fatigue</div>
+          <h3>Quand le corps <em>ralentit.</em></h3>
+          <p class="body-doc" style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">
+            Comprendre la fatigue chronique comme un signal d'usage, pas comme un défaut.
+            Ce que dit votre corps quand il vous demande de poser le pas.
+          </p>
+          <div class="meta">Pédagogie · Aloe Vera Excellence</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 05·e Hero responsive ============ -->
+    <div style="margin-top: 128px;">
+      <h3 class="block"><span class="caption" style="font-family: var(--ff-mono); display: block; margin-bottom: 8px;">05·e</span>Hero responsive F1–F4. <em>Pile mobile, split desktop.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        Le hero est l'écran d'accueil au-dessus du fil. Sur desktop il s'étend sur deux colonnes — texte gauche, photo
+        droite (ratio 2:1). Sur tablette, la photo passe en bandeau supérieur (4:3). Sur mobile, tout pile verticalement
+        en portrait 3:4. La photo est <em>placeholder typographique honnête</em> en V1, à remplacer par photos
+        authentiques Céline ou Sébastien.
+      </p>
+
+      <div class="bp-row" style="margin-top: 40px;">
+        <!-- 375 -->
+        <div class="bp-frame bp-375 h-880">
+          <span class="bp-label">375 · <strong>F3 EES</strong></span>
+          <div class="bp-viewport scope-ees">
+            <div class="c-hero mobile" style="padding-top: 48px;">
+              <div class="hero-content">
+                <div class="hero-tag">Sanctuaire du corps</div>
+                <div class="hero-title">Reposer ce qui demande à <span class="c-italic">l'être.</span></div>
+                <p class="hero-lede">
+                  Pratique énergétique et corporelle. Une heure pour reposer le système nerveux.
+                </p>
+                <div class="hero-cta">
+                  <button class="c-btn">Prendre RDV</button>
+                </div>
+              </div>
+              <div class="c-photo-slot" style="height: 340px; margin-top: 8px;">
+                <div class="slot-inner">
+                  <div class="slot-tag">Slot photo · Hero EES</div>
+                  <div class="slot-sujet">Cabinet de Céline · main sur ventre · lumière matinale chaude · ratio 3:4 portrait</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 768 -->
+        <div class="bp-frame bp-768 h-880">
+          <span class="bp-label">768 · <strong>F3 EES</strong></span>
+          <div class="bp-viewport scope-ees">
+            <div class="c-hero tablet" style="padding-top: 56px;">
+              <div class="c-photo-slot" style="height: 360px;">
+                <div class="slot-inner">
+                  <div class="slot-tag">Slot photo · Hero EES tablette</div>
+                  <div class="slot-sujet">Cabinet de Céline · main sur ventre · ratio 4:3 paysage doux</div>
+                </div>
+              </div>
+              <div class="hero-content">
+                <div class="hero-tag">Sanctuaire du corps · Sainte-Hélène en Médoc</div>
+                <div class="hero-title">Reposer ce qui demande à <span class="c-italic">l'être.</span></div>
+                <p class="hero-lede">
+                  Pratique énergétique et corporelle. Une heure pour reposer le système nerveux, retrouver la
+                  fluidité du souffle, honorer ce qui se dépose.
+                </p>
+                <div class="hero-cta">
+                  <button class="c-btn">Prendre rendez-vous</button>
+                  <button class="c-btn c-btn--tertiary">Les soins →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1440 -->
+        <div class="bp-frame bp-1440 h-880">
+          <span class="bp-label">1440 · <strong>F3 EES</strong></span>
+          <div class="bp-viewport scope-ees">
+            <div class="c-hero desktop" style="min-height: 880px;">
+              <div class="hero-content">
+                <div class="hero-tag">Sanctuaire du corps · Sainte-Hélène en Médoc</div>
+                <div class="hero-title">Reposer ce qui demande à <span class="c-italic">l'être.</span></div>
+                <p class="hero-lede">
+                  Pratique énergétique et corporelle. Une heure pour reposer le système nerveux, retrouver la
+                  fluidité du souffle, honorer ce qui se dépose. Sans urgence. Au rythme propre.
+                </p>
+                <div class="hero-cta" style="margin-top: 24px;">
+                  <button class="c-btn">Demander un rendez-vous</button>
+                  <button class="c-btn c-btn--tertiary">Découvrir les soins →</button>
+                </div>
+              </div>
+              <div class="c-photo-slot" style="height: 600px;">
+                <div class="slot-inner">
+                  <div class="slot-tag">Slot photo · Hero EES desktop</div>
+                  <div class="slot-sujet">Cabinet de Céline en Médoc · trois-quarts cadre serré · main sur ventre · liseré rose poudré 0.16em · ratio 2:1 paysage</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bp-caption">
+        <div class="cap"><strong>Pile 3:4</strong> · texte en haut, photo dessous, CTA primaire seul.</div>
+        <div class="cap"><strong>Photo bandeau 4:3</strong> · texte sous, deux CTA en ligne acceptables.</div>
+        <div class="cap"><strong>Split 7:5 · 2:1</strong> · texte gauche, photo droite, lecture en double colonne.</div>
+      </div>
+    </div>
+
+    <!-- ============ 05·f Footer écosystème invariant ============ -->
+    <div style="margin-top: 128px;">
+      <h3 class="block"><span class="caption" style="font-family: var(--ff-mono); display: block; margin-bottom: 8px;">05·f</span>Footer écosystème invariant. <em>Cinq entités équivalentes. Une maison commune.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <p class="body-doc" style="margin-top: 24px; max-width: 62ch;">
+        Le footer reste <strong>invariant nuit chaude</strong> <code>--wtf-nuit-chaude #2E2A22</code> quelle que soit
+        l'entité parente. Cinq colonnes équivalentes — même typographie, même taille, même filet. Aucune ne domine.
+        La maison parle de ses enfants comme une famille parle des siens. Au centre du pied, la signature italique :
+        <em>« Écosystème porté par Céline &amp; Sébastien Marcadet »</em>, sous le sceau papillon-corps WTF.
+      </p>
+
+      <!-- Aperçu 1440 pleine largeur -->
+      <div style="margin-top: 48px;">
+        <div class="bp-frame" style="width: 100%; border: 1px solid var(--ink-line);">
+          <span class="bp-label">1440 · <strong>desktop · invariant</strong></span>
+          <div class="bp-viewport" style="width: 1248px; transform: scale(1); transform-origin: top left; margin: 0 auto;">
+            <footer class="c-eco-footer" style="padding: 96px 80px 56px;">
+              <div class="top" style="grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;">
+                <div class="brand-block">
+                  <div class="mark">Way To <em>Freedom</em></div>
+                  <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+                </div>
+                <div>
+                  <h5>Way To Freedom</h5>
+                  <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>SÉSÂMES</h5>
+                  <ul>
+                    <li><a href="#">Clarification intérieure</a></li>
+                    <li><a href="#">GBP SÉSÂMES</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>EssenCel'en Soi</h5>
+                  <ul>
+                    <li><a href="#">essencelensoi.fr ↗</a></li>
+                    <li><a href="#">Soins &amp; Parcours</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Voie d'autonomie</h5>
+                  <ul>
+                    <li><a href="#">La voie</a></li>
+                    <li><a href="#">Recevoir le brief</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Aloe Vera Excellence</h5>
+                  <ul>
+                    <li><a href="#">aloeveraexcellence.com ↗</a></li>
+                    <li><a href="#">Ressources hub</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Sceau central -->
+              <div style="display: flex; flex-direction: column; align-items: center; padding: 56px 0 32px;">
+                <div style="width: 56px; height: 56px; border: 1px solid var(--wtf-dore-bas); display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 24px; font-variation-settings: 'opsz' 36, 'wght' 300;">W·F</div>
+                <p style="font-family: var(--ff-italic); font-style: italic; font-size: 17px; color: #C9BFA9; margin-top: 20px; text-align: center; max-width: 42ch; line-height: 1.55;">
+                  Une maison-mère narrative. Trois chemins légitimes. Un hub publiant.<br>
+                  Les fondateurs sont les fondations qui voyagent.
+                </p>
+              </div>
+              <div class="bottom" style="border-top: 1px solid rgba(230, 221, 201, .18); padding-top: 32px;">
+                <span><strong>© 2026 Way To Freedom</strong> · Tous droits réservés</span>
+                <span>
+                  <a href="#" style="margin-right: 24px;">Mentions légales</a>
+                  <a href="#" style="margin-right: 24px;">Politique de confidentialité</a>
+                  <a href="#">Cookies</a>
+                </span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+      <p class="caption" style="margin-top: 16px; text-align: center;">
+        Affichage à l'échelle 1:1 — le pied est démontré tel qu'il s'imprime au pixel près à 1440px de viewport.
+      </p>
+
+      <!-- Démo mobile / tablette -->
+      <div class="bp-row" style="margin-top: 64px; grid-template-columns: 1fr 1.8fr;">
+        <!-- 375 -->
+        <div class="bp-frame bp-375" style="height: 720px;">
+          <span class="bp-label">375 · <strong>invariant</strong></span>
+          <div class="bp-viewport">
+            <footer class="c-eco-footer" style="padding: 48px 24px 32px; font-size: 13px;">
+              <div style="display: flex; flex-direction: column; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(230, 221, 201, .18);">
+                <div class="brand-block">
+                  <div class="mark" style="font-size: 22px;">Way To <em>Freedom</em></div>
+                  <p class="quote" style="font-size: 14px;">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+                </div>
+                <div>
+                  <h5 style="font-size: 10px;">Les cinq territoires</h5>
+                  <ul>
+                    <li><a href="#">Way To Freedom</a></li>
+                    <li><a href="#">SÉSÂMES — clarification</a></li>
+                    <li><a href="#">EssenCel'en Soi ↗</a></li>
+                    <li><a href="#">Voie d'autonomie</a></li>
+                    <li><a href="#">Aloe Vera Excellence ↗</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 style="font-size: 10px;">Légal</h5>
+                  <ul>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="#">Cookies</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div style="text-align: center; padding: 32px 0 16px;">
+                <div style="width: 40px; height: 40px; border: 1px solid var(--wtf-dore-bas); margin: 0 auto; display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 18px;">W·F</div>
+                <p style="font-family: var(--ff-italic); font-style: italic; font-size: 13px; color: #948A78; margin-top: 14px;">
+                  © 2026 · Tous droits réservés
+                </p>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+        <!-- 768 -->
+        <div class="bp-frame bp-768" style="height: 720px;">
+          <span class="bp-label">768 · <strong>invariant</strong></span>
+          <div class="bp-viewport">
+            <footer class="c-eco-footer" style="padding: 64px 56px 40px;">
+              <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(230, 221, 201, .18);">
+                <div class="brand-block">
+                  <div class="mark">Way To <em>Freedom</em></div>
+                  <p class="quote">Écosystème porté par<br>Céline &amp; Sébastien Marcadet.</p>
+                </div>
+                <div>
+                  <h5>Les chemins</h5>
+                  <ul>
+                    <li><a href="#">Way To Freedom</a></li>
+                    <li><a href="#">SÉSÂMES</a></li>
+                    <li><a href="#">Voie d'autonomie</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Sites propres</h5>
+                  <ul>
+                    <li><a href="#">EssenCel'en Soi ↗</a></li>
+                    <li><a href="#">Aloe Vera Excellence ↗</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div style="text-align: center; padding: 40px 0 16px;">
+                <div style="width: 48px; height: 48px; border: 1px solid var(--wtf-dore-bas); margin: 0 auto; display: flex; align-items: center; justify-content: center; color: var(--wtf-dore-bas); font-family: var(--ff-display); font-size: 20px;">W·F</div>
+                <p style="font-family: var(--ff-italic); font-style: italic; font-size: 15px; color: #C9BFA9; margin-top: 16px;">
+                  Une maison-mère. Trois chemins. Un hub publiant.
+                </p>
+              </div>
+              <div class="bottom" style="border-top: 1px solid rgba(230, 221, 201, .18); padding-top: 24px; font-size: 10px;">
+                <span><strong>© 2026 Way To Freedom</strong></span>
+                <span><a href="#" style="margin-right: 16px;">Mentions</a><a href="#" style="margin-right: 16px;">Confidentialité</a><a href="#">Cookies</a></span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+      <p class="caption" style="margin-top: 14px;">
+        <strong>Mobile 375</strong> · les cinq entités pliées dans une liste verticale unique, hiérarchie architecturale préservée.
+        <strong>Tablette 768</strong> · regroupement en trois colonnes (maison-mère / chemins / sites propres).
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 6 · GARDE-FOUS ACCESSIBILITÉ
+  =========================================================== -->
+  <section class="chapter">
+    <div class="eyebrow"><span class="num">06</span>Garde-fous accessibilité</div>
+    <h2 class="section" style="margin-top: 32px;">WCAG AA. <em>Tenu par la grammaire,</em> pas posé en surcouche.</h2>
+    <p class="lede" style="margin-top: 56px;">
+      L'accessibilité n'est pas une couche d'overlay ajoutée en fin de chantier. Elle est inscrite dans la grammaire
+      même du système — contrastes calculés sur palette, sémantique HTML propre, focus visible respectueux de la
+      palette de l'entité. WCAG AA n'est pas un plafond, c'est un plancher.
+    </p>
+
+    <div class="grid-2" style="margin-top: 80px;">
+      <div>
+        <h3 class="block">Contraste &amp; encres.</h3>
+        <div class="filet" style="margin-top: 24px;"></div>
+        <p class="body-doc" style="margin-top: 24px;">
+          Sur fonds clairs, plancher <code>--ink-2 #3B342A</code> (contraste 4.5:1 garanti). Sur fonds sombres, encres
+          crème <code>#E6DDC9</code>. <code>--ink-mute</code> réservé corps ≥ 18px sur fond très clair.
+        </p>
+        <table class="doc-table" style="margin-top: 24px;">
+          <thead><tr><th>Cible</th><th>Ratio</th></tr></thead>
+          <tbody>
+            <tr><td>Texte courant <em>(corps 16px)</em></td><td><strong>4.5:1</strong></td></tr>
+            <tr><td>Texte large <em>(≥ 18px ou ≥ 14px bold)</em></td><td><strong>3:1</strong></td></tr>
+            <tr><td>Éléments UI <em>(focus, boutons)</em></td><td><strong>3:1</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <h3 class="block">Sémantique HTML.</h3>
+        <div class="filet" style="margin-top: 24px;"></div>
+        <ul class="body-doc" style="margin-top: 24px; list-style: none;">
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">
+            <code>&lt;nav&gt;</code> · <code>&lt;main&gt;</code> · <code>&lt;article&gt;</code> · <code>&lt;section&gt;</code> · <code>&lt;aside&gt;</code> · <code>&lt;footer&gt;</code>
+          </li>
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Un seul <code>&lt;h1&gt;</code> par page</li>
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Hiérarchie h2/h3/h4 respectée — pas de saut</li>
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Skip link <em>« Aller au contenu »</em> focus-only</li>
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--ink-line);">Tab sequence logique, focus visible toujours</li>
+          <li style="padding: 8px 0;">Drawer mobile fermable par Escape · FAQ accordéons Enter/Space</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 96px;">
+      <h3 class="block">Préférences utilisateur. <em>On les écoute, sans surinterpréter.</em></h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <div class="grid-2" style="margin-top: 32px;">
+        <pre class="code">
+<span class="tk-comment">/* Réduction de mouvement honorée */</span>
+<span class="tk-sel">@media</span> (prefers-reduced-motion: reduce) {
+  <span class="tk-sel">*, *::before, *::after</span> {
+    <span class="tk-prop">animation-duration</span>: <span class="tk-val">0.01ms !important</span>;
+    <span class="tk-prop">transition-duration</span>: <span class="tk-val">0.01ms !important</span>;
+  }
+}</pre>
+        <div class="body-doc">
+          <p><strong>prefers-reduced-motion</strong> · toutes animations passent à 0.01ms. La grammaire éditoriale reste
+            la même — c'est juste le mouvement qui s'efface.</p>
+          <p><strong>prefers-color-scheme: dark</strong> · <em>refusé en V1.</em> Le registre éditorial impose une
+            palette stable. Le mode sombre dégraderait la cohérence chromatique de l'écosystème (la nuit chaude WTF n'est
+            pas un thème sombre, c'est une palette signature).</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 96px;">
+      <h3 class="block">Cibles Lighthouse V1.</h3>
+      <div class="filet" style="margin-top: 24px;"></div>
+      <div class="grid-4" style="margin-top: 32px;">
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">LCP</div>
+          <div style="font-family: var(--ff-display); font-size: 44px; line-height: 1; margin-top: 12px; color: var(--ink); font-variation-settings: 'opsz' 96, 'wght' 400;">&lt; 2.5s</div>
+          <div class="caption" style="margin-top: 12px;">Largest Contentful Paint</div>
+        </div>
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">INP</div>
+          <div style="font-family: var(--ff-display); font-size: 44px; line-height: 1; margin-top: 12px; color: var(--ink); font-variation-settings: 'opsz' 96, 'wght' 400;">&lt; 200ms</div>
+          <div class="caption" style="margin-top: 12px;">Interaction to Next Paint</div>
+        </div>
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">CLS</div>
+          <div style="font-family: var(--ff-display); font-size: 44px; line-height: 1; margin-top: 12px; color: var(--ink); font-variation-settings: 'opsz' 96, 'wght' 400;">&lt; 0.1</div>
+          <div class="caption" style="margin-top: 12px;">Cumulative Layout Shift</div>
+        </div>
+        <div style="background: var(--paper-soft); padding: 32px;">
+          <div class="caption">Accessibilité</div>
+          <div style="font-family: var(--ff-display); font-size: 44px; line-height: 1; margin-top: 12px; color: var(--ink); font-variation-settings: 'opsz' 96, 'wght' 400;">≥ 95</div>
+          <div class="caption" style="margin-top: 12px;">Score Lighthouse</div>
+        </div>
+      </div>
+      <p class="caption" style="margin-top: 16px;">Stack cible Astro statique encaisse ces cibles sans compromis serveur.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       CHAPITRE 7 · POSTURE CARDINALE TIP V3
+  =========================================================== -->
+  <section class="chapter" style="background: var(--wtf-nuit); color: #E6DDC9;">
+    <div class="eyebrow" style="color: var(--wtf-dore-bas);">
+      <span class="num" style="color: var(--wtf-dore-bas);">07</span>Posture cardinale TIP V3
+    </div>
+    <h2 class="section" style="margin-top: 32px; color: #FAF7F2; max-width: 24ch;">
+      Les écoles sont des <em style="color: var(--wtf-dore-bas);">boussoles</em>.<br>
+      Pas des templates.
+    </h2>
+    <p class="lede" style="margin-top: 56px; color: #C9BFA9; max-width: 64ch;">
+      Aesop, Hermès, The Row, Frédéric Malle, The Beauty Chef Edit, Pukka — ces maisons cadrent le <strong style="color: #FAF7F2;">registre</strong>
+      du système TIP V3. Elles ne le <em>composent</em> pas. Ce qu'elles enseignent : sobriété éditoriale,
+      autorité tranquille, refus du SaaS criard, respect du temps de lecture, photographie vraie. Ce qu'elles ne
+      donnent pas : la signature.
+    </p>
+
+    <div style="margin-top: 96px; display: grid; grid-template-columns: 5fr 7fr; gap: 96px; align-items: start;">
+      <div>
+        <div class="eyebrow" style="color: var(--wtf-dore-bas);">
+          <span class="num" style="color: var(--wtf-dore-bas);">07·a</span>Ce qui fait la signature unique
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0;">
+        <div style="padding: 28px 0; border-top: 1px solid rgba(230, 221, 201, .22);">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 60, 'wght' 400; font-size: 24px; color: #FAF7F2; margin-bottom: 8px;">
+            Palette double or.
+          </div>
+          <p style="font-size: 15px; line-height: 1.65; color: #C9BFA9;">
+            Or terre <code style="color: var(--wtf-dore-bas);">#B8884A</code> EES/WTF + or canalisé
+            <code style="color: var(--wtf-dore-bas);">#C9A24E</code> SÉSÂMES/Voie/AVE. Aucune maison existante ne porte
+            cette double signature chromatique. Doctrine de bascule alignée sujet — jamais mixée.
+          </p>
+        </div>
+
+        <div style="padding: 28px 0; border-top: 1px solid rgba(230, 221, 201, .22);">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 60, 'wght' 400; font-size: 24px; color: #FAF7F2; margin-bottom: 8px;">
+            Sceaux iconographiques propriétaires.
+          </div>
+          <p style="font-size: 15px; line-height: 1.65; color: #C9BFA9;">
+            Papillon-corps WTF, triangle aquarellé canalisé SÉSÂMES, phénix renaissant AVE, ligature lune-C EES.
+            Iconographie photoréaliste par soustraction — non vectoriellement redessinée, non générique.
+          </p>
+        </div>
+
+        <div style="padding: 28px 0; border-top: 1px solid rgba(230, 221, 201, .22);">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 60, 'wght' 400; font-size: 24px; color: #FAF7F2; margin-bottom: 8px;">
+            Doctrine fondatrice nomade.
+          </div>
+          <p style="font-size: 15px; line-height: 1.65; color: #C9BFA9;">
+            <em>Les fondateurs sont les fondations qui voyagent.</em> Aucune palette ne dérive d'un territoire fixe. La
+            maison se porte avec Céline &amp; Sébastien. Différence stratégique majeure rarement explicitée ailleurs.
+          </p>
+        </div>
+
+        <div style="padding: 28px 0; border-top: 1px solid rgba(230, 221, 201, .22);">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 60, 'wght' 400; font-size: 24px; color: #FAF7F2; margin-bottom: 8px;">
+            Articulation 3 chemins + 1 hub publiant.
+          </div>
+          <p style="font-size: 15px; line-height: 1.65; color: #C9BFA9;">
+            Inédite. Pas une marque-mère + sous-marques. Pas un parcours linéaire. Trois chemins légitimes,
+            indépendants, qui partagent une voix et une grammaire. Un hub pédagogique discret qui irrigue sans push.
+          </p>
+        </div>
+
+        <div style="padding: 28px 0; border-top: 1px solid rgba(230, 221, 201, .22);">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 60, 'wght' 400; font-size: 24px; color: #FAF7F2; margin-bottom: 8px;">
+            Voix d'incarnation.
+          </div>
+          <p style="font-size: 15px; line-height: 1.65; color: #C9BFA9;">
+            <em>« On organise des passages. »</em> Pas <em>« on vend du soin »</em>, pas <em>« on coach »</em>, pas
+            <em>« on transforme »</em>. La langue dit ce que la pratique fait : tenir l'espace, reconnaître les seuils,
+            nommer ce qui se traverse.
+          </p>
+        </div>
+
+        <div style="padding: 28px 0; border-top: 1px solid rgba(230, 221, 201, .22); border-bottom: 1px solid rgba(230, 221, 201, .22);">
+          <div style="font-family: var(--ff-display); font-variation-settings: 'opsz' 60, 'wght' 400; font-size: 24px; color: #FAF7F2; margin-bottom: 8px;">
+            Cinq tensions tenues simultanément.
+          </div>
+          <p style="font-size: 15px; line-height: 1.65; color: #C9BFA9;">
+            Profond sans grandiloquence · simple sans pauvreté · clair sans froideur · chaleureux sans mollesse ·
+            premium sans arrogance. Aucun maison existante ne tient les cinq d'un coup — c'est précisément ce qui
+            rend la signature reconnaissable.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Le test révisé -->
+    <div style="margin-top: 128px; padding: 80px 96px; background: var(--wtf-nuit-chaude); border-left: 2px solid var(--wtf-dore-bas);">
+      <div class="eyebrow" style="color: var(--wtf-dore-bas);">
+        <span class="num" style="color: var(--wtf-dore-bas);">07·b</span>Le test final · révisé V3.0c
+      </div>
+      <p style="font-family: var(--ff-italic); font-style: italic; font-size: 36px; line-height: 1.3; color: #FAF7F2; margin-top: 40px; max-width: 36ch;">
+        Cette maquette pourrait-elle être <span style="color: var(--wtf-dore-bas);">évidemment</span>
+        et <span style="color: var(--wtf-dore-bas);">uniquement</span> un site WTF TIP V3 ?
+      </p>
+      <p style="font-family: var(--ff-italic); font-style: italic; font-size: 22px; line-height: 1.5; color: #C9BFA9; margin-top: 32px; max-width: 48ch;">
+        La grammaire visuelle s'attribue-t-elle d'elle-même à l'écosystème Way To Freedom — et à personne d'autre ?
+      </p>
+      <p style="font-size: 14px; line-height: 1.7; color: #948A78; margin-top: 56px; max-width: 56ch;">
+        L'ancien test <em>« Pourrait-elle apparaître comme refonte d'un site Aesop ou Hermès ? »</em> glissait vers le
+        pastiche. Le nouveau test est plus exigeant. Plus juste. Plus aligné avec la posture cofondateurs Marcadet —
+        construire une signature qui dure dix ans et qui n'imite personne.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       PIED DE DOCUMENT
+  =========================================================== -->
+  <footer class="doc-footer">
+    <div>
+      <div class="label">Document</div>
+      <div class="filet"></div>
+      <h4>Lot 9 · Web System V3<br><em>Passe 9.1 — Doctrine + Library</em></h4>
+      <p class="body-doc">
+        Cette doctrine fige le socle responsive web qui conditionne les trois sites de l'écosystème — WTF + sous-pages
+        (passe 9.2), EssenCel'en Soi (passe 9.3), Aloe Vera Excellence (passe 9.4). Validation DirCom unique sur la
+        doctrine ; les trois sites s'enchaînent ensuite d'un trait sur la base validée.
+      </p>
+    </div>
+
+    <div>
+      <div class="label">Sources de vérité</div>
+      <div class="filet"></div>
+      <p class="body-doc">
+        <strong>tokens-v3.css</strong> V3.0b · 17 mai 2026<br>
+        <strong>Design System v2.1.1</strong> · 1<sup>er</sup> mai 2026<br>
+        <strong>ECOSYSTEM_GPS.md</strong> V3.0c · 19 mai 2026<br>
+        <strong>SCELLEMENT_TEMPLATE_ECOSYSTEME_V3-0c.md</strong> · 19 mai 2026<br>
+        Mémoire Centrale Notion · doctrine vivante prioritaire
+      </p>
+    </div>
+
+    <div>
+      <div class="label">Stack technique cible Phase 3</div>
+      <div class="filet"></div>
+      <p class="body-doc">
+        Astro statique + Decap CMS headless Git-based + Hostinger Node.js<br>
+        Bascule sans casser l'existant — staging URL temporaire, test parallèle WordPress vivant, bascule DNS quand
+        validé, backup 30 jours puis archivé.<br><br>
+        Hors périmètre Lot 9. Pour information.
+      </p>
+    </div>
+
+    <div class="signature">
+      <span><strong>Way To Freedom</strong> · DirCom + Claude Design</span>
+      <span>V3.0c · 19 mai 2026 · pré-scellement Lot 9</span>
+      <span><strong>9.1</strong> doctrine · <strong>9.2</strong> WTF · <strong>9.3</strong> EES · <strong>9.4</strong> AVE</span>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>
